@@ -1,0 +1,6 @@
+[submodule "build/dwm"]
+	path = build/dwm
+	url = https://github.com/bibek22/dwm
+[submodule "build/dwm-patched"]
+	path = build/dwm-patched
+	url = https://github.com/bibek22/dwm

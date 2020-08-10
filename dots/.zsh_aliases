@@ -1,0 +1,196 @@
+# default installs
+alias rmrf="rm -rf"
+alias ls="ls -trh --color"    # add colors for filetype recognition
+alias lstr="ls -tr"
+alias lsa="ls -a"
+alias grep="grep --color=auto"
+alias ll="ls -l --group-directories-first"
+alias la="ls -A"            # show hidden files
+alias lt="ls -ltr"          # sort by date, most recent last
+alias lm="ls -Al |more"     # pipe through 'more'
+alias lr="ls -lR"           # recursive ls
+alias lsr="tree -Csu"       # nice alternative to 'recursive ls'
+# Filesystem aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias reload="source ~/.zshrc"
+
+# Arch/pacman
+alias install="yay -S"
+alias remove="sudo pacman -Rs"
+alias update="yay -Syu"
+alias lsorphans='pacman -Qdt'
+alias rmorphans='sudo pacman -Rs $(pacman -Qtdq)'
+alias pcounter='pacman -Q|wc -l'
+
+alias screenshots="sxiv ~/pictures/screenshots/*"
+alias bins="cd ~/.local/bin/"
+
+# Applications
+alias pdf="zathura"
+alias ec="emacsclient"
+alias gmail="mbsync gmail:INBOX; neomutt"
+alias vim="nvim"
+alias v="nvim"
+alias ranger="lf"
+alias mutt="neomutt"
+alias btcl="bluetoothctl"
+#aliases for youtube-dl
+# cookies file generated using a firefox addon 'export cookies'
+alias youtube-dl="youtube-dl --cookies ~/.youtube-dl/cookies.txt "
+alias ytdl="youtube-dl --cookies ~/.youtube-dl/cookies.txt "
+alias ytmp3="youtube-dl -f 140 -o '%(title)s.%(ext)s'"
+alias tm='tmux attach'
+alias play="mpc searchplay"
+
+# specific tasks
+alias topdf='soffice --headless --convert-to pdf --outdir ./'
+alias weather="curl wttr.in"
+alias pw="nc termbin.com 9999"
+alias p="xclip -o"
+alias pong="ping -c 3 www.google.com"
+alias nocomment='egrep -v "^[ \t]*#|^[ \t]*$"'
+# for New file (last modified)
+alias -g NF='./*(oc[1])' # this is a global shortcut for last created file or the folder it's in
+
+
+## Connect ssh
+alias blog="cd ~/git/blog"
+alias hashbang="mosh bibek@da1.hashbang.sh"
+
+# default viewers just run file name with no command
+alias -s {diff,c,txt,dat,csv}=vim
+alias -s {md}=typora
+alias -s {mid,MID}=playmidi
+alias -s {pdf,djvu}=zathura
+alias -s {mkv,mp4,avi}=mpv
+alias -s {jpg,png,jpeg,PNG,JPEG,JPG,giv}=sxiv
+# prefixes git clone to every 'filename' ending in git i.e. URL of git repo
+alias -s git="git clone"
+alias -s {gz,tgz,tar,TAR}="tar xvf"
+alias -g G="| grep"
+alias -g L="| less"
+
+# System related
+alias suspend="systemctl suspend"
+alias dush="du -sm *|sort -n|tail"
+alias makeup="updpkgsums && makepkg -ci"
+# copy pipe to clipboard.
+alias c="xclip -selection c"
+# Battery status
+alias bat="acpi -b"
+alias su="sudo su"
+alias nethogs="sudo nethogs wlp2s0"
+alias mirror='xrandr --output HDMI-1  --mode 1920x1080 --output eDP-1  --primary --scale-from 1366x768'
+
+# My functions
+cf(){
+    cd "$(ls -fd ~/.config/*/ | fzf)"
+}
+
+function report(){
+  notify-send "Done"
+}
+
+function swapfiles(){
+  cp -r "$1" tmpfileHopeTheNameDoesNotMATCH
+  cp -r "$2" "$1"
+  cp -r tmpfileHopeTheNameDoesNotMATCH "$2"
+  rm tmpfileHopeTheNameDoesNotMATCH
+}
+
+
+function chalyo(){
+  acpi -b | grep -Eo Charging
+  while [ $? ];
+  do
+    acpi -b | grep -Eo Charging
+  done
+
+  notify-send "chalyo"
+}
+
+function playmidi(){
+  aplaymidi -p `aplaymidi -l | tail -n 1 | grep -Eo "[0-9]*:."` "$1"
+}
+
+
+mkcd() {
+  if [[ -z "$1" ]]
+  then
+    echo 'mkcd; mkdir and cd into it. Usage: mkcd <dir>'
+  else
+    { mkdir $1 && cd $1 }
+  fi
+}
+
+# edit scripts
+es() {
+  local options choice
+  choice=`tree -if /home/bibek/.local/bin/|fzf` && $EDITOR "$choice"
+}
+
+# FZF utilities
+#fuzzy kill
+fk() {
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+
+  [ "x$pid" != "x" ] && kill -${1:-9} $pid
+}
+
+fp() {
+  pid=$(ps -ef | sed 1d | fzf -m | awk '{print $2}')
+}
+
+#fuzzy read
+fr() { fzf -m -x | xargs -d'\n' -r "$@" ; }
+
+# fuzzy open
+# - CTRL-O to open with `open` command,
+# - CTRL-E or Enter key to open with the $EDITOR
+fo() {
+  local out file key
+  out=$(fzf-tmux --query="$1" --exit-0 --expect=ctrl-o,ctrl-e)
+  key=$(head -1 <<< "$out")
+  file=$(head -2 <<< "$out" | tail -1)
+  if [ -n "$file" ]; then
+    [ "$key" = ctrl-o ] && open "$file" || ${EDITOR:-vim} "$file"
+  fi
+}
+# fd - cd to selected directory
+fd() {
+  local dir
+  dir=$(find ${1:-*} -path '*/\.*' -prune \
+                  -o -type d -print 2> /dev/null | fzf +m) &&
+  cd "$dir"
+}
+fmpc() {
+  local song_position
+  song_position=$(mpc -f "%position%) %artist% - %title%" playlist | \
+    fzf-tmux --query="$1" --reverse --select-1 --exit-0 | \
+    sed -n 's/^\([0-9]\+\)).*/\1/p') || return 1
+  [ -n "$song_position" ] && mpc -q play $song_position
+}
+
+# SAS initialization
+function sasinit() {
+  echo "Initializing HEASOFT"
+  . $HEADAS/headas-init.sh && echo "Initialized!"
+  if [[ ! $? -eq 0 ]]; then
+    echo "Failed. Exiting..."
+    exit
+  fi
+  echo "Initializing SAS"
+  source /home/bibek/sas/xmmsas_20190531_1155/setsas.sh && echo "DONE!"
+  export SAS_ODF='/home/bibek/research/finalyear/xmm/workDir/obsn/'
+  export SAS_CCFPATH='/home/bibek/research/finalyear/xmm/workDir/ccf/'
+  echo "SAS_ODF: $SAS_ODF"
+  echo "SAS_CCFPATH: $SAS_CCFPATH"
+}
+
+# HEASOFT alias
+HEADAS="/opt/heasoft/x86_64-pc-linux-gnu-libc2.31"
+export HEADAS
+alias heainit=". $HEADAS/headas-init.sh"

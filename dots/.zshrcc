@@ -1,0 +1,35 @@
+PROMPT_EOL_MARK=" •"
+
+# zsh default command
+export FZF_DEFAULT_OPTS="-m"
+if command -v ag &>/dev/null; then
+	fzf='ag -g "" -a --hidden --silent --nocolor'
+elif command -v ack &>/dev/null; then
+	fzf='ack --nogroup --nocolor'
+else
+	fzf='find * -type f'
+fi
+
+export FZF_DEFAULT_COMMAND="$fzf"
+unset fzf
+
+# Fzf default files
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+function condainit () {
+	__conda_setup="$('/home/bibek/.anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+	if [ $? -eq 0 ]; then
+	    eval "$__conda_setup"
+	else
+	    if [ -f "/home/bibek/.anaconda/etc/profile.d/conda.sh" ]; then
+	        . "/home/bibek/.anaconda/etc/profile.d/conda.sh"
+	    else
+	        export PATH="/home/bibek/.anaconda/bin:$PATH"
+	    fi
+	fi
+	unset __conda_setup
+}
+# <<< conda initialize <<<
