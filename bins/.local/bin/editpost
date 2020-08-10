@@ -1,0 +1,10 @@
+#!/bin/zsh
+
+if [[ -n "$1" ]]; then
+    FILE=$1
+else
+    echo "Usage: $0 <post name>"
+    exit
+fi
+
+$EDITOR ~/git/blog/content/*/$FILE*

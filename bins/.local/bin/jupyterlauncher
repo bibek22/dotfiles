@@ -1,0 +1,41 @@
+#/usr/bin/zsh
+
+function condainit(){
+	__conda_setup="$('/home/bibek/.anaconda/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+	if [ $? -eq 0 ]; then
+	    eval "$__conda_setup"
+	else
+	    if [ -f "/home/bibek/.anaconda/etc/profile.d/conda.sh" ]; then
+	        . "/home/bibek/.anaconda/etc/profile.d/conda.sh"
+	    else
+	        export PATH="/home/bibek/.anaconda/bin:$PATH"
+	    fi
+	fi
+	unset __conda_setup
+}
+
+if [[ `pgrep -f jupyter-lab` ]]; then
+	response=`echo -e "kill\nLaunch new" | rofi -dmenu -p "Already running! Do you wanna kill it ?"`
+	if [[ ! $? ]]; then
+		exit
+	else
+		if [ $response = 'kill' ]; then
+			notify-send "Killing Jupyter server"
+			kill -s KILL `pgrep -f jupyter-lab`
+			exit
+		fi
+	fi
+fi
+
+DIR=`tree -ifd $HOME| rofi -i -dmenu -p "Choose a directory"`
+
+if [[ ! $? -eq 0 ]]; then
+	exit
+else
+	# ENV=`conda env list | tail -n 5 | head -n4  | awk '{ print $1}'| rofi -i -dmenu -p "Pick an Env"`
+	# conda activate "$ENV"
+	condainit
+	cd "$DIR"
+	jupyter lab 2> /dev/null &
+	notify-send "Launching Jupyter server"
+fi

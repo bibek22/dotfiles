@@ -1,0 +1,32 @@
+#!/bin/bash
+
+# Arbitrary but unique message id for dunstify
+msgId="591049"
+
+# For mic mute. supply any argument
+ if [ "$#" -ne 0 ]; then
+   ANY=`pactl list sources  | grep Mute |head -n 2| grep -Eo ":.*" | uniq | wc -l`
+   if [ 1 -ne "$ANY" ]; then
+      pactl set-source-mute 1 true
+      pactl set-source-mute 0 true
+      dunstify -u low -a "Volume" -r "$msgId" " (mics)"
+      exit
+   fi
+
+   #Internal mic
+   pactl set-source-mute 0 toggle
+   #Headphone mic
+   pactl set-source-mute 1 toggle
+
+   state=`pactl list sources  | grep Mute | head -n 1| grep yes`
+   if [ $? -ne 0 ]; then
+      # returned non zero exit status on last command => not muted
+      dunstify -u low -a "Volume" -r "$msgId" " (mic)"
+   else
+      dunstify -u low -a "Volume" -r "$msgId" " (mic)"
+   fi
+else
+   pactl set-sink-mute `pacmd list-sinks | grep "index" |grep -Eo '[0-9]{1,4}'|tail -1 ` toggle
+   MUTE_STATUS=`pacmd list-sinks | awk '/muted/ { print $2 }' | tail -n 1 | sed "s/no//;s/yes//"`
+   dunstify -u low -a "Volume" -r "$msgId" $MUTE_STATUS
+ fi

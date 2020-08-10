@@ -1,0 +1,46 @@
+#!/usr/bin/bash
+
+## With the below logic
+## if an old file, say one with 10, is touched
+## newer screenshots starts getting written from 11
+## overwriting everything along the way.
+
+DIR="${HOME%/}/pictures/screenshots"
+name=screenshot
+
+# create the folder if not already there
+if [[ ! -d $DIR ]]; then
+	mkdir $DIR
+fi
+
+for new in $( ls -tr $DIR | grep -Po "\d*" ); do
+    if [[ $new -gt $i ]]; then
+        i=$new
+    fi
+done
+
+let i++
+name=$name-$i
+
+case $@ in 
+    "junk")
+        import png:- | xclip -selection c -t image/png
+        notify-send --hint=int:transient:1 " Screenshot taken!" "File copied to clipboard"
+        ;;
+
+    "partial")
+        import png:- | xclip -selection c -t image/png
+        notify-send --hint=int:transient:1 " Screenshot taken!" "File saved & copied"
+        ;;
+
+    "path")
+        import png:- | tee $DIR/$name.png
+        echo "$DIR/$name.png" | xclip -selection c
+        notify-send --hint=int:transient:1 " Screenshot taken!" "Path copied"
+        ;;
+
+    *)
+        import -window root png:- | tee $DIR/$name.png | xclip -selection c -t image/png
+        notify-send --hint=int:transient:1 " Screenshot taken!" "File saved & copied"
+        ;;
+esac

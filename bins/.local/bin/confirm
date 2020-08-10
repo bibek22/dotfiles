@@ -1,0 +1,16 @@
+#!/usr/bin/bash
+
+## this needs to be sourced in the script that you wanna use it from
+
+function confirm() {
+    # call with a prompt string or use a default
+    read -q "response?${1:-proceed? [y/N]} "
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}

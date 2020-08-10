@@ -1,0 +1,9 @@
+MUS=`mpc | head -n 1`
+BAT=`acpi -b`
+DATE=`date "+%a %d %T"`
+MEM=`free -mh | grep -Po "\d+.\d?.i$"`
+
+
+STATUS="$MUS | B:$BAT | $DATE | $MEM"
+
+xsetroot -name "$STATUS"

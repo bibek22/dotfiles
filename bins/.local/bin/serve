@@ -1,0 +1,27 @@
+#!/bin/bash
+
+cd ~/git/blog/
+
+user_interrupt(){
+    if [[ -z "$1" ]]
+    then
+        sed -i 's/http:\/\/127.0.0.1:8000/https:\/\/www.bibekgautm.com.np/' pelicanconf.py
+    else
+        sed -i 's/http:\/\/localhost:8000/https:\/\/www.bibekgautm.com.np/' pelicanconf.py
+    fi
+    exit
+}
+
+trap user_interrupt SIGINT
+trap user_interrupt SIGSTOP
+
+
+if [[ -z "$1" ]]
+then
+    sed -i 's/https:\/\/www.bibekgautm.com.np/http:\/\/127.0.0.1:8000/' pelicanconf.py
+else
+    sed -i 's/https:\/\/www.bibekgautm.com.np/http:\/\/localhost:8000/' pelicanconf.py
+fi
+
+sleep 4 && firefox "localhost:8000" &
+make devserver

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# USAGE:
+# first argument is the command to run. Only runs if not already running.
+# If there are more than 1 arguments, assumes a terminal is needed to run the
+# command. Uses fist argument to check if running and second to run the command
+# Could be extended to support more complicaed launch of st.
+
+if [[ ! `pgrep "$1"` ]]; then
+	if [[ $# -eq 1 ]]; then
+		"$1" &
+	else
+		st -f "ShureTechMono Nerd Font:pixelsize=20" -c "$1" -e "$2" &
+	fi
+fi
+

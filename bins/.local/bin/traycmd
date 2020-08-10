@@ -1,0 +1,6 @@
+pidof stalonetray
+if [ $? -eq 0 ]; then
+	kill -15 `pidof stalonetray`
+else
+	stalonetray &
+fi

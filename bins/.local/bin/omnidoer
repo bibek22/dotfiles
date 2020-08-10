@@ -1,0 +1,165 @@
+#/usr/bin/bash
+# Bibek Gautam
+# Sep 21 2019
+# Do some random things without invoking terminal
+
+function confirm() {
+    CONFIRM=`echo -e "yes\nno"| rofi -dmenu -i -p "$1"` || exit
+    if [ $CONFIRM == "yes" ]
+    then
+	return 0
+    else
+	return -1
+    fi
+}
+
+function note() {
+    FILE=`tree -if "$HOME/notes" | grep "\.md$" |  rofi -dmenu -i -p "Pick a note"`
+    filename="$(basename -- $FILE)"
+    extension="${filename##*.}"
+
+    if [ "$extension" == "md" ]
+    then
+	typora $FILE
+    elif [ "$extension" == "notes" ]
+    then
+	exit
+    elif [ "$extension" == "org" ]
+    then
+	emacs "$FILE"
+    elif [ "$extension" == "$filename" ]
+    then
+	confirm "create a new note?" || exit
+	touch ~/notes/"$filename.md"
+	typora "~/notes/$filename.md"
+    fi
+}
+
+
+function copypath() {
+    tree -if $HOME| rofi -dmenu -i -p "Choose a File" | xclip -selection c
+    notify-send "path copied !"
+}
+
+
+function toprightcornermouse() {
+    xdotool mousemove 1900 0
+}
+
+function serveblog() {
+	if [[ `pgrep -f pelican` ]]; then
+		kill -s Kill `pgrep -f pelican`	
+		notify-send "Killed Server"
+		exit
+	else
+		/usr/local/bin/serve
+		notify-send "Blog server launched. Opening..."
+	fi	
+}
+
+
+function changeBackground() {
+# change background image
+    # IMG=`tree -if $HOME/pictures/wallpaper/ | rofi -dmenu -i -p "Choose a Pic"`
+    IMG=`sxiv -ro $HOME/pictures/wallpaper/`
+
+    wal -i "$IMG" --saturate 0.6 -a 0.6 -o /home/bibek/.local/bin/dwmcolorsparser.py
+}
+
+function Delete() {
+    # Delete arbitrary file
+    FILE=`tree -if $HOME | rofi -dmenu -i -p "Delete a File"`
+    if [[ ! $? -eq 0 ]]; then
+	exit
+    fi
+
+    confirm "Are you sure?" || exit
+    notify-send "$FILE Deleted"
+    rm -r $FILE
+}
+
+function killall() {
+    # This to be added later
+    pid=$(ps -ef |grep bibek | awk '{print $2 "\t" $5 "\t" $8 }' |rofi -dmenu -i -p "kill a job" | awk '{print $1}')
+    if [ "x$pid" != "x" ];
+    then
+	kill -${1:-9} $pid
+    fi
+}
+
+function stopwatch(){
+    TIME=`echo -e "5\n10\n20\n25\n30\n35"| rofi -dmenu -i -p "Pick a time (min)"`
+    notify-send "Stopwatch set for $TIME mins"
+    sleep $TIME'm'
+    notify-send "Times up! $TIME mins"
+}
+
+function printIP() {
+    resp=`ip a | grep -Po "\d*\.\d*\.\d*\.\d*/24"`
+    notify-send $resp
+}
+
+function play() {
+    DIR=`tree -idf $HOME | rofi -dmenu -i -p "Choose a Directory"`
+    if [[ ! $? -eq 0 ]]; then
+	    exit
+    else
+        cd "$DIR"
+        mpv *
+    fi
+}
+
+function btconnect() {
+    bluetoothctl power on && bluetoothctl connect 8C:EE:B1:21:D7:69
+}
+
+function idUSBSpeaker() {
+    pactl list sources  | grep -B2 'USB_AUDIO' | head -n 1| grep -Eo ".$"
+}
+
+
+##################
+# Main BODY      #
+##################
+DOS="Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
+DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path"
+DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock|Routine"
+DOS="$DOS|Note"
+
+if [[ -z "$1" ]]
+then
+    ACTION=`echo -e $DOS | rofi -dmenu -sep '|' -i -p "What do you want to do?"`
+else
+    ACTION="$@"
+fi
+
+if [[ ! $? -eq 0 ]]; then
+	exit
+else
+    case ${ACTION} in
+    "Change wallpaper")     changeBackground;;
+    IP)             printIP;;
+    Note)           note;;
+"Prevent slock")    xdotool mousemove 1900 0;;
+Click)	    xdotool click 1;;
+"Double click")	    xdotool click 1 --repeat 2;;
+    JBL)            btconnect;;
+    "Copy path")    copypath;;
+    Routine)        feh -F ~/pictures/routine.jpg;;
+    # Syllabus)       zathura "$HOME/Calibre Library/BSCIV_MicroSyllabus_Physics.pdf" ;;
+    Delete)         Delete ;;
+    CapsLock)       setxkbmap -option ctrl:nocaps ;; # Map CapsLock to CTRL
+    Gmail)          mbsync gmail:INBOX;;
+    Play)           play ;;
+    Stopwatch)      stopwatch ;;
+    Suspend)        systemctl suspend;;
+    Omnilauncher)   /usr/local/bin/omnilauncher ;;
+    ServeBlog)	    serveblog;;
+    Killall)        killall ;;
+    "Headphone Mic")   pactl set-source-port alsa_input.pci-0000_00_1b.0.analog-stereo analog-input-headset-mic ;;
+    "Mute Mic")	    pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo 1 ;;
+    *)              ;;
+    esac
+fi
+
+

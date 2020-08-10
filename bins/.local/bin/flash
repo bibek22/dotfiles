@@ -1,0 +1,74 @@
+#!/usr/bin/python
+import sys
+import re
+import time
+import os
+
+dot = re.compile("\.")
+# define the ideal/normal speed(words per minute) for you below
+mySpeed = 310
+try:
+    speed = sys.argv[1]
+except:
+    speed = False
+
+def flash(txt):
+    print("\033[3m", txt.center(30, ' '), "\033[0m", end='\r')
+
+while True:
+    words = input("Text to speedRead:\n")
+    while True:
+        more = input("")
+        if more == "":
+            break
+        else:
+            words += " " + more
+
+    dot.sub(". \n", words)
+
+    # get words from clipboard if the input is empty
+    words = words or os.system('xclip -o')
+    try:
+        words = words.split(" ")
+    except:
+        print()
+        print("Hint: Gimme some texts")
+        print()
+        continue
+
+    # on to the speep
+    speed = int(input("Reading Speed: ") or speed) or  mySpeed
+    print('\nReading at ', speed, ' wpm!')
+    sleepTime = 60/speed
+    print()
+    print()
+
+    # Now on to the flashing of words!
+    flash("BEGIN!")
+    time.sleep(.6)
+    beginning = time.time()
+    try:
+        counter = 0
+        for word in words:
+            counter += 1
+            if word[0] == "\n":
+                flash(' ')
+                time.sleep(3)
+                word = word[1:]
+            flash(word)
+            time.sleep(sleepTime)
+            if word[-1] in ",;":
+                time.sleep(sleepTime * .5)
+            elif ( '-' in word ) or ('—' in word):
+                time.sleep(word.count('-')*sleepTime)
+                time.sleep(word.count('—')*sleepTime)
+                continue
+            elif word[-1] in ".":
+                time.sleep(sleepTime * .6)
+            elif ("“" in word) or ("”" in word):
+                time.sleep(sleepTime)
+        print("\n")
+    finally:
+        print("\n")
+        print('Effective speed: ', counter/(time.time()-beginning)*60)
+        print("\n")

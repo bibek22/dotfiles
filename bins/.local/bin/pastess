@@ -1,0 +1,14 @@
+#!/bin/zsh
+
+if [[ -n "$2" ]]; then
+    FILE="$1"
+    DEST="$2"
+elif [[ -n "$1" ]]; then
+    FILE=''
+    DEST="./"
+else
+    DEST="./"
+fi
+
+ls -tr ~/pictures/screenshots/ | tail -n 1 | xargs -I file mv ~/pictures/screenshots/'file' "${DEST%/}/$FILE"
+echo "Screenshot moved to $DEST"

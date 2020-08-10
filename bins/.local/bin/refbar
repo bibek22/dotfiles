@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Refresh the dwmbar.
+# Send SIGTRAP signal to dwmbar script, which will handle it with a trap.
+# Uncomment this if refresh rate of dwmbar itself is too slow > 2 sec
+# pid=`ps aux| grep dwmbar | awk '/sh/ {print $2}'`
+# kill -s 5 $pid

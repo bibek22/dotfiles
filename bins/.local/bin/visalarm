@@ -1,0 +1,21 @@
+clear
+echo "*********************"
+echo Visual Alarm v1.0.1-1
+echo "*********************"
+echo
+if [ $# -lt 2 ]; then
+   if [ $# -lt  1 ]; then
+        echo -n "Reminder time(in sec): "
+        read time
+   else
+        time=$1
+   fi
+   echo -n "Message to notify: "
+   read message
+else
+    time=$1
+    message=$2
+fi
+echo Reminder set for $time seconds.
+sleep $time && notify-send -i /usr/local/src/clock.ico "$message"&
+echo

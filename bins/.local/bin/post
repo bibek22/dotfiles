@@ -1,0 +1,44 @@
+#!/usr/bin/bash
+
+##########################
+## A Utility to make a  ##
+## blog post on my site ##
+## Also: publish, serve ##
+##########################
+
+DT=`date '+%F %H:%M'`
+echo $DT
+
+echo -n "Title: "
+read TITLE
+FILE=`echo "$TITLE" | sed 's/ /-/g'| sed 's/,//g' | tr '[:upper:]' '[:lower:]'`
+
+echo -n "Category: "
+read CATEGORY
+
+echo -n "Tags: "
+read TAGS
+
+echo -n "Draft ?  "
+read DRAFT
+
+SLUG=`echo $TITLE | sed 's/\s\?-\s\?/-/g' | sed 's/,//g' | sed 's/\s\{1,\}/ /g' | sed 's/[!?]//g' | sed 's/\s\{1,\}/-/g' | tr '[:upper:]' '[:lower:]'`
+
+if [ -d ~/git/blog/content/$CATEGORY ]; then
+    FILE=$CATEGORY/$FILE
+fi
+
+echo "Author: Bibek Gautam" >> ~/git/blog/content/"$FILE".md
+echo "Date: "$DT"" >> ~/git/blog/content/"$FILE".md
+echo "Title: "$TITLE"" >> ~/git/blog/content/"$FILE".md
+echo "Slug: $SLUG" >> ~/git/blog/content/"$FILE".md
+echo "Category: $CATEGORY" >> ~/git/blog/content/"$FILE".md
+echo "Tags: $TAGS" >> ~/git/blog/content/"$FILE".md
+if [ "$DRAFT" == "y" ]; then
+    echo "Status: Draft" >> ~/git/blog/content/"$FILE".md
+fi
+echo "Summary: " >> ~/git/blog/content/"$FILE".md
+
+echo "" >> ~/git/blog/content/"$FILE".md
+
+$EDITOR +8 ~/git/blog/content/"$FILE".md

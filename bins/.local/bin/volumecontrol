@@ -1,0 +1,45 @@
+#!/bin/bash
+
+msgId="591049"
+DEVICES=`pacmd list-sinks | grep "index" |grep -Eo '[0-9]{1,4}'`
+
+
+function up(){
+    DEVICE=`echo $DEVICES |tr " " "\n" |  tail -n$1| head -n1`
+    CUR_VOL=`pacmd list-sinks | awk '/volume: front/ { print $5 }' | tail -n$1 |  head -n1| grep -Eo "[0-9]*"`
+    NEW_VOL=$(($CUR_VOL+5))
+
+    if [[ $NEW_VOL -gt 100 ]] # don't allow more than 100% volume
+    then
+      pactl set-sink-volume "$DEVICE" 100%
+      CUR_VOL=100
+      return 0
+    else
+      pactl set-sink-volume "$DEVICE" +5%
+      CUR_VOL=$(($CUR_VOL+5))
+    fi
+}
+
+function down(){
+    DEVICE=`echo $DEVICES | tr " " "\n" | tail -n$1| head -n1`
+
+    CUR_VOL=`pacmd list-sinks | awk '/volume: front/ { print $5 }' | tail -n$1 | head -n1 | grep -Eo "[0-9]*"`
+    NEW_VOL=$(($CUR_VOL+5))
+
+    pactl set-sink-volume "$DEVICE" -5%
+    CUR_VOL=$(($CUR_VOL-5))
+}
+
+function notify(){
+  msg=`getProgressString 20 "" ""  $CUR_VOL`
+  dunstify -i audio-volume-high -u low -a "Volume" -r "$msgId" "$CUR_VOL%" "$msg"
+}
+
+case $1 in
+  up)         up 1 && notify;;
+  altup)         up 2 && notify;;
+  down)       down 1 && notify;;
+  altdown)       down 2 && notify;;
+  # mute)       down && notify;;
+esac
+

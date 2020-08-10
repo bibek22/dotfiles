@@ -1,0 +1,49 @@
+#!/usr/bin/bash
+# a short-cut way to locate and open various config files in editor
+# 
+conf() {
+  local options choice
+  options="a|b|mirror|mpd|mpv|mpvi|ncmpcpp|pacman|hosts|ranger|nvim|rtv|sxiv|tmux|trc|vimpc|vim|x|xres|zathura|ssh|sshd|z|dwm|st"
+  choice="$1"
+  [ -z "$choice" ] &&  choice=`echo $options | tr "|" "\n" | fzf`
+
+  case "$choice" in
+  a)              $EDITOR ~/.zsh_aliases ;;
+  b)              $EDITOR ~/.bashrc ;;
+  mirror)         $EDITOR /etc/pacman.d/mirrorlist ;;
+  mpd)            $EDITOR ~/.mpdconf ;;
+  mpv)            $EDITOR ~/.config/mpv/config ;;
+  mpvi)           $EDITOR ~/.config/mpv/input.conf ;;
+  ncmpcpp)        $EDITOR ~/.ncmpcpp/config ;;
+  pacman)         $EDITOR /etc/pacman.conf ;;
+  hosts)     sudo $EDITOR /etc/hosts ;;
+  ranger)         $EDITOR ~/.config/ranger/rc.conf ;;
+  nvim)           $EDITOR ~/.config/nvim/init.vim ;;
+  rtv)            $EDITOR ~/.config/rtv/rtv.cfg ;;
+  sxiv)           $EDITOR ~/.config/sxiv/exec/key-handler ;;
+  tmux)           $EDITOR ~/.tmux.conf ;;
+  trc)            $EDITOR ~/.config/transmission-remote-cli/settings.cfg ;;
+  vimpc)          $EDITOR ~/.vimpcrc ;;
+  vim)            $EDITOR ~/.vimrc ;;
+  x)              $EDITOR ~/.xinitrc ;;
+  xres)           $EDITOR ~/.Xresources && xrdb ~/.Xresources ;;
+  zathura)        $EDITOR ~/.config/zathura/zathurarc ;;
+  ssh)            $EDITOR ~/.ssh/config;;
+  sshd)           $EDITOR /etc/ssh/sshd_config;;
+  z)              $EDITOR ~/.zshrc ;;
+  dwm)            $EDITOR ~/build/dwm/config.h;;
+  rofi)           $EDITOR ~/.config/rofi/config;;
+  st)             $EDITOR ~/build/st/config.h;
+                  cd /home/bibek/build/st/
+                  sudo make install ;
+                  cd - ;;
+  *)              echo "Unknown application: $1";
+      echo 'trying anyway...'
+      [ -f ~/.config/$1/conf ] && $EDITOR ~/.config/$1/conf || \
+      [ -f ~/.config/$1/config ] && $EDITOR ~/.config/$1/config || \
+      [ -f ~/.config/$1/"$1"rc ] && $EDITOR ~/.config/$1/"$1"rc ;;
+      # which $1 && vim `which $1` ;;
+  esac
+}
+
+conf $1

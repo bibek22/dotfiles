@@ -1,0 +1,4 @@
+while read line
+do
+        { echo -en "$line "; trans -b $line; } | column -c 30;
+done < "${1:-/dev/stdin}"

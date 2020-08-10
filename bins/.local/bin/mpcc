@@ -1,0 +1,32 @@
+msgId="591049"
+
+case $1 in
+    vup) arg="volume +5" ;;
+    vdown) arg="volume -5" ;;
+    seekf) arg="seek +0:0:5" ;;
+    seekb) arg="seek -0:0:5" ;;
+    next) arg="next" ;;
+    prev) arg="prev" ;;
+    toggle) arg="toggle" ;;
+    stop) arg="stop" ;;
+esac
+
+
+# now playing song
+now=`mpc | head -n 1`
+
+if [[ $arg == "next" ]] || [[  $arg == "prev" ]];
+then
+	( mpc "$arg" || mpc -q -h arch "$arg" ) &&	dunstify -u low -a "Music" -r "$msgId" "Now Playing" "$now"
+	exit
+fi
+
+status=`mpc | sed '2q;d'  | grep -Eo "\[.*\]"`
+
+if [[ $arg == "toggle" ]];
+then
+	( mpc "$arg" || mpc -q -h arch "$arg" ) &&	dunstify -u low -a "Music" -r "$msgId" "Now Playing" "$now $status"
+	exit
+fi
+
+mpc "$arg"

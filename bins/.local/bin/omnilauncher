@@ -1,0 +1,40 @@
+#/usr/bin/sh
+# Bibek Gautam
+# Sep 21 2019
+# A function to open file with every extension !
+
+function open() {
+    ext=${1##*.}
+    case $ext in 
+    pdf)        zathura "$1" ;;
+    djvu)       zathura "$1" ;;
+    epub)       zathura "$1" ;;
+    mid)	aplaymidi -p `aplaymidi -l | tail -n 1 | grep -Eo "[0-9]*:."` "$1" ;;
+    jpg)        feh -F "$1" ;;
+    png)        feh -F "$1" ;;
+    jpeg)       feh -F "$1" ;;
+    mp4)        mpv "$1" ;;
+    avi)        mpv "$1" ;;
+    mkv)        mpv "$1" ;;
+    docx)       lowriter "$1" ;;
+    pptx)       loimpress "$1" ;;
+    blend)      blender "$1" ;;
+    odt)	lowriter "$1" ;;
+    html)       firefox "$1" ;;
+    py)		st -n 'Vim' -c "Float" -T "Vim - ${1##*/}" -w '' -e zsh -c "vim '$1'" ;;
+    csv)	st -n 'Vim' -c "Float" -T "Vim - ${1##*/}" -w '' -e zsh -c "vim '$1'" ;;
+    sh) 	st -n 'Vim' -c "Float" -T "Vim - ${1##*/}" -w '' -e zsh -c "vim '$1'" ;;
+    md) 	typora "$1";;
+    *)          ;;
+    esac
+}
+
+FILE=`tree -if $HOME| rofi -dmenu -i -p "Choose a File"`
+
+if [[ ! $? -eq 0 ]]; then
+	exit
+else
+    open "$FILE"
+fi
+
+

@@ -1,0 +1,14 @@
+#!/usr/bin/zsh
+
+DT=`date '+%F %H:%M'`
+PWD=`pwd`
+cd ~/git/blog/
+echo -n "Commit message: "
+read CM
+git commit -a -m "$CM" && git push github master
+
+if [[ $? == 0 ]]; then
+    echo
+    echo Done
+    exit
+fi

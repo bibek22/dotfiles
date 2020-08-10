@@ -1,0 +1,23 @@
+#!/usr/bin/zsh
+
+# add the directories to backup in the list below.
+# git should already be initialized and remote set.
+DIRS=(
+	/home/bibek/.bin/
+	/home/bibek/Build/dwm/
+	/home/bibek/Build/st/
+)
+
+# commit message
+MSG="Updates - `date`"
+
+function backup() {
+	for dir in $DIRS; do
+		cd "$dir"
+		git add .
+		git commit -m "$MSG"
+		git push --all origin
+	done
+}
+
+backup && notify-send " Backup Successful"
