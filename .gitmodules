@@ -4,3 +4,6 @@
 [submodule "build/dwm-patched"]
 	path = build/dwm-patched
 	url = https://github.com/bibek22/dwm
+[submodule "build/build/dwm"]
+	path = build/build/dwm
+	url = https://github.com/bibek22/dwm
