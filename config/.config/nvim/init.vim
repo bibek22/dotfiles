@@ -8,6 +8,10 @@ map <C-l> <C-w>l
 let mapleader = " "
 let maplocalleader = ";"
 
+" Save recording macro to <s-q> and free q
+nnoremap Q q
+nnoremap q <Nop>
+
 " easy save and/or quit
 map q :q<ENTER>
 map <Leader>q :q!<ENTER>
