@@ -31,6 +31,22 @@ set number
 " Count relative to line at cursor
 set relativenumber
 
+" Save undo history across sessions
+" Put plugins and dictionaries in this dir (also on Windows)
+let vimDir = '$HOME/.vim'
+let &runtimepath.=','.vimDir
+
+" Keep undo history across sessions by storing it in a file
+if has('persistent_undo')
+    let myUndoDir = expand(vimDir . '/undodir')
+    " Create dirs
+    call system('mkdir ' . vimDir)
+    call system('mkdir ' . myUndoDir)
+    let &undodir = myUndoDir
+    set undofile
+endif
+
+
 """""""""""""""""""""""""
 " Vim-Plug Plugin Manager
 """""""""""""""""""""""""
@@ -67,6 +83,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     " async lint engine
     " proselint installed. check usage!
     " Plug 'dense-analysis/ale'
+    " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 
     "Python stuffs
     Plug 'davidhalter/jedi-vim'     " to jump to code
