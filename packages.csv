@@ -33,6 +33,8 @@ pandoc
 pulseaudio
 pulseaudio-alsa
 pulsemixer
+python-pywal
+python-pynvim
 redshift
 rofi
 screenkey
@@ -57,9 +59,7 @@ xcompmgr
 xdotool
 xf86-input-synaptics
 xf86-video-vesa
-xorg
-xournalpp
-xorg
+xorg-xsetroot
 xwallpaper
 yapf
 youtube-dl

@@ -80,7 +80,7 @@ sleep 3 && pcmanfm -d &
 wal -R
 xrdb -merge /home/bibek/.cache/wal/dwm.Xresources
 
-/usr/local/bin/dwmbar &
+/home/bibek/.local/bin/dwmbar &
 
 LOC=/home/bibek/build/dwm/
 while true; do
