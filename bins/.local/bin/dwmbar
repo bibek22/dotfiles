@@ -78,8 +78,8 @@ status() { \
 		echo "$delim"
 
 	# Will show all batteries with approximate icon for remaining power.
-	# [ `acpi -b | grep -Eo "Charging"` ] &&	echo ⚡
-	[ `acpi -b | grep -Eo "Discharging"` ] && dunstify -p 9999 "Unplugged" "Don't let me die!" || echo ⚡
+	[ `acpi -b | grep -Eo "Charging"` ] &&	echo ⚡
+    # ( [ `acpi -b | grep -Eo "Discharging"` ] && dunstify -p 9999 "Unplugged" "Don't let me die!" )|| echo ⚡
 
 	for x in /sys/class/power_supply/BAT?/capacity;
 	do
