@@ -1,5 +1,9 @@
 PROMPT_EOL_MARK=" •"
 
+# append history when the shell closes. not in real time.
+# which would mix up history from multiple terminal instances. 
+setopt APPEND_HISTORY
+
 # zsh default command
 export FZF_DEFAULT_OPTS="-m"
 if command -v ag &>/dev/null; then

@@ -79,6 +79,9 @@ call plug#begin('~/.local/share/nvim/plugged')
 		let g:UltiSnipsJumpBackwardTrigger='<s+tab>'
 		" smap <S+tab> :call UltiSnips#JumpBackwards()<ENTER>
 		let g:UltiSnipsSnippetDirectories=["UltiSnips", "mySnips"]
+    " wal sets the colorscheme
+    Plug 'dylanaraps/wal.vim'
+
 
     " async lint engine
     " proselint installed. check usage!
@@ -130,3 +133,10 @@ vmap <C-_> <leader>c<Space>
 " For python files it's `yapf` developed by Google open source. :h neoformat
 nmap <leader>f :Neoformat<enter>
 
+" Colorscheme wal
+colorscheme wal
+
+" Highlight color of matching pairs look ugly
+" This is set from colorscheme wal. overriding it here
+" hi MatchParen cterm=bold ctermbg=1 ctermfg=8
+hi MatchParen cterm=bold ctermbg=1 ctermfg=white
