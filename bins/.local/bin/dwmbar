@@ -21,14 +21,14 @@ status() { \
 	#       echo ' '
 	#     fi
 	# 
- #            if [[  `mpc | grep -c Elvis` != 0  ]]; then
- #                mpc -f "%title%"| head -n 1 | xargs -r0 basename | tr -d "\n" | cut -d"(" -f1 | cut -d" " -f1-6
- #            else
- #                # take first line > quote args, remove dir >> take 1st split from ( > take 6 words
- #                mpc | head -n 1 | xargs -r0 basename | tr -d "\n" | cut -d"(" -f1 | cut -d" " -f1-6
- #            fi
- #            echo " $delim"
- #        fi
+    #            if [[  `mpc | grep -c Elvis` != 0  ]]; then
+    #                mpc -f "%title%"| head -n 1 | xargs -r0 basename | tr -d "\n" | cut -d"(" -f1 | cut -d" " -f1-6
+    #            else
+    #                # take first line > quote args, remove dir >> take 1st split from ( > take 6 words
+    #                mpc | head -n 1 | xargs -r0 basename | tr -d "\n" | cut -d"(" -f1 | cut -d" " -f1-6
+    #            fi
+    #            echo " $delim"
+    #        fi
 	# 
 	# Get the volume of pulse audio's master volume output.
 	CUR_VOL=`pacmd list-sinks | awk '/volume: front/ { print $5 }' | tail -n1 | grep -Eo "[0-9]*"`
@@ -84,12 +84,17 @@ status() { \
 	for x in /sys/class/power_supply/BAT?/capacity;
 	do
 	case "$(cat $x)" in
-		100|9[0-9])	echo "" ;;
-		8[0-9]|7[0-9])	echo "" ;;
-		6[0-9]|5[0-9])	echo "" ;;
-		# 4[0-9]|3[0-9])	echo "" ;;
-		4[0-9])		echo "" ;;
-		*)		echo "" ;;
+		[0-9])		echo "" ;;
+		1[0-9])		echo "" ;;
+		2[0-9])		echo "" ;;
+		3[0-9])		echo "" ;;
+		4[0-9])		echo "" ;;
+		5[0-9])		echo "" ;;
+		6[0-9])		echo "" ;;
+		7[0-9])		echo "" ;;
+		8[0-9])		echo "" ;;
+		9[0-9])		echo "" ;;
+		*)		    echo "" ;;
 	esac
 	done && echo "$delim"
 
@@ -109,11 +114,7 @@ update() { \
 	# to prevent some weird issues that cause significant slowing of
 	# everything in dwm. Note entirely sure of the cause, but again, the tr
 	# command easily avoids it.
-	if [ -z $SPACE ]; then
-	    xsetroot -name "$(status | tr -d '\n')" &
-	else
-	    xsetroot -name "$(status | tr "$delim" "$SPACE$delim$SPACE")" &
-	fi
+    xsetroot -name "$(status | tr -d '\n')" &
     # wait
 }
 
@@ -121,8 +122,8 @@ while :; do
     update
 	# Sleep for a minute after changing the status bar before updating it
 	# again. We run sleep in the background and use wait until it finishes,
-    	# because traps can interrupt wait immediately, but they can't do that
-    	# with sleep.
-	sleep 0.2 &
+   	# because traps can interrupt wait immediately, but they can't do that
+   	# with sleep.
+	sleep 1 &
     wait
 done

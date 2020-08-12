@@ -62,6 +62,14 @@ function buildthings() {
      sudo make install
 }
 
+function installfonts() {
+    local location, target
+    location="$HOME/dotfiles/fonts/"
+    target="$HOME/.local/share/fonts"
+    unzip $location/Sh*.zip
+    (  [ -d "$target" ] || mkdir $target ) && mv $location/*.ttf $target
+}
+
 # startsession "Installing stow and yay-AUR helper"
 # prepare
 # startsession "Cloning dotfiles"

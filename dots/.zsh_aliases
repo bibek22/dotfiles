@@ -1,3 +1,7 @@
+# Transients
+alias vc='conf nvim'
+alias vp='vim ~/dox/project/main.tex'
+
 # default installs
 alias rmrf="rm -rf"
 alias ls="ls -trh --color"    # add colors for filetype recognition
