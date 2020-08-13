@@ -33,6 +33,8 @@ $0
 endsnippet
 
 snippet template "Basic template" b
+%! TEX root = main.tex
+% above line for vim-plug to compile
 \documentclass[a4paper]{article}
 
 \usepackage[utf8]{inputenc}			% Allows for accented characters to be -
@@ -58,6 +60,8 @@ snippet template "Basic template" b
 \pdfsuppresswarningpagegroup=1
 
 \begin{document}
+	% \maketitlepage
+	% \tableofcontents
 	$0
 
 	\printbibliography

@@ -1,6 +1,6 @@
 #!/usr/bin/zsh
 
-word=`cat /usr/share/dict/usa | rofi -dmenu` || exit
+word=`cat /usr/share/dict/usa | rofi -dmenu --levenshstein-sort` || exit
 # res="$(sdcv -e -n $word | sed 1,6d | sed "s/^\s*//" | sed "s/\[/\n\[/"| sed "s/[\[\]]//g")"
 res="$(sdcv -e -n $word | ~/.local/bin/parse-sdcv.py)"
 dunstify -a "WordNet" -r 191919 --urgency=normal "$word" "$res"

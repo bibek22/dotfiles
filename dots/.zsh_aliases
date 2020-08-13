@@ -1,6 +1,8 @@
 # Transients
 alias vc='conf nvim'
 alias vp='vim ~/dox/project/main.tex'
+alias vls='vim ~/.config/nvim/mySnips/tex.snippets'
+alias pq='pacman -Q'
 
 # default installs
 alias rmrf="rm -rf"

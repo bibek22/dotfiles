@@ -1,12 +1,17 @@
+" leader
+let mapleader = " "
+let maplocalleader = ";"
+
 " pane navigation easier
+map <leader>wj <C-w>j	
+map <leader>wk <C-w>k
+map <leader>wh <C-w>h
+map <leader>wl <C-w>l
+
 map <C-j> <C-w>j	
 map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
-
-" leader
-let mapleader = " "
-let maplocalleader = ";"
 
 " Save recording macro to <s-q> and free q
 nnoremap Q q
@@ -15,7 +20,7 @@ nnoremap q <Nop>
 " easy save and/or quit
 map q :q<ENTER>
 map <Leader>q :q!<ENTER>
-map <Leader>w :w!<ENTER>
+map <Leader>s :w!<ENTER>
 
 """"""""""""""""""""""""
 " General configuration
@@ -99,12 +104,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     " LATEX plugins below
     Plug 'lervag/vimtex'
-		let g:vimtex_view_general_options_latexmk = '-reuse-instance'
-		let g:vimtex_viewer_mode='zathura'
-		let g:tex_flavor='latex'
-		let conceallevel=1
-		let g:tex_conceal='abdmg'
-
+    
 	" C/C++ completion
 	Plug 'Shougo/deoplete-clangx'
 
@@ -140,3 +140,12 @@ colorscheme wal
 " This is set from colorscheme wal. overriding it here
 " hi MatchParen cterm=bold ctermbg=1 ctermfg=8
 hi MatchParen cterm=bold ctermbg=1 ctermfg=white
+
+" let g:vimtex_view_general_options_latexmk = '-reuse-instance'
+let g:vimtex_viewer_method='zathura'
+" let g:vimtex_compiler_progname = 'nvr'
+let g:tex_flavor='latex'
+" let conceallevel=1
+" let g:tex_conceal='abdmg'
+
+
