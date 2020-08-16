@@ -4,6 +4,13 @@ PROMPT_EOL_MARK=" •"
 # which would mix up history from multiple terminal instances. 
 setopt APPEND_HISTORY
 
+# prompt when in terminal
+if [ -t 0 ]; then 
+    export PROMPT_COMMAND='fzf'
+    export PROMPT_OPTIONS=''
+fi
+
+
 # zsh default command
 export FZF_DEFAULT_OPTS="-m"
 if command -v ag &>/dev/null; then

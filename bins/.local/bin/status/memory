@@ -1,0 +1,2 @@
+echo "ﳄ"
+free -mh | grep -Po "\d+.\d?.i$"

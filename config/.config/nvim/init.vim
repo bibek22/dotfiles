@@ -3,10 +3,10 @@ let mapleader = " "
 let maplocalleader = ";"
 
 " pane navigation easier
-map <leader>wj <C-w>j	
-map <leader>wk <C-w>k
-map <leader>wh <C-w>h
-map <leader>wl <C-w>l
+map <leader>jj <C-w>j	
+map <leader>kk <C-w>k
+map <leader>hh <C-w>h
+map <leader>ll <C-w>l
 
 map <C-j> <C-w>j	
 map <C-k> <C-w>k
@@ -20,7 +20,7 @@ nnoremap q <Nop>
 " easy save and/or quit
 map q :q<ENTER>
 map <Leader>q :q!<ENTER>
-map <Leader>s :w!<ENTER>
+map <Leader>w :w!<ENTER>
 
 """"""""""""""""""""""""
 " General configuration
@@ -51,6 +51,11 @@ if has('persistent_undo')
     set undofile
 endif
 
+" Move cursor to the last left positionn
+if has("autocmd")
+  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+endif
+
 
 """""""""""""""""""""""""
 " Vim-Plug Plugin Manager
@@ -65,7 +70,6 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'jiangmiao/auto-pairs'          " One shouldn't have to worry about it
     Plug 'romainl/vim-cool'              " Turn off highlight after search
     Plug 'machakann/vim-highlightedyank' " Highlight the yanked portion
-		hi HighlightedyankRegion cterm=reverse gui=reverse
 		let g:highlightedyank_highlight_duration = 200
     Plug 'scrooloose/nerdcommenter'      " Consider  tomtom/tcomment_vim 
 		" Align line-wise comment delimiters flush left instead of following code indentation
@@ -87,6 +91,8 @@ call plug#begin('~/.local/share/nvim/plugged')
     " wal sets the colorscheme
     Plug 'dylanaraps/wal.vim'
 
+    " Git plugni
+    Plug 'tpope/vim-fugitive'
 
     " async lint engine
     " proselint installed. check usage!
@@ -140,6 +146,8 @@ colorscheme wal
 " This is set from colorscheme wal. overriding it here
 " hi MatchParen cterm=bold ctermbg=1 ctermfg=8
 hi MatchParen cterm=bold ctermbg=1 ctermfg=white
+" Highlight yank region
+hi HighlightedyankRegion cterm=reverse gui=reverse
 
 " let g:vimtex_view_general_options_latexmk = '-reuse-instance'
 let g:vimtex_viewer_method='zathura'
@@ -148,4 +156,6 @@ let g:tex_flavor='latex'
 " let conceallevel=1
 " let g:tex_conceal='abdmg'
 
+" Autocmd's bufwrite hooks
+autocmd BufWritePre *dunstrc :!killall dunst ; dunst& disown 
 

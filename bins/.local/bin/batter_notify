@@ -1,6 +1,6 @@
 #!/bin/bash
 CRIT=30
-estimate_backup=40 # Per percentage in seconds.
+estimate_backup=200 # Per percentage in seconds.
 while true; do
     # current battery level
     BAT_LEVEL=`acpi -b |grep -Eo "[0-9]+%"|grep -Eo "[0-9]+"`

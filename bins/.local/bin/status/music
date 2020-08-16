@@ -1,0 +1,54 @@
+
+# Get current mpd track filename or artist - title if possible.
+# if [ 1 -lt `mpc | wc -l` ]; then
+#     echo " "
+#     if [ `mpc | grep -Eo "playing"` ]; then
+#       echo ' '
+#     else
+#       echo ' '
+#     fi
+# 
+#            if [[  `mpc | grep -c Elvis` != 0  ]]; then
+#                mpc -f "%title%"| head -n 1 | xargs -r0 basename | tr -d "\n" | cut -d"(" -f1 | cut -d" " -f1-6
+#            else
+#                # take first line > quote args, remove dir >> take 1st split from ( > take 6 words
+#                mpc | head -n 1 | xargs -r0 basename | tr -d "\n" | cut -d"(" -f1 | cut -d" " -f1-6
+#            fi
+#            echo " $delim"
+#        fi
+
+# Get the volume of pulse audio's master volume output.
+CUR_VOL=`pacmd list-sinks | awk '/volume: front/ { print $5 }' | tail -n1 | grep -Eo "[0-9]*"`
+#   Show an icon if or not muted. | sed "s/no//;s/yes//"
+    MUTE_STATUS=`pacmd list-sinks | awk '/muted/ { print $2 }' | tail -n 1`
+
+if [[ $MUTE_STATUS == "yes" ]] || [[ $CUR_VOL -eq 0 ]]
+then
+    echo 
+elif [[ $CUR_VOL -lt 15 ]]
+then
+    echo 
+elif [[ $CUR_VOL -lt 45 ]]
+then
+    echo 
+elif [[ $CUR_VOL -lt 70 ]]
+then
+    echo 墳
+else
+    echo 
+fi
+
+pacmd list-sinks | awk '/volume: front/ { print $5 }' | tail -n 1 | tr '%' ''
+
+# just indicate whether playing or not
+if [ 1 -lt `mpc | wc -l` ]; then
+    echo " "
+    if [ `mpc | grep -Eo "playing"` ]; then
+      # echo '[]'
+      echo '[]'
+    else
+      # echo '[]'
+      echo '[]'
+    fi
+fi
+# 

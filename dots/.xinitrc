@@ -1,10 +1,15 @@
 #!/bin/sh
 
+#Env Variables
+export PROMPT_COMMAND='rofi'
+export PROMPT_OPTIONS='-dmenu'
+
 userresources=$HOME/.Xresources
 usermodmap=$HOME/.Xmodmap
 sysresources=/etc/X11/xinit/.Xresources
 sysmodmap=/etc/X11/xinit/.Xmodmap
-
+# Map Menu/Options key to Super key
+xmodmap -e "keycode 135 = Super_R"
 
 # merge in defaults and keymaps
 [ -f $sysresources ] && xrdb -merge $sysresources
@@ -29,13 +34,13 @@ do
   while pgrep slock; do
     sleep 30s # pause on screen lock
   done
-  sleep 25m && notify-send "minute break"
+  sleep 25m && dunstify  -r 1923 "minute break"
   # sleep 5; slock 
 done &
 
-
-unclutter &
-xset r rate 250 40 &
+# Autorepeat of a key
+# wait till--v   v-- x repeat per sec
+xset r rate 250 30 &
 
 # Notification daemon
 dunst &
@@ -62,6 +67,7 @@ picom &
 sleep 1 && st &
 sleep 1 && redshift &
 sleep 3 && pcmanfm -d &
+sleep 10 && notion-app &
 
 # Restore colorscheme (second line below does it in dwmbar)
 wal -R

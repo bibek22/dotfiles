@@ -1,15 +1,19 @@
 # Transients
 alias vc='conf nvim'
 alias vp='vim ~/dox/project/main.tex'
+alias vi='vim ~/dox/project/introduction/introduction.tex'
 alias vls='vim ~/.config/nvim/mySnips/tex.snippets'
 alias pq='pacman -Q'
+alias py='python'
+alias void='cd ~/git/voidrice/.local/bin/'
 
 # default installs
+alias grep="grep --color=auto"
+alias rm="rm -r"
 alias rmrf="rm -rf"
 alias ls="ls -trh --color"    # add colors for filetype recognition
 alias lstr="ls -tr"
 alias lsa="ls -a"
-alias grep="grep --color=auto"
 alias ll="ls -l --group-directories-first"
 alias la="ls -A"            # show hidden files
 alias lt="ls -ltr"          # sort by date, most recent last

@@ -1,120 +1,25 @@
 #!/usr/bin/env sh
 
-# This script sets the statusbar with the xsetroot command at the end. Have it
-# started by ~/.xinitrc or ~/.xprofile.
-
 # Handle SIGTRAP signals sent by refbar to update the status bar immediately.
 # trap 'update' 5
 
 # Set the deliminter character.
-delim=""  # 
-# if you want to pad with space around delim
-SPACE=""
+delim=" "  #  
 
 status() { \
-	# Get current mpd track filename or artist - title if possible.
-	# if [ 1 -lt `mpc | wc -l` ]; then
-	#     echo " "
-	#     if [ `mpc | grep -Eo "playing"` ]; then
-	#       echo ' '
-	#     else
-	#       echo ' '
-	#     fi
-	# 
-    #            if [[  `mpc | grep -c Elvis` != 0  ]]; then
-    #                mpc -f "%title%"| head -n 1 | xargs -r0 basename | tr -d "\n" | cut -d"(" -f1 | cut -d" " -f1-6
-    #            else
-    #                # take first line > quote args, remove dir >> take 1st split from ( > take 6 words
-    #                mpc | head -n 1 | xargs -r0 basename | tr -d "\n" | cut -d"(" -f1 | cut -d" " -f1-6
-    #            fi
-    #            echo " $delim"
-    #        fi
-	# 
-	# Get the volume of pulse audio's master volume output.
-	CUR_VOL=`pacmd list-sinks | awk '/volume: front/ { print $5 }' | tail -n1 | grep -Eo "[0-9]*"`
-	#   Show an icon if or not muted. | sed "s/no//;s/yes//"
-        MUTE_STATUS=`pacmd list-sinks | awk '/muted/ { print $2 }' | tail -n 1`
-
-	if [[ $MUTE_STATUS == "yes" ]] || [[ $CUR_VOL -eq 0 ]]
-	then
-	    echo 
-	elif [[ $CUR_VOL -lt 15 ]]
-	then
-	    echo 
-	elif [[ $CUR_VOL -lt 45 ]]
-	then
-	    echo 
-	elif [[ $CUR_VOL -lt 70 ]]
-	then
-	    echo 墳
-	else
-	    echo 
-	fi
-        pacmd list-sinks | awk '/volume: front/ { print $5 }' | tail -n 1 | tr '%' ''
-
-	# just playing or not
-	if [ 1 -lt `mpc | wc -l` ]; then
-	    echo " "
-	    if [ `mpc | grep -Eo "playing"` ]; then
-	      # echo '[]'
-	      echo '[]'
-	    else
-	      # echo '[]'
-	      echo '[]'
-	    fi
-	fi
-	# 
-
-	# Wifi quality percentage and  icon if ethernet is connected.
-	# grep "^\s*w" /proc/net/wireless | awk '{ print "", int($3 * 100 / 70) "%" }'
-	# echo "$delim"
-	# grep "^\s*w" /proc/net/wireless | awk '{ print "" }'
-	# sed "s/down//;s/up//" /sys/class/net/e*/operstate
-
-	# Show unread mail if mutt-wizard is installed.
-	command -v mw >/dev/null 2>&1 &&
-		echo "$delim" &&
-		du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | wc -l | sed 's/^//'
-		echo "$delim"
-
-	# Will show all batteries with approximate icon for remaining power.
-	[ `acpi -b | grep -Eo "Charging"` ] &&	echo ⚡
-    # ( [ `acpi -b | grep -Eo "Discharging"` ] && dunstify -p 9999 "Unplugged" "Don't let me die!" )|| echo ⚡
-
-	for x in /sys/class/power_supply/BAT?/capacity;
-	do
-	case "$(cat $x)" in
-		[0-9])		echo "" ;;
-		1[0-9])		echo "" ;;
-		2[0-9])		echo "" ;;
-		3[0-9])		echo "" ;;
-		4[0-9])		echo "" ;;
-		5[0-9])		echo "" ;;
-		6[0-9])		echo "" ;;
-		7[0-9])		echo "" ;;
-		8[0-9])		echo "" ;;
-		9[0-9])		echo "" ;;
-		*)		    echo "" ;;
-	esac
-	done && echo "$delim"
-
-	# Date and time.
-	# date '+%Y %b %d (%a) %I:%M'
-	date '+%b%d(%a)%I:%M'
-
-	echo "$delimﳄ"
-
-	free -mh | grep -Po "\d+.\d?.i$"
-	}
+    $HOME/.local/bin/status/music       && echo "$delim"
+    $HOME/.local/bin/status/memory      && echo "$delim"
+    $HOME/.local/bin/status/disk        && echo "$delim"
+    $HOME/.local/bin/status/mail        && echo "$delim"
+    $HOME/.local/bin/status/internet    && echo "$delim"
+    $HOME/.local/bin/status/battery     && echo "$delim"
+    $HOME/.local/bin/status/date    
+}
 
 update() { \
-	# So all that big status function was just a command that quicking gets
-	# what we want to be the statusbar. This xsetroot command is what sets
-	# it. Note that the tr command replaces newlines with spaces. This is
-	# to prevent some weird issues that cause significant slowing of
-	# everything in dwm. Note entirely sure of the cause, but again, the tr
-	# command easily avoids it.
-    xsetroot -name "$(status | tr -d '\n')" &
+	# piping into tr to get rid of all the new line characters introduced by echos
+    xsetroot -name "$(status | tr -d '\n')"
+    # echo "$(status | tr -d '\n')" &
     # wait
 }
 

@@ -31,6 +31,7 @@ conf() {
   ssh)            $EDITOR ~/.ssh/config;;
   sshd)           $EDITOR /etc/ssh/sshd_config;;
   z)              $EDITOR ~/.zshrc ;;
+  zz)              $EDITOR ~/.zshrcc ;;
   dwm)            $EDITOR ~/build/dwm/config.h;;
   rofi)           $EDITOR ~/.config/rofi/config;;
   st)             $EDITOR ~/build/st/config.h;

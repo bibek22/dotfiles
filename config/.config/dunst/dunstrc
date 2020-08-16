@@ -1,6 +1,5 @@
 [global]
-    font = Monospace 12
-
+    font = ShureTechMono Nerd Font 12
     # allow a small subset of html markup:
     # <b>bold</b>
     # <i>italic</i>
@@ -187,17 +186,17 @@
 # fitting options for rules.
 
 [reminder]
-		summary = "minute*break"
-    format		= "%s\n%b"
+	summary = "minute*break"
+    format	= "%s\n%b"
     urgency = low
 
 [mutt-wizard]
-		appname = mutt-wizard
-    format		= "<b>%s</b>:\n%b"
+	appname = Mail
+    format	= "<b>%s</b>:\n%b"
 
 [Volume]
-		appname = Volume
-    format		= "<b>%a</b>: %s\n%b"
+	appname = Volume
+    format	= "<b>%a</b>: %s\n%b"
     urgency = low
 
 [notify-send]
