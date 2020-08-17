@@ -1,4 +1,3 @@
 # Date and time.
 # date '+%Y %b %d (%a) %I:%M'
-echo "$(date '+%b%d(%a)%I:%M')"
-
+echo "$(date '+%b-%d(%a)%I:%M')"

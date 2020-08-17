@@ -49,7 +49,9 @@ handle_mime() {
             fi
             highlight --replace-tabs="${HIGHLIGHT_TABWIDTH}" --out-format="${highlight_format}" \
                 --style="${HIGHLIGHT_STYLE}" --force -- "${FILE_PATH}" ;;
+        application/epub*) echo "Epub Document";;
         application/zip) atool --list -- "${FILE_PATH}" ;;
+        image/*djvu) echo "Djvu Document";;
         image/*) chafa --fill=block --symbols=block -c 256 -s 80x"${HEIGHT}" "${FILE_PATH}" || exit 1;;
         video/* | audio/*|application/octet-stream) mediainfo "${FILE_PATH}" || exit 1;;
         */pdf) pdftotext -l 10 -nopgbrk -q -- "${FILE_PATH}" - ;;

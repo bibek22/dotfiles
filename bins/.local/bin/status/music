@@ -1,4 +1,5 @@
-
+#!/usr/bin/sh
+#
 # Get current mpd track filename or artist - title if possible.
 # if [ 1 -lt `mpc | wc -l` ]; then
 #     echo " "

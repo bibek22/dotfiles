@@ -1,0 +1,25 @@
+/* Ignore everything */
+config/.config/*
+bins/.local/lib
+bins/.local/bin/git
+bins/.local/share/*
+build/build/*
+dots/git
+
+/* !config/ */
+/* Unignore few things */
+!config/.config/nvim/
+!config/.config/lf/
+!config/.config/light/
+!config/.config/zathura/
+!config/.config/tmux/
+!config/.config/sxhkd/
+!config/.config/dunst/
+!config/.config/wal/
+!config/.config/rofi/
+
+!bins/.local/share/larbs/
+!bins/.local/share/dic/
+
+!build/build/dwm/
+!build/build/st/

@@ -35,6 +35,10 @@ set clipboard+=unnamedplus
 set number
 " Count relative to line at cursor
 set relativenumber
+set ignorecase          " Case insensitive search
+set smartcase           " smart (case sensitivity) search
+set title titlelen=35
+set titlestring=%t%(\ %M%)%(\ (%{expand(\'%:~:.:h\')})%)%(\ %a%)
 
 " Save undo history across sessions
 " Put plugins and dictionaries in this dir (also on Windows)
@@ -91,7 +95,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     " wal sets the colorscheme
     Plug 'dylanaraps/wal.vim'
 
-    " Git plugni
+    " Git plugin
     Plug 'tpope/vim-fugitive'
 
     " async lint engine

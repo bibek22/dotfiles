@@ -1,3 +1,7 @@
+#!/usr/bin/sh
+
+[ 0 -eq "$(cat /sys/class/power_supply/ACAD/online)" ] || echo ﮣ
+[ -f /sys/class/power_supply/BAT?/capacity ] ||  echo "" ; exit
 
 for x in /sys/class/power_supply/BAT?/capacity;
 do
@@ -14,5 +18,4 @@ case "$(cat $x)" in
     9[0-9])		echo "" ;;
     *)		    echo "" ;;
 esac
-[ 0 -eq "$(cat /sys/class/power_supply/ACAD/online)" ] ||	echo ⚡
 done

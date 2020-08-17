@@ -7,9 +7,9 @@ function confirm() {
     CONFIRM=`echo -e "yes\nno"| rofi -dmenu -i -p "$1"` || exit
     if [ $CONFIRM == "yes" ]
     then
-	return 0
+        return 0
     else
-	return -1
+        return -1
     fi
 }
 
@@ -18,21 +18,14 @@ function note() {
     filename="$(basename -- $FILE)"
     extension="${filename##*.}"
 
-    if [ "$extension" == "md" ]
-    then
-	typora $FILE
-    elif [ "$extension" == "notes" ]
-    then
-	exit
-    elif [ "$extension" == "org" ]
-    then
-	emacs "$FILE"
-    elif [ "$extension" == "$filename" ]
-    then
-	confirm "create a new note?" || exit
-	touch ~/notes/"$filename.md"
-	typora "~/notes/$filename.md"
-    fi
+    case $extension in
+         "md")       typora $FILE ;;
+      "notes")       exit ;;
+        "org")       emacs "$FILE" ;;
+  "$filename")       confirm "create a new note?" || exit ;
+            	touch ~/notes/"$filename.md" ;
+            	typora "~/notes/$filename.md" ;;
+    esac
 }
 
 
@@ -69,9 +62,7 @@ function changeBackground() {
 function Delete() {
     # Delete arbitrary file
     FILE=`tree -if $HOME | rofi -dmenu -i -p "Delete a File"`
-    if [[ ! $? -eq 0 ]]; then
-	exit
-    fi
+    [[ ! $? -eq 0 ]] && exit
 
     confirm "Are you sure?" || exit
     notify-send "$FILE Deleted"
@@ -83,20 +74,24 @@ function killall() {
     pid=$(ps -ef |grep bibek | awk '{print $2 "\t" $5 "\t" $8 }' |rofi -dmenu -i -p "kill a job" | awk '{print $1}')
     if [ "x$pid" != "x" ];
     then
-	kill -${1:-9} $pid
+        kill -${1:-9} $pid
     fi
 }
 
 function stopwatch(){
+    local TIME
     TIME=`echo -e "5\n10\n20\n25\n30\n35"| rofi -dmenu -i -p "Pick a time (min)"`
     notify-send "Stopwatch set for $TIME mins"
     sleep $TIME'm'
-    notify-send "Times up! $TIME mins"
+    notify-send "Times up! ($TIME mins)"
 }
 
 function printIP() {
-    resp=`ip a | grep -Po "\d*\.\d*\.\d*\.\d*/24"`
-    notify-send $resp
+    # depends on iproute2 package.
+    # ip=`ip a | grep -Po "\d*\.\d*\.\d*\.\d*/24"`
+    local ip
+    ip="$(python  -c 'import socket as s; print(s.gethostbyname(s.gethostname()))')"
+    dunstify -a "Local IP" "$ip"
 }
 
 function play() {
@@ -161,5 +156,3 @@ Click)	    xdotool click 1;;
     *)              ;;
     esac
 fi
-
-

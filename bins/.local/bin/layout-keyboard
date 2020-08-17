@@ -3,16 +3,20 @@ if [ ! $@ ]; then
     status=`setxkbmap -query | grep layout|grep -Eo "[a-z]+$"`
     if [ $status = "gr" ]; then
         setxkbmap -model dell -layout us -variant mac -option ctrl:nocaps
+        dunstify -r 19191 -a "Keyboard Layout" "us"
     else
         setxkbmap -model dell -layout gr -option ctrl:nocaps
+        dunstify -r 19191 -a "Keyboard Layout" "gr"
     fi
 else
     case $1 in
         "de")
             setxkbmap -model dell -layout $1 -variant qwerty -option ctrl:nocaps
+            dunstify -r 19191 -a "Keyboard Layout" "de"
             ;;
         *)
             setxkbmap -model dell -layout $1 -option ctrl:nocaps
+            dunstify -r 19191 -a "Keyboard Layout" "$1"
     esac
 
 fi

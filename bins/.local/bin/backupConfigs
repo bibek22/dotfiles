@@ -3,13 +3,12 @@
 # add the directories to backup in the list below.
 # git should already be initialized and remote set.
 DIRS=(
-	/home/bibek/.bin/
-	/home/bibek/Build/dwm/
-	/home/bibek/Build/st/
+	/home/bibek/dotfiles/
+	/home/bibek/dotfiles/build/build/dwm/
 )
 
 # commit message
-MSG="Updates - `date`"
+MSG="Routine Bump - `date`"
 
 function backup() {
 	for dir in $DIRS; do
@@ -20,4 +19,5 @@ function backup() {
 	done
 }
 
-backup && notify-send " Backup Successful"
+{ backup && notify-send " Backup Successful" } \
+    || notify-send " Backup failed 😢" 

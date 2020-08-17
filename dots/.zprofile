@@ -6,6 +6,7 @@ export EDITOR="nvim"
 export TERMINAL="st"
 export BROWSER="firefox"
 export READER="zathura"
+export SUDO_ASKPASS="dmenupass"
 
 # Add paths
 export PATH=/home/bibek/.local/bin:$PATH
