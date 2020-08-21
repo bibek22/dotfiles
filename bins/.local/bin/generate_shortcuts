@@ -1,0 +1,3 @@
+#!/usr/bin/sh
+shell="$HOME/.aliases"
+awk '{print "alias " $1"=""\"cd "$2"; ls; pwd\""}' ~/.config/directories > "$shell"

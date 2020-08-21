@@ -17,6 +17,7 @@ dots/git
 !config/.config/dunst/
 !config/.config/wal/
 !config/.config/rofi/
+!config/.config/ncmpcpp/
 
 !bins/.local/share/larbs/
 !bins/.local/share/dic/

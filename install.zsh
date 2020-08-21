@@ -1,5 +1,5 @@
 #!/usr/bin/zsh
-
+#This wont run cleanly. This is mostly only for reference as of now.
 #Initialize env variables
 export ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
 export XDG_DATA_HOME="$HOME/.config/"

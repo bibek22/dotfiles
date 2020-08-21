@@ -4,20 +4,8 @@
 # trap 'update' 5
 
 # Set the deliminter character.
-delim=" "  #  
-
 status() { \
-    
-    echo " "
-    $HOME/.local/bin/status/music       && echo "$delim"
-    $HOME/.local/bin/status/memory      && echo "$delim"
-    $HOME/.local/bin/status/disk        && echo "$delim"
-    $HOME/.local/bin/status/mail        && echo "$delim"
-    $HOME/.local/bin/status/internet    && echo "$delim"
-    $HOME/.local/bin/status/battery     && echo "$delim"
-    $HOME/.local/bin/status/moonphase
-    $HOME/.local/bin/status/date    
-
+    $HOME/.local/bin/status/main
 }
 
 update() { \

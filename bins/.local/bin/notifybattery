@@ -1,0 +1,11 @@
+#!/usr/bin/bash
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/1000/bus; export DISPLAY=:0; 
+[ 1 -eq "$(cat /sys/class/power_supply/ACAD/online)" ] && exit 0
+[ $(cat /sys/class/power_supply/BAT?/capacity) -lt 40 ] && dunstify -a "Battery" -r 12212 "Critical"
+
+# [ 1 -eq "$(cat /sys/class/power_supply/ACAD/online)" ] \
+#     && ( [  $(cat /sys/class/power_supply/BAT?/capacity) -gt 80  ]\
+#         && dunstify -a "Battery" -r 12212 "Ya can unplug it" \
+#         && exit 0 ) \
+#     || echo hi; exit 0
+

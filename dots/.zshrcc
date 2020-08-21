@@ -10,6 +10,9 @@ if [ -t 0 ]; then
     export PROMPT_OPTIONS=''
 fi
 
+# source aliases: These are generated from ~/.config/directories
+# with script generate_shortcuts done automatically with vim autocmd
+[ -f $HOME/.aliases ] && source $HOME/.aliases
 
 # zsh default command
 export FZF_DEFAULT_OPTS="-m"

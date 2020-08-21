@@ -63,11 +63,11 @@ fi
 
 # compositor
 picom &
-# nm-applet &
 sleep 1 && st &
 sleep 1 && redshift &
 sleep 3 && pcmanfm -d &
 sleep 10 && notion-app &
+# nm-applet &
 
 # Restore colorscheme (second line below does it in dwmbar)
 wal -R

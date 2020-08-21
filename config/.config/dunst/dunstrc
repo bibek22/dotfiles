@@ -159,7 +159,7 @@
     /* background = "#5B3256" */
     background = "#260d1a"
     foreground = "#dddddd"
-    timeout = 5
+    timeout = 7
 
 [urgency_critical]
     background = "#900000"

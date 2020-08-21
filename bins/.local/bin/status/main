@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+delim=" "  #  
+
+echo " "
+# $HOME/.local/bin/status/weather   && echo "$delim"
+$HOME/.local/bin/status/music     && echo "$delim"
+$HOME/.local/bin/status/memory    && echo "$delim"
+$HOME/.local/bin/status/disk      && echo "$delim"
+$HOME/.local/bin/status/mail      && echo "$delim"
+$HOME/.local/bin/status/internet  && echo "$delim"
+# $HOME/.local/bin/status/nettraf   && echo "$delim"
+$HOME/.local/bin/status/battery   && echo "$delim"
+$HOME/.local/bin/status/moonphase && echo "$delim"
+$HOME/.local/bin/status/date

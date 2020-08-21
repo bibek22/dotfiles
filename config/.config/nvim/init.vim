@@ -7,6 +7,10 @@ map <leader>jj <C-w>j
 map <leader>kk <C-w>k
 map <leader>hh <C-w>h
 map <leader>ll <C-w>l
+" map gwh :split<enter>
+" map gwv :vsplit<enter>
+map L $
+map H 0
 
 map <C-j> <C-w>j	
 map <C-k> <C-w>k
@@ -25,26 +29,24 @@ map <Leader>w :w!<ENTER>
 """"""""""""""""""""""""
 " General configuration
 """"""""""""""""""""""""
-set tabstop =4		" show tabstop as 4 spaces
-set shiftwidth =4	" autoindent size
-set expandtab		" insert 4 spaces on <tab>
+set tabstop =4		    " show tabstop as 4 spaces
+set shiftwidth =4	    " autoindent size
+set expandtab		    " insert 4 spaces on <tab>
 filetype plugin on
-" Use system clipboard
-set clipboard+=unnamedplus
-" Show line number
-set number
-" Count relative to line at cursor
-set relativenumber
+set clipboard+=unnamedplus " Use system clipboard
+set number              " Show line number
+set relativenumber      " Count relative to line at cursor
 set ignorecase          " Case insensitive search
 set smartcase           " smart (case sensitivity) search
-set title titlelen=35
+set inccommand=nosplit  " show incrementally effect of a command(eg. substitute)
+set title titlelen=35   " Set the title of terminal
 set titlestring=%t%(\ %M%)%(\ (%{expand(\'%:~:.:h\')})%)%(\ %a%)
+set conceallevel=2      " Conceal things whenever available like md, tex
+
 
 " Save undo history across sessions
-" Put plugins and dictionaries in this dir (also on Windows)
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
-
 " Keep undo history across sessions by storing it in a file
 if has('persistent_undo')
     let myUndoDir = expand(vimDir . '/undodir')
@@ -70,6 +72,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'junegunn/goyo.vim'             " Distraction free writing
     Plug 'ryvnf/readline.vim'            " Readline shortcuts in command mode
     Plug 'tpope/vim-surround'            " Easily manipulate surrounding brackets/quotes
+    Plug 'godlygeek/tabular'             " Tabularize things
     Plug 'vim-airline/vim-airline'       " Statusbar theme
     Plug 'jiangmiao/auto-pairs'          " One shouldn't have to worry about it
     Plug 'romainl/vim-cool'              " Turn off highlight after search
@@ -96,19 +99,20 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'dylanaraps/wal.vim'
 
     " Git plugin
-    Plug 'tpope/vim-fugitive'
+    " Plug 'tpope/vim-fugitive'
 
     " async lint engine
     " proselint installed. check usage!
     " Plug 'dense-analysis/ale'
     " Plug 'Shougo/defx.nvim', { 'do': ':UpdateRemotePlugins' }
 
-    "Python stuffs
+    " Python stuffs
+    " Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
     Plug 'davidhalter/jedi-vim'     " to jump to code
-		" disable autocompletion, cause we use deoplete for completion
-		let g:jedi#completions_enabled = 0
-		" open the go-to function in split, not another buffer
-		let g:jedi#use_splits_not_buffers = "right"
+        " disable autocompletion, cause we use deoplete for completion
+        let g:jedi#completions_enabled = 0
+        " open the go-to function in split, not another buffer
+        let g:jedi#use_splits_not_buffers = "right"
     " Plug 'zchee/deoplete-jedi'
     " Plug 'neomake/neomake'
 
@@ -123,13 +127,16 @@ call plug#begin('~/.local/share/nvim/plugged')
 
     " Filetype support
     Plug 'plasticboy/vim-markdown', { 'for': 'markdown' }
+        let g:vim_markdown_math = 1
+        let g:vim_markdown_frontmatter = 1
+        let g:vim_markdown_strikethrough = 1
+        let g:vim_markdown_no_extensions_in_markdown = 1
 call plug#end()
 
 " Telling deoplete to use vimtex as completion engine
 call deoplete#custom#var('omni', 'input_patterns', {
         \ 'tex': g:vimtex#re#deoplete
         \})
-
 
 " Plugin keybinds
 " Comment toggle with C-/
@@ -161,5 +168,7 @@ let g:tex_flavor='latex'
 " let g:tex_conceal='abdmg'
 
 " Autocmd's bufwrite hooks
-autocmd BufWritePre *dunstrc :!killall dunst ; dunst& disown 
-
+au BufWritePost *dunstrc :silent !killall dunst ; dunst& disown 
+au BufWritePost *init.vim :source %
+au BufWinLeave *.config/directories :!generate_shortcuts
+" autocmd BufNewFile *.tex itemplate<tab>

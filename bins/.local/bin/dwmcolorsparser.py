@@ -21,7 +21,7 @@ with open(path) as file:
 
 pattern = re.compile("#.{6}")
 colors = pattern.findall(data)
-colors[5] = colors[4]
+colors[5] = colors[0]
 colors[2] = colors[1]
 colors[3] = colors[1]
 

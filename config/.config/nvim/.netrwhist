@@ -1,3 +1,5 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =1
+let g:netrw_dirhistcnt =3
+let g:netrw_dirhist_3='/home/bibek/dl/movies_script/Comedy'
+let g:netrw_dirhist_2='/etc/udev/rules.d'
 let g:netrw_dirhist_1='/var/lib/iwd'

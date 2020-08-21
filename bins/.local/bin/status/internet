@@ -15,4 +15,4 @@ case "$(cat /sys/class/net/w*/operstate 2>/dev/null)" in
 esac
 
 printf "%s%s\n" "$wifiicon" 
-~/.local/bin/status/nettraf
+# ~/.local/bin/status/nettraf

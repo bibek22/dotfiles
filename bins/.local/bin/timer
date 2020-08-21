@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+import sys
+import os
+import time as t
+from datetime import timedelta as td
+from multiprocessing import Process
+
+usage='''Usage: timer <minutes> <seconds>
+    No support for more format yet
+'''
+try:
+    minutes = int(sys.argv[1])
+    seconds = 0 if (len(sys.argv)<=2) else int(sys.argv[2]) 
+    ref = td(minutes=minutes, seconds=seconds)
+    time = td(minutes=minutes, seconds=seconds)
+except:
+    print(usage)
+    exit(-1)
+
+timestamps = []
+delta = td(seconds=1)
+
+def timer():
+    global time, timestamps, delta
+    while (time):
+        sys.stdout.write("\r" + str(time))
+        try: t.sleep(1)
+        except: print("\nexitting...") ; break
+        time -= delta
+    os.system("dunstify -a 'Timer' -r 12873 'Times up!'")
+
+def record():
+    global time, timestamps, delta
+    
+    try:
+        for line in sys.stdin:
+            stamp = ref-time
+            timestamps.append(stamp)
+            print("recorded %s" % stamp)
+    except: finalize()
+
+def finalize():
+    print("\n\nSummary below:")
+    global  timestamps
+    for i in timestamps:
+        print(i)
+
+#  clock = Process(target=timer)
+#  register = Process(target=record)
+#  register.start()
+#  clock.start()
+#  clock.join()
+#  record()
+#  finalize()
+#  register.join()
+timer()

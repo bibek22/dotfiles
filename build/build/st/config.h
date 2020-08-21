@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "mononoki Nerd Font Mono:pixelsize=18:antialias=true:autohint=true";
-static char *font2[] = { "OverpassMono Nerd Font Mono:pixelsize=18:antialias=true:autohint=true", "Lohit Nepali:style=Regular" };
+static char *font = "mononoki Nerd Font Mono:pixelsize=20:antialias=true:autohint=true";
+static char *font2[] = { "OverpassMono Nerd Font Mono:pixelsize=20:antialias=true:autohint=true", "Lohit Nepali:style=Regular" };
 /* static char *font2[] = { "mononoki Nerd Font Mono:pixelsize=19:antialias=true:autohint=true" }; */
 static int borderpx = 2;
 
@@ -298,7 +298,7 @@ static Shortcut shortcuts[] = {
 	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
 	{ MODKEY,               XK_p,           selpaste,       {.i =  0} },
 	{ MODKEY,               XK_Num_Lock,    numlock,        {.i =  0} },
-	{ MODKEY,               XK_Control_L,   iso14755,       {.i =  0} },
+	// { MODKEY,               XK_Control_L,   iso14755,       {.i =  0} },
 	{ XK_ANY_MOD,           XK_F6,		swapcolors,     {.i =  0} },
 	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
 	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },

@@ -3,13 +3,17 @@ alias vc='conf nvim'
 alias vp='vim ~/dox/project/main.tex'
 alias vi='vim ~/dox/project/introduction/introduction.tex'
 alias vls='vim ~/.config/nvim/mySnips/tex.snippets'
+alias dir='vim ~/.config/directories'
 alias pq='pacman -Q'
 alias py='python'
 alias void='cd ~/git/voidrice/.local/bin/'
+sentence(){
+    ag -A4 -B2 "$1" ~/dl/movies_script/Comedy/
+}
 
 # default installs
 alias grep="grep --color=auto"
-alias rm="rm -r"
+alias rm="rm -vr"
 alias rmrf="rm -rf"
 alias ls="ls -trh --color"    # add colors for filetype recognition
 alias lstr="ls -tr"
@@ -49,8 +53,8 @@ alias mutt="neomutt"
 alias btcl="bluetoothctl"
 #aliases for youtube-dl
 # cookies file generated using a firefox addon 'export cookies'
-alias youtube-dl="youtube-dl --cookies ~/.youtube-dl/cookies.txt "
-alias ytdl="youtube-dl --cookies ~/.youtube-dl/cookies.txt "
+alias youtube-dl="youtube-dl --cookies ~/.youtube-dl/cookies.txt"
+alias ytdl="youtube-dl --cookies ~/.youtube-dl/cookies.txt"
 alias ytmp3="youtube-dl -f 140 -o '%(title)s.%(ext)s'"
 alias tm='tmux attach'
 alias play="mpc searchplay"
@@ -92,7 +96,6 @@ alias c="xclip -selection c"
 # Battery status
 alias bat="acpi -b"
 alias su="sudo su"
-alias nethogs="sudo nethogs wlp2s0"
 alias mirror='xrandr --output HDMI-1  --mode 1920x1080 --output eDP-1  --primary --scale-from 1366x768'
 
 # My functions
