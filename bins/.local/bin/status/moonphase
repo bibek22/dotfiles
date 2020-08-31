@@ -15,5 +15,5 @@ icons=( \
 icon="${icons[$moonday]}"
 echo "${icon-?}" > "$moonfile"
 echo "${icon-?}" 
-purnima=( 15 0 11 26 )
+purnima=( 14 0 10 24 )
 [[ ${purnima[@]} =~ (^|[[:space:]])"$moonday"($|[[:space:]])  ]] &&  echo 🛕 && echo 🛕 >> "$moonfile" 

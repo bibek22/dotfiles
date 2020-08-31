@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #Env Variables
-export PROMPT_COMMAND='rofi'
+# export PROMPT_COMMAND='rofi'
 export PROMPT_OPTIONS='-dmenu'
 
 userresources=$HOME/.Xresources

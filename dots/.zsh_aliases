@@ -1,6 +1,8 @@
 # Transients
 alias vc='conf nvim'
-alias vp='vim ~/dox/project/main.tex'
+alias sniptex='vim ~/.config/nvim/mySnips/tex.snippets'
+
+alias vm='vim ~/dox/project/main.tex'
 alias vi='vim ~/dox/project/introduction/introduction.tex'
 alias vls='vim ~/.config/nvim/mySnips/tex.snippets'
 alias dir='vim ~/.config/directories'
@@ -13,7 +15,7 @@ sentence(){
 
 # default installs
 alias grep="grep --color=auto"
-alias rm="rm -vr"
+alias rm="rm -v"
 alias rmrf="rm -rf"
 alias ls="ls -trh --color"    # add colors for filetype recognition
 alias lstr="ls -tr"
@@ -63,7 +65,7 @@ alias play="mpc searchplay"
 alias topdf='soffice --headless --convert-to pdf --outdir ./'
 alias weather="curl wttr.in"
 alias pw="nc termbin.com 9999"
-alias p="xclip -o"
+alias p="xclip -selection c -o"
 alias pong="ping -c 3 www.google.com"
 alias nocomment='egrep -v "^[ \t]*#|^[ \t]*$"'
 # for New file (last modified)

@@ -119,7 +119,7 @@ function idUSBSpeaker() {
 DOS="Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
 DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path"
 DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock|Routine"
-DOS="$DOS|Note"
+DOS="$DOS|Note|Reconnect"
 
 if [[ -z "$1" ]]
 then
@@ -153,6 +153,7 @@ Click)	    xdotool click 1;;
     Killall)        killall ;;
     "Headphone Mic")   pactl set-source-port alsa_input.pci-0000_00_1b.0.analog-stereo analog-input-headset-mic ;;
     "Mute Mic")	    pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo 1 ;;
+    "Reconnect")    iwctl station wlan0 disconnect; iwctl station wlan0 connect "Home wifi";;
     *)              ;;
     esac
 fi

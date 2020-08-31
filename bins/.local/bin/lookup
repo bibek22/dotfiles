@@ -1,7 +1,7 @@
 #!/usr/bin/zsh
 # Prompt commands set from .xinitrc for key bins invocation and .zshrcc for use
 # in terminal
-word=`cat /usr/share/dict/usa | $PROMPT_COMMAND $PROMPT_OPTIONS` || exit
+word=`cat /usr/share/dict/usa | rofi -dmenu` || exit
 res="$(sdcv -e -n $word | stripends | parse-sdcv.py)"
 dunstify -a "WordNet" -r 191919 --urgency=normal "$word" "$res"
 {  echo "$word" } >> $HOME/dox/lookup_history

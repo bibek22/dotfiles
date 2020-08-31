@@ -12,7 +12,7 @@ map <leader>ll <C-w>l
 map L $
 map H 0
 
-map <C-j> <C-w>j	
+map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
@@ -26,9 +26,29 @@ map q :q<ENTER>
 map <Leader>q :q!<ENTER>
 map <Leader>w :w!<ENTER>
 
+" goyo enable
+map <Leader>gy :Goyo<ENTER>
+" Some commonly opened files
+set splitright
+map <Leader>es :UltiSnipsEdit<ENTER>
+map <Leader>ec :vsplit ~/.config/nvim/init.vim<ENTER>
+map <leader>eb :vsplit ~/dox/bibliography.bib<ENTER>
+
+" Fugitive Git commands
+map <localleader>gs :Gwrite<ENTER>  " s for stage
+map <localleader>gd :Gvdiffsplit!<ENTER>  " Gdiff on a vertical split
+map <localleader>gb :Git blame<ENTER>
+map <localleader>gc :Git commit<ENTER>
+map <localleader>go :Git checkout 
+" To resolve conflict
+nnoremap gdh :diffget //2<CR>
+nnoremap gdl :diffget //3<CR>
+
 """"""""""""""""""""""""
 " General configuration
 """"""""""""""""""""""""
+set updatetime=100      " update time in ms for git changes(default:4s)
+set mouse=a             " Mouse enabled for all modes
 set tabstop =4		    " show tabstop as 4 spaces
 set shiftwidth =4	    " autoindent size
 set expandtab		    " insert 4 spaces on <tab>
@@ -42,6 +62,9 @@ set inccommand=nosplit  " show incrementally effect of a command(eg. substitute)
 set title titlelen=35   " Set the title of terminal
 set titlestring=%t%(\ %M%)%(\ (%{expand(\'%:~:.:h\')})%)%(\ %a%)
 set conceallevel=2      " Conceal things whenever available like md, tex
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
 
 
 " Save undo history across sessions
@@ -71,6 +94,7 @@ call plug#begin('~/.local/share/nvim/plugged')
     " General
     Plug 'junegunn/goyo.vim'             " Distraction free writing
     Plug 'ryvnf/readline.vim'            " Readline shortcuts in command mode
+    Plug 'tpope/vim-rsi'            " Readline shortcuts in command mode
     Plug 'tpope/vim-surround'            " Easily manipulate surrounding brackets/quotes
     Plug 'godlygeek/tabular'             " Tabularize things
     Plug 'vim-airline/vim-airline'       " Statusbar theme
@@ -94,12 +118,14 @@ call plug#begin('~/.local/share/nvim/plugged')
 		let g:UltiSnipsJumpForwardTrigger='<tab>'
 		let g:UltiSnipsJumpBackwardTrigger='<s+tab>'
 		" smap <S+tab> :call UltiSnips#JumpBackwards()<ENTER>
-		let g:UltiSnipsSnippetDirectories=["UltiSnips", "mySnips"]
+		let g:UltiSnipsSnippetDirectories=["UltiSnips"]
+        let g:UltiSnipsEditSplit='vertical'
     " wal sets the colorscheme
     Plug 'dylanaraps/wal.vim'
 
     " Git plugin
-    " Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-fugitive'
+    Plug 'airblade/vim-gitgutter'   " indicate and work with hunks
 
     " async lint engine
     " proselint installed. check usage!
@@ -113,6 +139,7 @@ call plug#begin('~/.local/share/nvim/plugged')
         let g:jedi#completions_enabled = 0
         " open the go-to function in split, not another buffer
         let g:jedi#use_splits_not_buffers = "right"
+    " Plug 'deoplete-plugins/deoplete-jedi'
     " Plug 'zchee/deoplete-jedi'
     " Plug 'neomake/neomake'
 
@@ -137,6 +164,12 @@ call plug#end()
 call deoplete#custom#var('omni', 'input_patterns', {
         \ 'tex': g:vimtex#re#deoplete
         \})
+
+" Disable custom warnings based on regexp
+let g:vimtex_quickfix_ignore_filters = [
+      \ 'Marginpar on page',
+      \ 'overfull',
+      \]
 
 " Plugin keybinds
 " Comment toggle with C-/
@@ -172,3 +205,4 @@ au BufWritePost *dunstrc :silent !killall dunst ; dunst& disown
 au BufWritePost *init.vim :source %
 au BufWinLeave *.config/directories :!generate_shortcuts
 " autocmd BufNewFile *.tex itemplate<tab>
+

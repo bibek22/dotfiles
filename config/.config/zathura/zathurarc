@@ -81,6 +81,7 @@ map [fullscreen] <A-1> set "first-page-column 1:1"
 map [normal]     <A-2> set "first-page-column 1:2"
 map [fullscreen] <A-2> set "first-page-column 1:2"
 
+map [normal]     <PageUp>   navigate previous
 map [fullscreen] a adjust_window best-fit
 map [fullscreen] s adjust_window width
 map [fullscreen] f follow

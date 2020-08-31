@@ -18,17 +18,18 @@ def math():
 endglobal
 
 snippet sssec "Begin sub section" b
-\ssubsection{$1}
+\subsubsection{$1} \label{subsub:${2:${1/\W+/-/g}}}
 $0
 endsnippet
 
 snippet ssec "Begin sub section" b
-\subsection{$1}
+\subsection{$1} \label{sub:${2:${1/\W+/-/g}}}
+	
 $0
 endsnippet
 
 snippet sec "Begin Section" b
-\section{$1} \label{sec:$2}
+\section{$1} \label{sec:${2:${1/\W+/-/g}}}
 $0
 endsnippet
 
@@ -43,6 +44,8 @@ snippet template "Basic template" b
 \usepackage[english]{babel}			% dictionary; spellcheck
 \usepackage{amsmath, amssymb}		% maths symbols
 \usepackage[backend=biber]{biblatex}% bibliography manager
+\usepackage{csquotes}				% recommended when using biber and babel
+\usepackage{breakcites}				% put citations that overflow into new line
 \addbibresource{uni.bib}
 
 
@@ -66,6 +69,14 @@ snippet template "Basic template" b
 
 	\printbibliography
 \end{document}
+endsnippet
+
+snippet tit "\textit" 
+\textbf{$1}$0
+endsnippet
+
+snippet tbf "\textbf" A
+\textbf{$1}$0
 endsnippet
 
 snippet beg "begin{} / end{}" bA
@@ -326,9 +337,14 @@ snippet sr "^2" iA
 ^2
 endsnippet
 
+# context "math()"
+# snippet cb "^3" iA
+# ^3
+# endsnippet
+
 context "math()"
-snippet cb "^3" iA
-^3
+snippet sb "subscript" iA
+_{$1}$0
 endsnippet
 
 context "math()"
@@ -336,10 +352,10 @@ snippet td "to the ... power" iA
 ^{$1}$0
 endsnippet
 
-context "math()"
-snippet rd "to the ... power" iA
-^{($1)}$0
-endsnippet
+# context "math()"
+# snippet rd "to the ... power" iA
+# ^{($1)}$0
+# endsnippet
 
 snippet __ "subscript" iA
 _{$1}$0
@@ -541,10 +557,10 @@ snippet || "mid" iA
 endsnippet
 
 
-context "math()"
-snippet cc "subset" Ai
-\subset 
-endsnippet
+# context "math()"
+# snippet cc "subset" Ai
+# \subset
+# endsnippet
 
 snippet notin "not in " iA
 \not\in 
