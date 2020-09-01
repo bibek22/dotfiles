@@ -3,7 +3,6 @@ import sys
 import os
 import time as t
 from datetime import timedelta as td
-from multiprocessing import Process
 
 usage='''Usage: timer <minutes> <seconds>
     No support for more format yet
@@ -17,7 +16,6 @@ except:
     print(usage)
     exit(-1)
 
-timestamps = []
 delta = td(seconds=1)
 
 def timer():
@@ -29,28 +27,4 @@ def timer():
         time -= delta
     os.system("dunstify -a 'Timer' -r 12873 'Times up!'")
 
-def record():
-    global time, timestamps, delta
-    
-    try:
-        for line in sys.stdin:
-            stamp = ref-time
-            timestamps.append(stamp)
-            print("recorded %s" % stamp)
-    except: finalize()
-
-def finalize():
-    print("\n\nSummary below:")
-    global  timestamps
-    for i in timestamps:
-        print(i)
-
-#  clock = Process(target=timer)
-#  register = Process(target=record)
-#  register.start()
-#  clock.start()
-#  clock.join()
-#  record()
-#  finalize()
-#  register.join()
 timer()
