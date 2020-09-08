@@ -168,7 +168,7 @@ call deoplete#custom#var('omni', 'input_patterns', {
 " Disable custom warnings based on regexp
 let g:vimtex_quickfix_ignore_filters = [
       \ 'Marginpar on page',
-      \ 'overfull',
+      \ 'Overfull',
       \]
 
 " Plugin keybinds

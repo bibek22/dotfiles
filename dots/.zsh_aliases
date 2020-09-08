@@ -64,7 +64,7 @@ alias play="mpc searchplay"
 # specific tasks
 alias topdf='soffice --headless --convert-to pdf --outdir ./'
 alias weather="curl wttr.in"
-alias pw="nc termbin.com 9999"
+alias pw="curl --data-binary @- https://paste.rs"
 alias p="xclip -selection c -o"
 alias pong="ping -c 3 www.google.com"
 alias nocomment='egrep -v "^[ \t]*#|^[ \t]*$"'
@@ -103,6 +103,12 @@ alias mirror='xrandr --output HDMI-1  --mode 1920x1080 --output eDP-1  --primary
 # My functions
 cf(){
     cd "$(ls -fd ~/.config/*/ | fzf)"
+}
+
+# pastebin
+function pb() {
+    local file=${1:-/dev/stdin}
+    curl --data-binary @${file} https://paste.rs
 }
 
 function report(){

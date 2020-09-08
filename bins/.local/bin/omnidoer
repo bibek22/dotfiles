@@ -13,6 +13,12 @@ function confirm() {
     fi
 }
 
+function rotate_screen() {
+    local orientation
+    orientation=`echo -e "left\nright\nnormal\ninverted" |  rofi -dmenu -i -p "Rotate to"`
+    xrandr --output eDP-1 --rotate "$orientation"
+}
+
 function note() {
     FILE=`tree -if "$HOME/notes" | grep "\.md$" |  rofi -dmenu -i -p "Pick a note"`
     filename="$(basename -- $FILE)"
@@ -119,7 +125,7 @@ function idUSBSpeaker() {
 DOS="Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
 DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path"
 DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock|Routine"
-DOS="$DOS|Note|Reconnect"
+DOS="$DOS|Note|Reconnect|Rotate Screen"
 
 if [[ -z "$1" ]]
 then
@@ -154,6 +160,7 @@ Click)	    xdotool click 1;;
     "Headphone Mic")   pactl set-source-port alsa_input.pci-0000_00_1b.0.analog-stereo analog-input-headset-mic ;;
     "Mute Mic")	    pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo 1 ;;
     "Reconnect")    iwctl station wlan0 disconnect; iwctl station wlan0 connect "Home wifi";;
+    "Rotate Screen")    rotate_screen;;
     *)              ;;
     esac
 fi

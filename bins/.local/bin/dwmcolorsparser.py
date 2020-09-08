@@ -21,9 +21,10 @@ with open(path) as file:
 
 pattern = re.compile("#.{6}")
 colors = pattern.findall(data)
-colors[5] = colors[0]
-colors[2] = colors[1]
-colors[3] = colors[1]
+colors[5] = colors[4]
+#  colors[2] = colors[1]
+colors[3] = colors[4]
+colors[4] = colors[1]
 
 #  rgb = colors[4].lstrip('#')
 #  rgb = tuple(int(rgb[i:i+2], 16) for i in (0, 2, 4))

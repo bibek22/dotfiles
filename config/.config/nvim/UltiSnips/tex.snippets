@@ -17,6 +17,28 @@ def math():
 		return False
 endglobal
 
+# snippet starts here
+
+snippet gforce "gravitational force" A
+gravitational force
+endsnippet
+
+snippet gpot "gravitational potential" A
+gravitational potential
+endsnippet
+
+snippet gwave "gravitational wave" A
+gravitational wave
+endsnippet
+
+snippet angmom "angular momentum" A
+angular momentum 
+endsnippet
+
+snippet linmom "linear momentum" A
+linear momentum 
+endsnippet
+
 snippet sssec "Begin sub section" b
 \subsubsection{$1} \label{subsub:${2:${1/\W+/-/g}}}
 $0
@@ -348,7 +370,12 @@ _{$1}$0
 endsnippet
 
 context "math()"
-snippet td "to the ... power" iA
+snippet tl "subscript 'to lower'" iA
+_{$1}$0
+endsnippet
+
+context "math()"
+snippet tu "to the ... power 'to upper'" iA
 ^{$1}$0
 endsnippet
 

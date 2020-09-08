@@ -1,0 +1,105 @@
+#!/usr/bin/env python
+## Author : Bibek Gautam
+## Date	  : Wed Sep 02 2020
+import PySimpleGUI as sg
+import time
+
+sg.theme('DarkGreen2')
+font = 'Mono 20'
+font_small = 'Mono 15'
+
+ht = i = 1
+w = 5
+
+def calculator():
+    operations = {
+            "+": lambda x, y: x+y,
+            "-": lambda x, y: x-y,
+            "x": lambda x, y: x*y,
+            "÷": lambda x, y: x/y,
+            "√": lambda x: x**0.5,
+            "±": lambda x: -1*x,
+            }
+    operation = None
+    memory = x = y = None
+    taking_second_argument = False
+    showing_result = False
+    last_time = time.time()
+
+    field = sg.Input(key='field', font=font, size=(10, 40))
+    row1 = [sg.Button(label, font=font_small, size=(1,  1)) for label in ["MR",  "MC",  "M+",  "(",  ")"]]
+    row2 = [sg.Button(label, font=font_small, size=(1,  1)) for label in ["7",   "8",   "9",   "÷",  "C"]]
+    row3 = [sg.Button(label, font=font_small, size=(1,  1)) for label in ["4",   "5",   "6",   "x",  "CE"]]
+    row4 = [sg.Button(label, font=font_small, size=(1,  1)) for label in ["1",   "2",   "3",   "-",  "√"]]
+    row5 = [sg.Button(label, font=font_small, size=(1,  1)) for label in ["±",   "0",   ".",   "+",  "="]]
+    layout = [
+        [field],
+        row1,
+        row2,
+        row3,
+        row4,
+        row5]
+    window = sg.Window('GRE calculator', layout, finalize=True)
+
+    while True:
+        event, value = window.read()
+        timedelta = time.time() - last_time
+        # Ignore if clicking too fast (less than 150 ms)
+        if (timedelta) < 0.15:
+            continue
+        else:
+            last_time = time.time()
+        if event in ['Submit', 'Close']:
+            break
+        elif event.isdigit():
+            showing_result = False
+            if operation:
+                if taking_second_argument:
+                    field.Update(value['field']+event)
+                else:
+                    field.Update(event)
+                    taking_second_argument = True
+            else:
+                if showing_result:
+                    field.Update(event)
+                    showing_result = False
+                else:
+                    field.Update(value['field']+event)
+        elif event == "CE":
+            field.Update("")
+            operation = None
+            memory = x = y = None
+            taking_second_argument = False
+            showing_result = False
+        elif event == "C":
+            field.Update("")
+        elif event in operations.keys():
+            x = float(value['field'])
+            operation = event
+            if operation in ["±", "√"]:
+                result = operations[operation](x)
+                field.Update(str(result))
+        elif event in "=":
+            if showing_result:
+                continue
+            y = float(value['field'])
+            func = operations[operation]
+            result = func(x,y)
+            field.Update(str(result))
+            showing_result = True
+            operation = None
+            taking_second_argument = False
+            x = result
+            y = None
+        elif event in "M+":
+            memory = value['field']
+        elif event in "MR":
+            if memory:
+                field.Update(memory)
+        elif event in "MC":
+            memory = None
+        else:
+            continue
+    window.close()
+
+calculator()

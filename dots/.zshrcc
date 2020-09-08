@@ -1,14 +1,12 @@
+# cursor is a bar not a block
+# this only works on vte terminal
+printf '\033[6 q'
+
 PROMPT_EOL_MARK=" •"
 
 # append history when the shell closes. not in real time.
 # which would mix up history from multiple terminal instances. 
 setopt APPEND_HISTORY
-
-# prompt when in terminal
-if [ -t 0 ]; then 
-    # export PROMPT_COMMAND='fzf'
-    # export PROMPT_OPTIONS=''
-fi
 
 # source aliases: These are generated from ~/.config/directories
 # with script generate_shortcuts done automatically with vim autocmd

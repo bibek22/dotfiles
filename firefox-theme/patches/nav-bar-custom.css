@@ -1,0 +1,98 @@
+/*css part of the prismatic night theme. visit https://github.com/dbuxy218/Prismatic-Night*/
+/* @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"); */
+
+/*  Dont always display addons icons and non-essential things */
+#pageActionSeparator,
+#pageActionButton,
+#star-button-box,
+#pocket-button,
+#whats-new-menu-button{
+  display: none !important;
+}
+
+/* auto hide nav bar stuff */
+/* https://github.com/moamenk/Firefox-Minimal-Responsive-Theme/blob/master/userChrome.css */
+
+#page-action-buttons,
+#nav-bar toolbarbutton{
+/*     margin-left: -28px !important;  Uncomment for animation but this leads to flicker!*/ 
+    opacity: 0 !important;
+    transform: scale(.85, .85) !important;
+    pointer-events: none !important;
+    transition: margin-left 100ms var(--animation-easing-function), opacity 100ms var(--animation-easing-function), transform 100ms var(--animation-easing-function) !important;
+    transition-delay: 2s;
+    filter: grayscale(40%) !important;
+}
+:root:not([customizing]) :focus > #nav-bar
+{
+  border: none !important;
+}
+
+/* Retract when hovered over  */
+:root:not([customizing]) :hover > #nav-bar toolbarbutton,
+:root:not([customizing]) :hover > #titlebar toolbarbutton,
+:root:not([customizing]) :hover > #page-action-buttons
+{
+    transform: scale(1, 1) !important;
+    opacity:1 !important;
+    margin-left:0 !important;
+    pointer-events: auto !important;
+    transition-delay: 3s;
+}
+
+#navigator-toolbox::after {
+  display: none !important;
+  border-bottom: 0px !important;
+}
+
+#nav-bar, #TabsToolbar {
+  border: none !important;
+  padding: none !important;
+}
+#PanelUI-button {
+  border: none !important;
+}
+
+#reload-button, #fxa-toolbar-menu-button, #back-button, #forward-button,
+#home-button, #sidebar-button, #library-button, #toolbar-button, #urlbar-go-button{
+  display: none !important;
+  visibility: collapse !important;
+}
+
+.urlbarView-favicon{
+  display:none !important; 
+}
+
+#navigator-toolbox{ 
+  margin-top: 0px;
+  padding-top: 0px !important; 
+  border: none !important;
+}
+
+#navigator-toolbox { --tabs-border-color: transparent !important; }
+
+#urlbar{
+/* Covers everything from input field to dropdown search completions   */
+    filter: grayscale(50%) !important;
+    border: none !important;
+}
+/* #urlbar-input-container{
+  border-radius: 10px !important;;
+  color: #FFF !important;
+} */
+
+#urlbar{
+  margin-left: 35%;  
+  width: 70% !important;
+}
+
+#urlbar-background {
+/*   Rest of the urlbar besides input field  */
+    box-shadow: none !important;
+    border-color: transparent !important;
+}
+
+#urlbar[open] > #urlbar-background{
+  border-color: transparent !important;
+  box-shadow: 0px 10px 20px 0px rgba(0, 0, 0, .32) !important;
+}
