@@ -1,0 +1,27 @@
+/* auto hide nav bar stuff */
+/* https://github.com/moamenk/Firefox-Minimal-Responsive-Theme/blob/master/userChrome.css */
+#nav-bar toolbarbutton
+ {
+    margin-left: -28px !important;
+    opacity: 0 !important;
+    transform: scale(.85, .85) !important;
+    pointer-events: none !important;
+    transition: margin-left 100ms var(--animation-easing-function), opacity 100ms var(--animation-easing-function), transform 100ms var(--animation-easing-function) !important;
+ transition-delay: 0s;
+}
+
+#urlbar-results :hover     /* the dropdown suggestions */
+#urlbar-background :hover
+{
+  pointer-events: none !important;
+}
+
+:root:not([customizing]) :hover > #nav-bar toolbarbutton,
+:root:not([customizing]) :hover > #titlebar  toolbarbutton
+{
+    transform: scale(1, 1) !important;
+    opacity:1 !important;
+    margin-left:0 !important;
+    pointer-events: auto !important;
+    transition-delay: 3s;
+}
