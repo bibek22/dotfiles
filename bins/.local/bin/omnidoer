@@ -118,6 +118,12 @@ function idUSBSpeaker() {
     pactl list sources  | grep -B2 'USB_AUDIO' | head -n 1| grep -Eo ".$"
 }
 
+function copy_rc(){
+    local rc
+    rc=$(cat $HOME/.local/share/personalrc | rofi -dmenu | cut -f2- -d ' ')
+    echo $rc |  xclip -selection c
+    dunstify -a "📋" "Copied to Clipboard" "$rc" 
+}
 
 ##################
 # Main BODY      #
@@ -125,7 +131,7 @@ function idUSBSpeaker() {
 DOS="Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
 DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path"
 DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock|Routine"
-DOS="$DOS|Note|Reconnect|Rotate Screen"
+DOS="$DOS|Note|Reconnect|Rotate Screen|Copy RC"
 
 if [[ -z "$1" ]]
 then
@@ -161,6 +167,7 @@ Click)	    xdotool click 1;;
     "Mute Mic")	    pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo 1 ;;
     "Reconnect")    iwctl station wlan0 disconnect; iwctl station wlan0 connect "Home wifi";;
     "Rotate Screen")    rotate_screen;;
+    "Copy RC")      copy_rc;;
     *)              ;;
     esac
 fi

@@ -24,3 +24,5 @@ dots/git
 
 !build/build/dwm/
 !build/build/st/
+
+!firefox-theme/

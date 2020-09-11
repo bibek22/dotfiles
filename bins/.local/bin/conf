@@ -11,7 +11,7 @@ conf() {
   a)              $EDITOR ~/.zsh_aliases ;;
   b)              $EDITOR ~/.bashrc ;;
   mirror)         $EDITOR /etc/pacman.d/mirrorlist ;;
-  mpd)            $EDITOR ~/.mpdconf ;;
+  mpd)            $EDITOR ~/.config/mpd/mpd.conf ;;
   mpv)            $EDITOR ~/.config/mpv/config ;;
   mpvi)           $EDITOR ~/.config/mpv/input.conf ;;
   ncmpcpp)        $EDITOR ~/.ncmpcpp/config ;;

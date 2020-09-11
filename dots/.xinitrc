@@ -73,7 +73,7 @@ sleep 10 && notion-app &
 wal -R
 xrdb -merge $HOME/.cache/wal/dwm.Xresources
 
-$HOME/.local/bin/dwmbar &
+$HOME/.local/bin/dwmbar 2> /dev/null &
 
 LOC=$HOME/build/dwm/
 while true; do
