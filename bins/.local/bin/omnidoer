@@ -16,7 +16,8 @@ function confirm() {
 function rotate_screen() {
     local orientation
     orientation=`echo -e "left\nright\nnormal\ninverted" |  rofi -dmenu -i -p "Rotate to"`
-    xrandr --output eDP-1 --rotate "$orientation"
+    # xrandr --output eDP-1 --rotate "$orientation"
+    xrandr --output LVDS-1 --rotate "$orientation"
 }
 
 function note() {
@@ -36,7 +37,7 @@ function note() {
 
 
 function copypath() {
-    tree -if $HOME| rofi -dmenu -i -p "Choose a File" | xclip -selection c
+    tree -lif $HOME| rofi -dmenu -i -p "Choose a File" | xclip -selection c
     notify-send "path copied !"
 }
 
@@ -67,12 +68,12 @@ function changeBackground() {
 
 function Delete() {
     # Delete arbitrary file
-    FILE=`tree -if $HOME | rofi -dmenu -i -p "Delete a File"`
+    FILE=`tree -lif $HOME | rofi -dmenu -i -p "Delete a File"`
     [[ ! $? -eq 0 ]] && exit
 
     confirm "Are you sure?" || exit
-    notify-send "$FILE Deleted"
-    rm -r $FILE
+    dunstify -a "" "Deleted" "$FILE"
+    rm -r "$FILE"
 }
 
 function killall() {
@@ -101,7 +102,7 @@ function printIP() {
 }
 
 function play() {
-    DIR=`tree -idf $HOME | rofi -dmenu -i -p "Choose a Directory"`
+    DIR=`tree -lidf $HOME | rofi -dmenu -i -p "Choose a Directory"`
     if [[ ! $? -eq 0 ]]; then
 	    exit
     else
@@ -131,11 +132,11 @@ function copy_rc(){
 DOS="Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
 DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path"
 DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock|Routine"
-DOS="$DOS|Note|Reconnect|Rotate Screen|Copy RC"
+DOS="$DOS|Note|Reconnect|Rotate Screen|Copy RC|Laptop Speaker|Microphone"
 
 if [[ -z "$1" ]]
 then
-    ACTION=`echo -e $DOS | rofi -dmenu -sep '|' -i -p "What do you want to do?"`
+    ACTION=`echo -e $DOS | rofi -dmenu -sort -sep '|' -i -p "What do you want to do?"`
 else
     ACTION="$@"
 fi
@@ -148,7 +149,7 @@ else
     IP)             printIP;;
     Note)           note;;
 "Prevent slock")    xdotool mousemove 1900 0;;
-Click)	    xdotool click 1;;
+    Click)	        xdotool click 1;;
 "Double click")	    xdotool click 1 --repeat 2;;
     JBL)            btconnect;;
     "Copy path")    copypath;;
@@ -164,8 +165,13 @@ Click)	    xdotool click 1;;
     ServeBlog)	    serveblog;;
     Killall)        killall ;;
     "Headphone Mic")   pactl set-source-port alsa_input.pci-0000_00_1b.0.analog-stereo analog-input-headset-mic ;;
+    "Laptop Speaker")  pactl set-sink-port alsa_output.pci-0000_00_1b.0.analog-stereo analog-output-speaker;;
+    "Microphone")  pactl set-sink-port alsa_output.pci-0000_00_1b.0.analog-stereo analog-output-headphones;;
+
+
     "Mute Mic")	    pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo 1 ;;
-    "Reconnect")    iwctl station wlan0 disconnect; iwctl station wlan0 connect "Home wifi";;
+    # "Reconnect")    iwctl station wlan0 disconnect; iwctl station wlan0 connect "Home wifi";;
+    "Reconnect")     iwctl station wlan0 connect "Chet_ClassicTech";;
     "Rotate Screen")    rotate_screen;;
     "Copy RC")      copy_rc;;
     *)              ;;

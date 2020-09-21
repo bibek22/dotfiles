@@ -1,7 +1,7 @@
 #!/usr/bin/bash
-delim="  "  #  
+delim=" "  #  
 
-echo " "
+echo " "  # little padding
 # $HOME/.local/bin/status/weather   && echo "$delim"
 $HOME/.local/bin/status/music     && echo "$delim"
 $HOME/.local/bin/status/memory    && echo "$delim"

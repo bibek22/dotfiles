@@ -18,6 +18,7 @@ dots/git
 !config/.config/wal/
 !config/.config/rofi/
 !config/.config/ncmpcpp/
+!config/.config/transmission-daemon/settings.json
 
 !bins/.local/share/larbs/
 !bins/.local/share/dic/

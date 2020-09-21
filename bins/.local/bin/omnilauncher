@@ -18,10 +18,12 @@ function open() {
     avi)    mpv "$1" ;;
     mkv)    mpv "$1" ;;
     docx)   lowriter "$1" ;;
-    pptx)   loimpress "$1" ;;
-    blend)  blender "$1" ;;
     odt)    lowriter "$1" ;;
+    pptx)   loimpress "$1" ;;
+    xlsx)   localc "$1" ;;
+    blend)  blender "$1" ;;
     html)   firefox "$1" ;;
+    mp3)    st -n "mpv - $1" -c "Float" -T "mpv - ${1##*/}" -w '' -e zsh -c "mpv '$1'" ;;
     py)     st -n 'Vim' -c "Float" -T "Vim - ${1##*/}" -w '' -e zsh -c "vim '$1'" ;;
     csv)    st -n 'Vim' -c "Float" -T "Vim - ${1##*/}" -w '' -e zsh -c "vim '$1'" ;;
     sh)     st -n 'Vim' -c "Float" -T "Vim - ${1##*/}" -w '' -e zsh -c "vim '$1'" ;;

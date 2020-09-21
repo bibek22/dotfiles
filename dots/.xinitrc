@@ -29,14 +29,14 @@ eval $(/usr/bin/gnome-keyring-daemon --start --components=pkcs11,secrets,ssh)
 export SSH_AUTH_SOCK
 
 # Take a break every 20 mins !
-while true ;
-do
-  while pgrep slock; do
-    sleep 30s # pause on screen lock
-  done
-  sleep 25m && dunstify  -r 1923 "minute break"
-  # sleep 5; slock 
-done &
+# while true ;
+# do
+#   while pgrep slock; do
+#     sleep 30s # pause on screen lock
+#   done
+#   sleep 25m && dunstify  -r 1923 "minute break"
+#   # sleep 5; slock
+# done &
 
 # Autorepeat of a key
 # wait till--v   v-- x repeat per sec

@@ -79,8 +79,8 @@ def calculator():
             if operation in ["±", "√"]:
                 result = operations[operation](x)
                 field.Update(str(result))
-        elif event in "=":
-            if showing_result:
+        elif event == "=":
+            if not operation or showing_result:
                 continue
             y = float(value['field'])
             func = operations[operation]
@@ -91,13 +91,17 @@ def calculator():
             taking_second_argument = False
             x = result
             y = None
-        elif event in "M+":
+        elif event == "M+":
             memory = value['field']
-        elif event in "MR":
+        elif event == "MR":
             if memory:
                 field.Update(memory)
-        elif event in "MC":
+        elif event == "MC":
             memory = None
+        elif event == ".":
+            value = value['field']
+            if "." not in value:
+                field.Update(value+".")
         else:
             continue
     window.close()
