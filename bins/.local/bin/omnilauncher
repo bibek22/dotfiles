@@ -32,7 +32,7 @@ function open() {
     esac
 }
 
-FILE=`tree -lif $HOME| rofi -dmenu -i -p "Choose a File"`
+FILE=`tree -lif $HOME| rofi -dmenu -sort -i -p "Choose a File"`
 
 if [[ ! $? -eq 0 ]]; then
 	exit

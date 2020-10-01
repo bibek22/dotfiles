@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
 wallpaper="$(tree -if ~/pictures/wallpaper | shuf -n 1)"
-wal --backend colorthief -i "$wallpaper" --saturate 0.75 -a 0.9 -o /home/bibek/.local/bin/dwmcolorsparser.py
+wal --backend colorthief -i "$wallpaper" --saturate 0.95 -a 0.9 -o /home/bibek/.local/bin/dwmcolorsparser.py
 dunstify -r 19922 -a "Wallpaper" "Changed" "$(basename $wallpaper)"
 
 # value of alpha from here doesn't reflect in st terminal
