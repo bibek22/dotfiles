@@ -16,6 +16,7 @@ dots/git
 !config/.config/sxhkd/
 !config/.config/dunst/
 !config/.config/wal/
+!config/.config/mpv/
 !config/.config/rofi/
 !config/.config/ncmpcpp/
 !config/.config/transmission-daemon/settings.json

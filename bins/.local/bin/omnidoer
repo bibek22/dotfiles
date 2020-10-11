@@ -170,8 +170,8 @@ else
 
 
     "Mute Mic")	    pactl set-source-mute alsa_input.pci-0000_00_1b.0.analog-stereo 1 ;;
-    # "Reconnect")    iwctl station wlan0 disconnect; iwctl station wlan0 connect "Home wifi";;
-    "Reconnect")     iwctl station wlan0 connect "Chet_ClassicTech";;
+    "Reconnect")    iwctl station wlan0 disconnect; iwctl station wlan0 connect "Home wifi";;
+    # "Reconnect")     iwctl station wlan0 connect "Chet_ClassicTech";;
     "Rotate Screen")    rotate_screen;;
     "Copy RC")      copy_rc;;
     *)              ;;
