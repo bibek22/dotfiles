@@ -68,6 +68,7 @@ snippet template "Basic template" b
 \usepackage[backend=biber]{biblatex}% bibliography manager
 \usepackage{csquotes}				% recommended when using biber and babel
 \usepackage{breakcites}				% put citations that overflow into new line
+\usepackage{hyperref}				% manages links
 \addbibresource{uni.bib}
 
 
@@ -84,17 +85,24 @@ snippet template "Basic template" b
 
 \pdfsuppresswarningpagegroup=1
 
+\graphicspath {{figures/}} # dont move this around
 \begin{document}
-	% \maketitlepage
-	% \tableofcontents
-	$0
 
-	\printbibliography
+% \maketitlepage
+% \tableofcontents
+
+% INTRODUCTION
+\newpage
+\section{Introduction}
+\input{./introduction.tex}
+$0
+
+\printbibliography
 \end{document}
 endsnippet
 
-snippet tit "\textit" 
-\textbf{$1}$0
+snippet tit "\textit" A
+\textit{$1}$0
 endsnippet
 
 snippet tbf "\textbf" A

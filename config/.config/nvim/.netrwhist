@@ -1,5 +1,6 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =6
+let g:netrw_dirhistcnt =7
+let g:netrw_dirhist_7='/home/bibek/deploy'
 let g:netrw_dirhist_6='/home/bibek/dotfiles/config/.config/mutt'
 let g:netrw_dirhist_5='/home/bibek/dotfiles/.git'
 let g:netrw_dirhist_4='/home/bibek/python-workshop/pandas'

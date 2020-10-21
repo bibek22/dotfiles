@@ -28,7 +28,11 @@ map <Leader>w :w!<ENTER>
 
 " goyo enable
 map <Leader>gy :Goyo<ENTER>
-" Some commonly opened files
+
+" Go to previous after following link
+map <Leader>gp :b#<ENTER>
+
+"Some commonly opened files
 set splitright
 map <Leader>es :UltiSnipsEdit<ENTER>
 map <Leader>ec :vsplit ~/.config/nvim/init.vim<ENTER>
@@ -169,6 +173,7 @@ call deoplete#custom#var('omni', 'input_patterns', {
 let g:vimtex_quickfix_ignore_filters = [
       \ 'Marginpar on page',
       \ 'Overfull',
+      \ 'Empty bib'
       \]
 
 " Plugin keybinds

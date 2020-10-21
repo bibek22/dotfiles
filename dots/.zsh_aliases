@@ -1,3 +1,9 @@
+function kutunnel() {
+    echo ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
+    ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
+}
+alias ssh='ssh -o ServerAliveInterval=60'
+
 # Transients
 alias vc='conf nvim'
 alias sniptex='vim ~/.config/nvim/mySnips/tex.snippets'

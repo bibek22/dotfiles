@@ -113,6 +113,3 @@ bindkey '^ ' autosuggest-accept
 
 source ~/.zsh_aliases
 source ~/.zshrcc
-
-# If you're looking for conda setup, that's sourced from ~/.zshrcc. just run
-# `condainit` and that's it.
