@@ -188,7 +188,7 @@ vmap <C-_> <leader>c<Space>
 " For python files it's `yapf` developed by Google open source. :h neoformat
 nmap <leader>f :Neoformat<enter>
 
-" Colorscheme wal
+" Colorscheme wal (set by pywal)
 colorscheme wal
 
 " Highlight color of matching pairs look ugly
@@ -198,9 +198,8 @@ hi MatchParen cterm=bold ctermbg=1 ctermfg=white
 " Highlight yank region
 hi HighlightedyankRegion cterm=reverse gui=reverse
 
-" let g:vimtex_view_general_options_latexmk = '-reuse-instance'
-let g:vimtex_viewer_method='zathura'
-" let g:vimtex_compiler_progname = 'nvr'
+let g:vimtex_view_method='zathura'
+let g:vimtex_compiler_progname='nvr'
 let g:tex_flavor='latex'
 " let conceallevel=1
 " let g:tex_conceal='abdmg'
@@ -210,4 +209,3 @@ au BufWritePost *dunstrc :silent !killall dunst ; dunst& disown
 au BufWritePost *init.vim :source %
 au BufWinLeave *.config/directories :!generate_shortcuts
 " autocmd BufNewFile *.tex itemplate<tab>
-

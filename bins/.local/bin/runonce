@@ -10,7 +10,7 @@ if [[ ! `pgrep "$1"` ]]; then
 	if [[ $# -eq 1 ]]; then
 		"$1" &
 	else
-		st -f "ShureTechMono Nerd Font:pixelsize=18" -c "$1" -e "$2" &
+		st -f "ShureTechMono Nerd Font:pixelsize=23" -c "$1" -e "$2" &
 	fi
 fi
 

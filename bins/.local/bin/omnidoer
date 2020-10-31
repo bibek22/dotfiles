@@ -121,7 +121,7 @@ function idUSBSpeaker() {
 
 function copy_rc(){
     local rc
-    rc=$(cat $HOME/.local/share/personalrc | rofi -dmenu | cut -f2- -d ' ')
+    rc=$(cat $HOME/.local/share/personalrc | rofi -dmenu -i | cut -f2- -d ' ')
     echo $rc |  xclip -selection c
     dunstify -a "📋" "Copied to Clipboard" "$rc" 
 }
@@ -130,8 +130,8 @@ function copy_rc(){
 # Main BODY      #
 ##################
 DOS="Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
-DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path"
-DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock|Routine"
+DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path|States"
+DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock"
 DOS="$DOS|Note|Reconnect|Rotate Screen|Copy RC|Laptop Speaker|Headphone"
 
 if [[ -z "$1" ]]
@@ -153,11 +153,11 @@ else
 "Double click")	    xdotool click 1 --repeat 2;;
     JBL)            btconnect;;
     "Copy path")    copypath;;
-    Routine)        feh -F ~/pictures/routine.jpg;;
-    # Syllabus)       zathura "$HOME/Calibre Library/BSCIV_MicroSyllabus_Physics.pdf" ;;
+    Syllabus)       zathura "$HOME/books/BSCIV_MicroSyllabus_Physics.pdf" ;;
     Delete)         Delete ;;
     CapsLock)       setxkbmap -option ctrl:nocaps ;; # Map CapsLock to CTRL
     Gmail)          mbsync gmail:INBOX;;
+    States)         feh ~/pictures/us-states.png;;
     Play)           play ;;
     Stopwatch)      stopwatch ;;
     Suspend)        systemctl suspend;;

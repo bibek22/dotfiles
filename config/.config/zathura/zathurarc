@@ -99,5 +99,4 @@ map [index] q quit
 
 # for vimtex search
 set synctex true
-set synctex-editor-command "nvr --remote +%line %file"
-
+set synctex-editor-command "nvr --remote-silent %f -c %l"
