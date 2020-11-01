@@ -65,6 +65,7 @@ snippet template "Basic template" b
 \usepackage{textcomp}				% support for symbols like music notes, currency
 \usepackage[english]{babel}			% dictionary; spellcheck
 \usepackage{amsmath, amssymb}		% maths symbols
+\numberwithin{equation}{section}    % section wise numbering of eqn
 \usepackage[backend=biber]{biblatex}% bibliography manager
 \usepackage{csquotes}				% recommended when using biber and babel
 \usepackage{breakcites}				% put citations that overflow into new line
@@ -118,6 +119,10 @@ endsnippet
 priority 100
 snippet ... "ldots" iA
 \ldots
+endsnippet
+
+snippet MWG "milky way" iA
+Milky Way galaxy
 endsnippet
 
 snippet xray "xray" iA

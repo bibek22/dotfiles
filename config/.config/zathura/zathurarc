@@ -96,7 +96,6 @@ map [fullscreen] <C-i> jumplist forward
 
 map [index] q quit
 
-
 # for vimtex search
 set synctex true
-set synctex-editor-command "nvr --remote-silent %f -c %l"
+set synctex-editor-command "nvr --remote +'%line' '%file'" 
