@@ -156,12 +156,16 @@ endsnippet
 
 snippet enum "Enumerate" bA
 \begin{enumerate}
+  	\setlength\itemsep{1em}
+    % \item[] for no bullet
 	\item $0
 \end{enumerate}
 endsnippet
 
 snippet item "Itemize" bA
 \begin{itemize}
+  	\setlength\itemsep{.1em}
+    % \item[] for no numbering
 	\item $0
 \end{itemize}
 endsnippet
@@ -196,6 +200,12 @@ if t[2] and t[2][0] not in [',', '.', '?', '-', ' ']:
 else:
 	snip.rv = ''
 `$2
+endsnippet
+
+snippet eqn "Math" b
+\begin{equation}
+$0
+\end{equation}
 endsnippet
 
 snippet dm "Math" wA

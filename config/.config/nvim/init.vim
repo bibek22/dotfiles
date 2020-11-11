@@ -70,7 +70,17 @@ set conceallevel=2      " Conceal things whenever available like md, tex
 set foldmethod=indent
 set foldlevel=99
 
+""""""""""""""""""""""""""""""""
+" Some Toggles <leader> t ?
+""""""""""""""""""""""""""""""""
+nmap <leader>tn :set number! relativenumber!<ENTER>
+nmap <leader>tg :GitGutterBufferToggle<ENTER>
+nmap <leader>tG :GitGutterToggle<ENTER>
 
+
+""""""""""""""""""""""""""""""""
+" Some Must haves
+""""""""""""""""""""""""""""""""
 " Save undo history across sessions
 let vimDir = '$HOME/.vim'
 let &runtimepath.=','.vimDir
