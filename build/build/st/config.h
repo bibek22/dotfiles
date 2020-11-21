@@ -5,8 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "mononoki Nerd Font Mono:pixelsize=20:antialias=true:autohint=true";
-static char *font2[] = { "OverpassMono Nerd Font Mono:pixelsize=20:antialias=true:autohint=true", "Lohit Nepali:style=Regular" };
+static char *font = "mononoki Nerd Font Mono:pixelsize=22:antialias=true:autohint=true";
+static char *font2[] = { "OverpassMono Nerd Font Mono:pixelsize=22:antialias=true:autohint=true", "Lohit Nepali:style=Regular" };
 /* static char *font2[] = { "mononoki Nerd Font Mono:pixelsize=19:antialias=true:autohint=true" }; */
 static int borderpx = 2;
 

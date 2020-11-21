@@ -130,7 +130,7 @@ function copy_rc(){
 # Main BODY      #
 ##################
 DOS="Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
-DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path|States"
+DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path|States|Both|Top|Base"
 DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock"
 DOS="$DOS|Note|Reconnect|Rotate Screen|Copy RC|Laptop Speaker|Headphone"
 
@@ -154,6 +154,9 @@ else
     JBL)            btconnect;;
     "Copy path")    copypath;;
     Syllabus)       zathura "$HOME/books/BSCIV_MicroSyllabus_Physics.pdf" ;;
+    Base)           xrandr --output HDMI-1 --off;;
+    Top)            xrandr --output LVDS-1 --off;;
+    Both)           xrandr --output LVDS-1 --auto --right-of HDMI-1; xrandr --output HDMI-1 --primary --auto --right-of LVDS-1;;
     Delete)         Delete ;;
     CapsLock)       setxkbmap -option ctrl:nocaps ;; # Map CapsLock to CTRL
     Gmail)          mbsync gmail:INBOX;;

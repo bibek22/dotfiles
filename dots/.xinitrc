@@ -64,7 +64,7 @@ fi
 # compositor
 picom &
 sleep 1 && st &
-sleep 1 && redshift &
+sleep 1 && redshift -b 1.0:0.6 -t 6500k:4500k &
 sleep 3 && pcmanfm -d &
 sleep 10 && notion-app &
 # nm-applet &

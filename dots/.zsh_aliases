@@ -4,6 +4,11 @@ function kutunnel() {
 }
 alias ssh='ssh -o ServerAliveInterval=60'
 
+# systemctl commands
+alias start="sudo systemctl start "
+alias stop="sudo systemctl stop "
+alias restart="sudo systemctl restart "
+
 # Transients
 alias vc='conf nvim'
 alias sniptex='vim ~/.config/nvim/mySnips/tex.snippets'
@@ -27,7 +32,7 @@ alias wifi_connect="iwctl station wlan0 connect "
 alias grep="grep --color=auto"
 alias rm="rm -v"
 alias rmrf="rm -rf"
-alias ls="ls -trh --color"    # add colors for filetype recognition
+alias ls="ls -h --color"    # add colors for filetype recognition
 alias lstr="ls -tr"
 alias lsa="ls -a"
 alias ll="ls -l --group-directories-first"
@@ -108,7 +113,7 @@ alias c="xclip -selection c"
 # Battery status
 alias bat="acpi -b"
 alias su="sudo su"
-alias mirror='xrandr --output HDMI-1  --mode 1920x1080 --output eDP-1  --primary --scale-from 1366x768'
+alias mirror='xrandr --output HDMI-1  --mode 1920x1080 --output LVDS-1  --primary --scale-from 1366x768'
 
 # My functions
 cf(){
