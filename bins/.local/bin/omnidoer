@@ -17,7 +17,7 @@ function rotate_screen() {
     local orientation
     orientation=`echo -e "left\nright\nnormal\ninverted" |  rofi -dmenu -i -p "Rotate to"`
     # xrandr --output eDP-1 --rotate "$orientation"
-    xrandr --output LVDS-1 --rotate "$orientation"
+    xrandr --output HDMI-1 --rotate "$orientation"
 }
 
 function note() {
@@ -156,7 +156,7 @@ else
     Syllabus)       zathura "$HOME/books/BSCIV_MicroSyllabus_Physics.pdf" ;;
     Base)           xrandr --output HDMI-1 --off;;
     Top)            xrandr --output LVDS-1 --off;;
-    Both)           xrandr --output LVDS-1 --auto --right-of HDMI-1; xrandr --output HDMI-1 --primary --auto --right-of LVDS-1;;
+    Both)           xrandr --output LVDS-1 --auto --left-of HDMI-1; xrandr --output HDMI-1 --primary --auto --left-of LVDS-1;;
     Delete)         Delete ;;
     CapsLock)       setxkbmap -option ctrl:nocaps ;; # Map CapsLock to CTRL
     Gmail)          mbsync gmail:INBOX;;

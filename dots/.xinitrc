@@ -48,7 +48,7 @@ dunst &
 numlockx &
 
 # for autolock
-xautolock -time 10 -locker "slock" -detectsleep -notify 5 -notifier "notify-send 'screenlock in 5sec'" -corners 0-+0 &
+xautolock -time 10 -locker "slock" -detectsleep -notify 5 -notifier "notify-send 'screenlock in 5s'" -corners 0-+0 &
 
 if [ ! `pgrep mpd` ]; then
     mpd
@@ -64,7 +64,8 @@ fi
 # compositor
 picom &
 sleep 1 && st &
-sleep 1 && redshift -b 1.0:0.6 -t 6500k:4500k &
+# redshift messes with external monitor. use `brightness`
+# sleep 1 && redshift -b 1.0:0.6 -t 6500k:4500k &
 sleep 3 && pcmanfm -d &
 sleep 10 && notion-app &
 # nm-applet &

@@ -1,0 +1,4 @@
+#!/bin/sh
+
+# outgoing mail always through sxc id. set here
+~/.local/bin/mutt-scripts/add-html-to-email | msmtp -a bibek.gautam@sxc.edu.np "$@"

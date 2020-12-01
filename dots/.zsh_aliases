@@ -2,7 +2,24 @@ function kutunnel() {
     echo ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
     ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
 }
+function confirm() {
+    # call with a prompt string or use a default
+    read -q "response?${1:-proceed? [y/N]} "
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            true
+            ;;
+        *)
+            false
+            ;;
+    esac
+}
+function reboot() {
+    echo "HDD probably won't be mounted in next boot."
+    confirm && reboot
+}
 alias ssh='ssh -o ServerAliveInterval=60'
+alias hdd='cd /mnt/hdd/home/bibek/'
 
 # systemctl commands
 alias start="sudo systemctl start "
@@ -110,6 +127,7 @@ alias dush="du -sm *|sort -n|tail"
 alias makeup="updpkgsums && makepkg -ci"
 # copy pipe to clipboard.
 alias c="xclip -selection c"
+alias cimg="xclip -selection c -t image/png"
 # Battery status
 alias bat="acpi -b"
 alias su="sudo su"

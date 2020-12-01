@@ -219,3 +219,5 @@ au BufWritePost *dunstrc :silent !killall dunst ; dunst& disown
 au BufWritePost *init.vim :source %
 au BufWinLeave *.config/directories :!generate_shortcuts
 " autocmd BufNewFile *.tex itemplate<tab>
+" open mail with markdown filetype
+autocmd BufEnter /tmp/neomutt* set filetype=markdown
