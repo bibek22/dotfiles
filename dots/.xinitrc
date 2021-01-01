@@ -63,6 +63,7 @@ fi
 
 # compositor
 picom &
+sxhkd &
 sleep 1 && st &
 # redshift messes with external monitor. use `brightness`
 # sleep 1 && redshift -b 1.0:0.6 -t 6500k:4500k &

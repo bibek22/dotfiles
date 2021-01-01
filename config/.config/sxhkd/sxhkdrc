@@ -1,0 +1,28 @@
+# Application launch
+ctrl + alt + g
+    firefox
+ctrl + alt + f
+    pcmanfm
+ctrl + alt + e
+    emacs
+ctrl + alt + k
+    st -f "ShureTechMono Nerd Font:pixelsize=20" -c "ncmpcpp" -e "ncmpcpp"
+ctrl + alt + j
+    /home/bibek/.local/bin/jupyterlauncher
+ctrl + alt + o
+    /home/bibek/.local/bin/omnilauncher
+ctrl + alt + l
+    slock
+ctrl + alt + m
+    /home/bibek/.local/bin/runonce neomutt neomutt
+
+
+super + o
+    /home/bibek/.local/bin/omnidoer
+
+# Switch Monitors
+super + alt + t
+    xrandr --output LVDS-1 --off
+ 
+super + alt + b
+    xrandr --output LVDS-1 --auto --left-of HDMI-1; xrandr --output HDMI-1 --primary --auto --left-of LVDS-1
