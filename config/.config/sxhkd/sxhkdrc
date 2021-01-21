@@ -13,8 +13,8 @@ ctrl + alt + o
     /home/bibek/.local/bin/omnilauncher
 ctrl + alt + l
     slock
-ctrl + alt + m
-    /home/bibek/.local/bin/runonce neomutt neomutt
+# ctrl + alt + m
+#     /home/bibek/.local/bin/runonce neomutt neomutt
 
 
 super + o

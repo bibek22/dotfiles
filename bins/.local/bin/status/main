@@ -1,5 +1,5 @@
 #!/usr/bin/bash
-delim=" "  #  
+delim="  "  #  
 
 echo " "  # little padding
 # $HOME/.local/bin/status/weather   && echo "$delim"
