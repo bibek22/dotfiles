@@ -1,5 +1,8 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =8
+let g:netrw_dirhistcnt =1
+let g:netrw_dirhist_1='/home/bibek/dox/project/abstract'
+let g:netrw_dirhist_0='/mnt/hdd/home/bibek/arch/research/finalyear/xmm/hashbang/0202400101'
+let g:netrw_dirhist_9='/mnt/hdd/home/bibek/arch/research/finalyear/xmm/hashbang'
 let g:netrw_dirhist_8='/home/bibek/notes'
 let g:netrw_dirhist_7='/home/bibek/deploy'
 let g:netrw_dirhist_6='/home/bibek/dotfiles/config/.config/mutt'
@@ -7,4 +10,3 @@ let g:netrw_dirhist_5='/home/bibek/dotfiles/.git'
 let g:netrw_dirhist_4='/home/bibek/python-workshop/pandas'
 let g:netrw_dirhist_3='/home/bibek/dl/movies_script/Comedy'
 let g:netrw_dirhist_2='/etc/udev/rules.d'
-let g:netrw_dirhist_1='/var/lib/iwd'

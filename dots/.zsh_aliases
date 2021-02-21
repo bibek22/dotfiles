@@ -31,6 +31,7 @@ alias vc='conf nvim'
 alias sniptex='vim ~/.config/nvim/mySnips/tex.snippets'
 
 alias vm='vim ~/dox/project/main.tex'
+alias vt='vim ~/dox/project/results/table.tex'
 alias vi='vim ~/dox/project/introduction/introduction.tex'
 alias vls='vim ~/.config/nvim/mySnips/tex.snippets'
 alias dir='vim ~/.config/directories'
