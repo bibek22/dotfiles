@@ -106,12 +106,18 @@ endif
 call plug#begin('~/.local/share/nvim/plugged')
 
     " General
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
     Plug 'junegunn/goyo.vim'             " Distraction free writing
+    Plug 'junegunn/limelight.vim'        " focus the para under cursor
     Plug 'ryvnf/readline.vim'            " Readline shortcuts in command mode
-    Plug 'tpope/vim-rsi'            " Readline shortcuts in command mode
-    Plug 'tpope/vim-surround'            " Easily manipulate surrounding brackets/quotes
+    Plug 'tpope/vim-rsi'                 " Readline shortcuts in command mode
+    " Plug 'tpope/vim-surround'            " Easily manipulate surrounding brackets/quotes
+    Plug 'machakann/vim-sandwich'        " Easily manipulate surrounding brackets/quotes
     Plug 'godlygeek/tabular'             " Tabularize things
-    Plug 'vim-airline/vim-airline'       " Statusbar theme
+    Plug 'vim-airline/vim-airline'       " Statusbar 
+ 	Plug 'vim-airline/vim-airline-themes'" Statusbar theme
+        let g:airline_powerline_fonts = 1
     Plug 'jiangmiao/auto-pairs'          " One shouldn't have to worry about it
     Plug 'romainl/vim-cool'              " Turn off highlight after search
     Plug 'machakann/vim-highlightedyank' " Highlight the yanked portion
@@ -172,6 +178,7 @@ call plug#begin('~/.local/share/nvim/plugged')
         let g:vim_markdown_frontmatter = 1
         let g:vim_markdown_strikethrough = 1
         let g:vim_markdown_no_extensions_in_markdown = 1
+        let g:vim_markdown_toc_autofit = 1
 call plug#end()
 
 " Telling deoplete to use vimtex as completion engine
@@ -196,7 +203,7 @@ vmap <C-_> <leader>c<Space>
 " Neoformat checks for the right formatter backend depending on the file
 " types. for latex, `latexindent` comes with texlive-core provides formatting.
 " For python files it's `yapf` developed by Google open source. :h neoformat
-nmap <leader>f :Neoformat<enter>
+nmap <leader>F :Neoformat<enter>
 
 " Colorscheme wal (set by pywal)
 colorscheme wal
@@ -221,3 +228,19 @@ au BufWinLeave *.config/directories :!generate_shortcuts
 " autocmd BufNewFile *.tex itemplate<tab>
 " open mail with markdown filetype
 autocmd BufEnter /tmp/neomutt* set filetype=markdown
+
+" contents.md file on a beamer/markdown setup
+:au BufWritePost */contents/contents.md :silent !pandoc contents.md -t beamer --slide-level 2 --pdf-engine=xelatex -o contents.tex
+
+
+""""""""""""""""""""""""""""""""""""""""
+""        FZF SHORTCUTS              """
+""""""""""""""""""""""""""""""""""""""""
+nnoremap <silent> <leader>o :Files<CR>
+nnoremap <silent> <leader>b :Buffers<CR>
+nnoremap <silent> <leader>b :Lines<CR>
+nnoremap <silent> <C-p> :History<CR>
+nnoremap <silent> <C-o> :Files<CR>
+nnoremap <silent> <M-x> :Commands<CR>
+nnoremap <silent> <F1> :Helptags<CR>
+
