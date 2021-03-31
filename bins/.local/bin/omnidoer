@@ -3,6 +3,18 @@
 # Sep 21 2019
 # Do some random things without invoking terminal
 
+
+alias p='xclip -selection c -o'
+
+function bibadd() {
+    # Append to the bibliography file
+    LINENUM=$(p | wc -l)
+    [ $LINENUM -lt 4 ] && exit # to prevent non-bib entry
+
+    p >> /home/bibek/dox/bibliography.bib
+    dunstify "Bib entry added"
+}
+
 function confirm() {
     CONFIRM=`echo -e "yes\nno"| rofi -dmenu -i -p "$1"` || exit
     if [ $CONFIRM == "yes" ]
@@ -131,7 +143,7 @@ function copy_rc(){
 ##################
 DOS="Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
 DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path|States|Both|Top|Base"
-DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock"
+DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock|bibadd"
 DOS="$DOS|Note|Reconnect|Rotate Screen|Copy RC|Laptop Speaker|Headphone"
 
 if [[ -z "$1" ]]
@@ -166,6 +178,7 @@ else
     Suspend)        systemctl suspend;;
     Omnilauncher)   /usr/local/bin/omnilauncher ;;
     ServeBlog)	    serveblog;;
+    bibadd)         bibadd;;
     Killall)        killall ;;
     "Headphone Mic")   pactl set-source-port alsa_input.pci-0000_00_1b.0.analog-stereo analog-input-headset-mic ;;
     "Laptop Speaker")  pactl set-sink-port alsa_output.pci-0000_00_1b.0.analog-stereo analog-output-speaker;;

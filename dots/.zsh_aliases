@@ -1,7 +1,14 @@
-function kutunnel() {
-    echo ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
-    ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
-}
+alias statmech="mpv 'https://www.youtube.com/playlist?list=PLXLSbKIMm0kjxyp45FIY62XNgHk4ywSaH' & disown"
+alias statmech2="mpv 'https://www.youtube.com/playlist?list=PLCC901B3A9445042D' & disown"
+alias relativity="mpv 'https://www.youtube.com/playlist?list=PLD9DDFBDC338226CA'"
+alias cloudy="/home/bibek/git/cloudy/c17.02/source/cloudy.exe -p"
+
+## SSH Reverse tunnel
+# function kutunnel() {
+#     echo ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
+#     ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
+# }
+
 function confirm() {
     # call with a prompt string or use a default
     read -q "response?${1:-proceed? [y/N]} "
@@ -14,10 +21,13 @@ function confirm() {
             ;;
     esac
 }
+
 function reboot() {
+    # Just a function to remind myself not to do reboot
     echo "HDD probably won't be mounted in next boot."
     confirm && reboot
 }
+
 alias ssh='ssh -o ServerAliveInterval=60'
 alias hdd='cd /mnt/hdd/home/bibek/'
 
@@ -26,25 +36,16 @@ alias start="sudo systemctl start "
 alias stop="sudo systemctl stop "
 alias restart="sudo systemctl restart "
 
-# Transients
-alias vc='conf nvim'
-alias sniptex='vim ~/.config/nvim/mySnips/tex.snippets'
-
 alias vm='vim ~/dox/project/main.tex'
-alias vt='vim ~/dox/project/results/table.tex'
-alias vi='vim ~/dox/project/introduction/introduction.tex'
 alias vls='vim ~/.config/nvim/mySnips/tex.snippets'
 alias dir='vim ~/.config/directories'
 alias pq='pacman -Q'
 alias py='python'
 alias void='cd ~/git/voidrice/.local/bin/'
-sentence(){
-    ag -A4 -B2 "$1" ~/dl/movies_script/Comedy/
-}
 
-# Wifi alias
-alias wifi_scan="iwctl station wlan0 scan; iwctl station wlan0 get-networks"
-alias wifi_connect="iwctl station wlan0 connect "
+# # Wifi alias
+# alias wifi_scan="iwctl station wlan0 scan; iwctl station wlan0 get-networks"
+# alias wifi_connect="iwctl station wlan0 connect "
 
 # default installs
 alias grep="grep --color=auto"
@@ -87,6 +88,7 @@ alias v="nvim"
 alias ranger="lf"
 alias mutt="neomutt"
 alias btcl="bluetoothctl"
+
 #aliases for youtube-dl
 # cookies file generated using a firefox addon 'export cookies'
 alias youtube-dl="youtube-dl --cookies ~/.youtube-dl/cookies.txt"

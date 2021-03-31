@@ -223,6 +223,7 @@ let g:tex_flavor='latex'
 
 " Autocmd's bufwrite hooks
 au BufWritePost *dunstrc :silent !killall dunst ; dunst& disown 
+au BufWritePost *sxhkdrc :silent !killall sxhkd ; sxhkd & disown 
 au BufWritePost *init.vim :source %
 au BufWinLeave *.config/directories :!generate_shortcuts
 " autocmd BufNewFile *.tex itemplate<tab>
