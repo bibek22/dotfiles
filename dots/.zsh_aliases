@@ -8,6 +8,17 @@ alias cloudy="/home/bibek/git/cloudy/c17.02/source/cloudy.exe -p"
 #     echo ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
 #     ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
 # }
+#
+
+function typeout(){
+    if [ -z $1 ] 
+    then
+        set 1=$(p)
+    fi
+    sleep 2;
+    xdotool key -clearmodifiers $(echo $1 | sed -e 's/\(.\)/\1 /g')
+}
+
 
 function confirm() {
     # call with a prompt string or use a default
