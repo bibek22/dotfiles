@@ -1,3 +1,5 @@
+alias watchlist="condainit;feh /home/bibek/git/nepse/intraday.png & /home/bibek/git/nepse/watch.py"
+alias checkipo="condainit; /home/bibek/git/nepse/checkipo.py"
 alias statmech="mpv 'https://www.youtube.com/playlist?list=PLXLSbKIMm0kjxyp45FIY62XNgHk4ywSaH' & disown"
 alias statmech2="mpv 'https://www.youtube.com/playlist?list=PLCC901B3A9445042D' & disown"
 alias relativity="mpv 'https://www.youtube.com/playlist?list=PLD9DDFBDC338226CA'"
