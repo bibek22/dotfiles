@@ -149,6 +149,7 @@ alias cimg="xclip -selection c -t image/png"
 alias bat="acpi -b"
 alias su="sudo su"
 alias mirror='xrandr --output HDMI-1  --mode 1920x1080 --output LVDS-1  --primary --scale-from 1366x768'
+alias bothoff='xrandr --output LVDS-1 --off --output HDMI-1 --off'
 
 # My functions
 cf(){
