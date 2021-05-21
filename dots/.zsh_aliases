@@ -1,3 +1,4 @@
+alias wm="cd /home/bibek/.local/Wolfram/Mathematica/11.3/Executables/ ; ./Mathematica"
 alias watchlist="condainit;feh /home/bibek/git/nepse/intraday.png & /home/bibek/git/nepse/watch.py"
 alias checkipo="condainit; /home/bibek/git/nepse/checkipo.py"
 alias statmech="mpv 'https://www.youtube.com/playlist?list=PLXLSbKIMm0kjxyp45FIY62XNgHk4ywSaH' & disown"

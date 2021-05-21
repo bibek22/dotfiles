@@ -1,0 +1,6 @@
+#!/usr/bin/sh 
+
+cd /home/bibek/.local/Wolfram/Mathematica/11.3/Executables/
+
+[[ ! -z "$1" ]] && ./Mathematica "$1"
+./Mathematica 
