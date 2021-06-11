@@ -53,6 +53,13 @@ function copypath() {
     notify-send "path copied !"
 }
 
+function copyimg() {
+    FILE=`tree -lif $HOME| rofi -dmenu -i -p "Choose a File"`
+    cat "$FILE" | xclip -selection c -t image/png
+    notify-send "Image copied !"
+}
+
+
 
 function toprightcornermouse() {
     xdotool mousemove 1900 0
@@ -144,7 +151,7 @@ function copy_rc(){
 DOS="Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
 DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path|States|Both|Top|Base"
 DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock|bibadd"
-DOS="$DOS|Note|Reconnect|Rotate Screen|Copy RC|Laptop Speaker|Headphone"
+DOS="$DOS|Note|Reconnect|Rotate Screen|Copy RC|Laptop Speaker|Headphone|Copy image"
 
 if [[ -z "$1" ]]
 then
@@ -165,6 +172,7 @@ else
 "Double click")	    xdotool click 1 --repeat 2;;
     JBL)            btconnect;;
     "Copy path")    copypath;;
+    "Copy image")   copyimg;;
     Syllabus)       zathura "$HOME/books/BSCIV_MicroSyllabus_Physics.pdf" ;;
     Base)           xrandr --output HDMI-1 --off;;
     Top)            xrandr --output LVDS-1 --off;;

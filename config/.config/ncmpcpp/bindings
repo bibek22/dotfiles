@@ -166,6 +166,8 @@
 #  select_item
 #  scroll_down
 
+def_key "L"
+ show_lyrics
 
 def_key "k"
  scroll_up

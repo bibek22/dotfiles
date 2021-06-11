@@ -12,6 +12,13 @@ alias cloudy="/home/bibek/git/cloudy/c17.02/source/cloudy.exe -p"
 #     ssh -N -L 8888:"$1":8888 bibekg@hpc.ku.edu.np
 # }
 #
+#
+
+function makepng(){
+    convert "$1" -fuzz 50% -transparent white -fill '#FF4500' -opaque black /tmp/makepng.png
+    # convert "$1" -fuzz 20% -transparent 'color 0 0' -fill '#FF4500' -opaque black /tmp/makepng.png
+    cat /tmp/makepng.png | xclip -selection c -t image/png
+}
 
 function typeout(){
     if [ -z $1 ] 
