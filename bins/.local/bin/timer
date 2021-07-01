@@ -20,11 +20,14 @@ delta = td(seconds=1)
 
 def timer():
     global time, timestamps, delta
+
+    os.system("dunstify -a 'Timer' -r 12873 'Timer started!'")
     while (time):
         sys.stdout.write("\r" + str(time))
         try: t.sleep(1)
         except: print("\nexitting...") ; break
         time -= delta
     os.system("dunstify -a 'Timer' -r 12873 'Times up!'")
+    os.system("mpc toggle") # ad hoc alarm ring lol!
 
 timer()

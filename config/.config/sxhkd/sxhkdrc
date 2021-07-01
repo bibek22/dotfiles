@@ -15,7 +15,11 @@ ctrl + alt + l
     slock
 # ctrl + alt + m
 #     /home/bibek/.local/bin/runonce neomutt neomutt
-
+ctrl + alt + t
+    /home/bibek/.local/bin/timer 0 108
+ctrl + alt + 1
+    /home/bibek/.local/bin/button
+     
 
 super + o
     /home/bibek/.local/bin/omnidoer
