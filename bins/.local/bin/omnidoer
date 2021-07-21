@@ -6,6 +6,7 @@
 
 alias p='xclip -selection c -o'
 
+
 function bibadd() {
     # Append to the bibliography file
     LINENUM=$(p | wc -l)
@@ -58,8 +59,6 @@ function copyimg() {
     cat "$FILE" | xclip -selection c -t image/png
     notify-send "Image copied !"
 }
-
-
 
 function toprightcornermouse() {
     xdotool mousemove 1900 0
@@ -148,10 +147,10 @@ function copy_rc(){
 ##################
 # Main BODY      #
 ##################
-DOS="Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
+DOS="Upload image|Suspend|JBL|Mute mic|Headphone Mic|IP|Stopwatch|Gmail|ServeBlog|Killall"
 DOS="$DOS|Prevent slock|Delete|Click|Doubble click|Copy path|States|Both|Top|Base"
 DOS="$DOS|Omnilauncher|Play|Change wallpaper|Music|Syllabus|CapsLock|bibadd"
-DOS="$DOS|Note|Reconnect|Rotate Screen|Copy RC|Laptop Speaker|Headphone|Copy image"
+DOS="$DOS|Note|Reconnect|Rotate Screen|Copy RC|Laptop Speaker|Headphone|Copy image|netflix"
 
 if [[ -z "$1" ]]
 then
@@ -167,6 +166,7 @@ else
     "Change wallpaper")     changeBackground;;
     IP)             printIP;;
     Note)           note;;
+    netflix)        chromium --app=https://www.netflix.com;;
 "Prevent slock")    xdotool mousemove 1900 0;;
     Click)	        xdotool click 1;;
 "Double click")	    xdotool click 1 --repeat 2;;
