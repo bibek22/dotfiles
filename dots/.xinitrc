@@ -67,8 +67,8 @@ sxhkd &
 sleep 1 && st &
 # redshift messes with external monitor. use `brightness`
 # sleep 1 && redshift -b 1.0:0.6 -t 6500k:4500k &
-sleep 3 && pcmanfm -d &
-sleep 10 && notion-app &
+# sleep 3 && pcmanfm -d &
+# sleep 10 && notion-app &
 # nm-applet &
 
 # Restore colorscheme (second line below does it in dwmbar)

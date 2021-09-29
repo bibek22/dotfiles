@@ -41,8 +41,8 @@ conf() {
                   cd - ;;
   *)              echo "Unknown application: $1";
       echo 'trying anyway...'
-      [ -f ~/.config/$1/conf ] && $EDITOR ~/.config/$1/conf || \
-      [ -f ~/.config/$1/config ] && $EDITOR ~/.config/$1/config || \
+      [ -f ~/.config/$1/conf ] && $EDITOR ~/.config/$1/conf && exit || \
+      [ -f ~/.config/$1/config ] && $EDITOR ~/.config/$1/config && exit || \
       [ -f ~/.config/$1/"$1"rc ] && $EDITOR ~/.config/$1/"$1"rc ;;
       # which $1 && vim `which $1` ;;
   esac

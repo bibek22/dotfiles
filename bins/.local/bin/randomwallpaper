@@ -1,7 +1,19 @@
 #!/usr/bin/bash
 
 wallpaper="$(tree -if ~/pictures/wallpaper | shuf -n 1)"
-wal --backend wal -i "$wallpaper" --saturate 0.65 -a 0.9 -o /home/bibek/.local/bin/dwmcolorsparser.py
-dunstify -r 19922 -a "Wallpaper" "Changed" "$(basename $wallpaper)"
+if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+    # skip setting the wallpaper (-n) on wayland
+    # leave it to swaywm
+    wal -n --backend wal -i "$wallpaper" --saturate 0.65 -a 0.9 \
+        -o /home/bibek/.local/bin/dwmcolorsparser.py
+else
+    wal --backend wal -i "$wallpaper" --saturate 0.65 -a 0.9 \
+        -o /home/bibek/.local/bin/dwmcolorsparser.py
+fi
 
-# value of alpha from here doesn't reflect in st terminal
+
+# link this to ~/.background so that sway can auto-set it at launch
+# and also update on the fly.
+rm $HOME/.background ; ln -s "$wallpaper" $HOME/.background 
+
+dunstify -r 19922 -a "Wallpaper" "Changed" "$(basename $wallpaper)"

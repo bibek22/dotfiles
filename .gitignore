@@ -13,6 +13,11 @@ dots/git
 !config/.config/light/
 !config/.config/zathura/
 !config/.config/tmux/
+!config/.config/sway/
+!config/.config/waybar/
+!config/.config/kanshi/
+!config/.config/alacritty/
+!config/.config/wofi/
 !config/.config/sxhkd/
 !config/.config/dunst/
 !config/.config/wal/

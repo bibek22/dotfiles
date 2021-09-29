@@ -129,4 +129,10 @@ ex=🎯:\
 # ~/.zsh_profile
 # [[ -f ~/.zshrc ]] && . ~/.zshrc  #cause acc. to wiki, it is not sourced only on login shell.
 
-startx &>.xsession-errors
+if [ "$(tty)" = "/dev/tty1" ]; then
+	exec sway
+fi
+
+# if [[ $XDG_SESSION_ID == 1 ]]; then
+#     exec sway
+# fi

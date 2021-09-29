@@ -1,3 +1,5 @@
+alias feh="imv"
+alias dwl="/home/bibek/git/dwl/dwl"
 alias wm="cd /home/bibek/.local/Wolfram/Mathematica/11.3/Executables/ ; ./Mathematica"
 alias watchlist="condainit;feh /home/bibek/git/nepse/intraday.png & /home/bibek/git/nepse/watch.py"
 alias checkipo="condainit; /home/bibek/git/nepse/checkipo.py"
@@ -5,6 +7,18 @@ alias statmech="mpv 'https://www.youtube.com/playlist?list=PLXLSbKIMm0kjxyp45FIY
 alias statmech2="mpv 'https://www.youtube.com/playlist?list=PLCC901B3A9445042D' & disown"
 alias relativity="mpv 'https://www.youtube.com/playlist?list=PLD9DDFBDC338226CA'"
 alias cloudy="/home/bibek/git/cloudy/c17.02/source/cloudy.exe -p"
+
+# copy pipe to clipboard.
+if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+    alias p="wl-paste"
+    alias c="wl-copy"
+    alias cimg="wl-copy"
+else
+    alias p="xclip -selection c -o"
+    alias c="xclip -selection c"
+    alias cimg="xclip -selection c -t image/png"
+fi
+
 
 ## SSH Reverse tunnel
 # function kutunnel() {
@@ -17,7 +31,7 @@ alias cloudy="/home/bibek/git/cloudy/c17.02/source/cloudy.exe -p"
 function makepng(){
     convert "$1" -fuzz 50% -transparent white -fill '#FF4500' -opaque black /tmp/makepng.png
     # convert "$1" -fuzz 20% -transparent 'color 0 0' -fill '#FF4500' -opaque black /tmp/makepng.png
-    cat /tmp/makepng.png | xclip -selection c -t image/png
+    cat /tmp/makepng.png | cimg
 }
 
 function typeout(){
@@ -122,7 +136,6 @@ alias play="mpc searchplay"
 alias topdf='soffice --headless --convert-to pdf --outdir ./'
 alias weather="curl wttr.in"
 alias pw="curl --data-binary @- https://paste.rs"
-alias p="xclip -selection c -o"
 alias pong="ping -c 3 www.google.com"
 alias nocomment='egrep -v "^[ \t]*#|^[ \t]*$"'
 # for New file (last modified)
@@ -150,9 +163,7 @@ alias -g L="| less"
 alias suspend="systemctl suspend"
 alias dush="du -sm *|sort -n|tail"
 alias makeup="updpkgsums && makepkg -ci"
-# copy pipe to clipboard.
-alias c="xclip -selection c"
-alias cimg="xclip -selection c -t image/png"
+
 # Battery status
 alias bat="acpi -b"
 alias su="sudo su"
@@ -167,7 +178,8 @@ cf(){
 # pastebin
 function pb() {
     local file=${1:-/dev/stdin}
-    curl --data-binary @${file} https://paste.rs
+    URL=$(curl --data-binary @${file} https://paste.rs)
+    echo $URL | c
 }
 
 function report(){

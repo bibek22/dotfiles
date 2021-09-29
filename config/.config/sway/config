@@ -1,0 +1,294 @@
+# rbnis/dotfiles https://github.com/rbnis/dotfiles/blob/master/.config/sway/config
+# Variables
+set $mod Mod4
+set $alt Mod1
+
+set $term alacritty
+set $menu rofi -show run
+set $background ~/.background
+
+set $cl_high #2d3138
+set $cl_indi #d9d8d8
+set $cl_back #231f20
+set $cl_fore #d9d8d8
+set $cl_urge #ee2e24
+
+# Colors                border   bg       text     indi     childborder
+client.focused          $cl_high $cl_high $cl_fore $cl_indi $cl_high
+client.focused_inactive $cl_back $cl_back $cl_fore $cl_back $cl_back
+client.unfocused        $cl_back $cl_back $cl_fore $cl_back $cl_back
+client.urgent           $cl_urge $cl_urge $cl_fore $cl_urge $cl_urge
+
+# workspaces
+set $ws1   1:
+set $ws2   2:2
+set $ws3   3:3
+set $ws4   4:4
+set $ws5   5:5
+set $ws6   6:6
+set $ws7   7:7
+set $ws8   8:8
+set $ws9   9:9
+set $ws0   10:10
+set $wsF1  11:
+set $wsF2  12:
+set $wsF3  13:13
+set $wsF4  14:14
+set $wsF5  15:15
+set $wsF6  16:16
+set $wsF7  17:17
+set $wsF8  18:18
+set $wsF9  19:19
+set $wsF10 20:20
+set $wsF11 21:
+set $wsF12 22:
+
+# Font
+font DejaVu Sans Mono 12
+
+# Window borders
+default_border pixel 2
+default_floating_border normal
+hide_edge_borders smart
+
+smart_gaps on
+gaps inner 10
+
+# ALL about the bar
+# Launch waybar as the top bar (see config in waybar/config)
+bar { 
+    swaybar_command waybar 
+    # mode hide
+    # hidden_state hide
+    # modifier $mod
+}
+
+# waybar toggle (author suggested method)
+bindsym $mod+b exec pkill -SIGUSR1 '^waybar$'
+
+
+# Autostart
+exec --no-startup-id dunst
+exec --no-startup-id pgrep mpd || mpd 2> mpd.log
+exec --no-startup-id "sleep 2; mpd-mpris 2> mpris.log"
+exec --no-startup-id playerctld daemon
+exec --no-startup-id kanshi
+# redshift suppliment
+exec --no-startup-id pgrep gammastep || gammastep -l 85:27
+
+# Output configuration
+output HDMI-A-1 pos 1366 0 bg $background fill
+output LVDS-1  bg $background fill
+
+# Input configuration
+input * {
+    xkb_layout us
+    xkb_options ctrl:nocaps
+}
+
+# Default workspaces for common programs
+assign [class="^Notion$"] $ws3
+assign [class="^Neomutt$"] $wsF2
+assign [class="^firefox$"] $ws9
+assign [app_id="^pavucontrol$"] $wsF4
+assign [app_id="^pulsemixer$"] $wsF4
+assign [class="^Signal$"] $ws8
+assign [app_id="^telegramdesktop$"] $ws8
+assign [class="^ViberPC$"] $ws8
+assign [class="^discord$"] $ws8
+assign [class="^Spotify$"] $wsF12
+
+# Floating mode by default
+for_window [class="pavucontrol"] floating enable
+for_window [class="pulsemixer"] floating enable
+for_window [class="ncmpcpp"] floating enable
+
+# Shortcuts/applications
+bindsym Control+$alt+g exec firefox
+bindsym Control+$alt+m  workspace $wsF2; exec /home/bibek/.local/bin/runonce neomutt neomutt
+bindsym Control+$alt+k exec /home/bibek/.local/bin/runonce ncmpcpp ncmpcpp
+bindsym Control+$alt+p  workspace $wsF4; exec alacritty --class pulsemixer -e pulsemixer
+bindsym $mod+Semicolon exec $term
+bindsym $mod+Return exec $term
+
+bindsym $mod+apostrophe exec /home/bibek/.local/bin/pick-emoji
+bindsym $alt+slash exec /home/bibek/.local/bin/lookup
+bindsym $mod+slash exec /home/bibek/.local/bin/windows_select_wayland
+
+
+# Monitor switch (both or one)
+bindsym $mod+$alt+t output LVDS-1 disable
+bindsym $mod+$alt+b output LVDS-1 enable
+
+# Brightness controls ( laptop only )
+bindsym Control+F4 exec light -T 1.5
+bindsym Control+F3 exec light -T 0.66
+
+# Screenshots
+bindsym Print               exec /home/bibek/.local/bin/screenshot_wayland  partial-copy
+bindsym Control+Print       exec /home/bibek/.local/bin/screenshot_wayland  full-copy
+bindsym $alt+Print          exec /home/bibek/.local/bin/screenshot_wayland  partial-save
+bindsym Control+$alt+Print  exec /home/bibek/.local/bin/screenshot_wayland  full-save
+
+# Prompt (rofi) stuffs
+bindsym $mod+p exec $menu
+bindsym $mod+o exec /home/bibek/.local/bin/omnidoer_wayland
+bindsym Control+$alt+o exec /home/bibek/.local/bin/omnilauncher
+bindsym Control+$alt+j exec /home/bibek/.local/bin/jupyterlauncher
+
+# Sway actions
+bindsym $mod+w kill
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+q exit
+# default was 'b' for splith
+bindsym $mod+n splith
+bindsym $mod+v splitv
+# screenlock
+bindsym Control+$alt+l exec swaylock
+# bindsym Control+Space exec makoctl dismiss
+# bindsym Control+Shift+Space exec makoctl dismiss --all
+
+# Multimedia
+bindsym --locked XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
+bindsym --locked XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
+bindsym --locked XF86AudioMute exec --no-startup-id pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle
+bindsym --locked XF86AudioPlay exec playerctl play-pause
+bindsym --locked XF86AudioNext exec playerctl next
+bindsym --locked XF86AudioPrev exec playerctl previous
+# Multimedia with Control key
+bindsym --locked Control+F2 exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
+bindsym --locked Control+F3 exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
+bindsym --locked Control+F4 exec --no-startup-id pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle
+bindsym --locked Control+F7 exec playerctl play-pause
+bindsym --locked Control+F8 exec playerctl next
+bindsym --locked Control+F9 exec playerctl previous
+
+
+# Brightness controls
+bindsym --locked XF86MonBrightnessUp exec --no-startup-id light -A 10
+bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
+
+# Toggle Redshift
+bindsym $mod+Home exec --no-startup-id pkill -USR1 redshift
+
+# Idle configuration
+exec swayidle \
+    timeout 300 'exec swaylock' \
+    timeout 600 'swaymsg "output * dpms off"' \
+    after-resume 'swaymsg "output * dpms on"' \
+    before-sleep 'exec swaylock'
+
+# Move your focus around
+bindsym $mod+Left focus left
+bindsym $mod+h focus left
+bindsym $mod+Down focus down
+bindsym $mod+j focus down
+bindsym $mod+Up focus up
+bindsym $mod+k focus up
+bindsym $mod+Right focus right
+bindsym $mod+l focus right
+
+# _move_ the focused window with the same, but add Shift
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+# switch to workspace
+bindsym $mod+Tab workspace back_and_forth
+bindsym $mod+1   workspace $ws1
+bindsym $mod+2   workspace $ws2
+bindsym $mod+3   workspace $ws3
+bindsym $mod+4   workspace $ws4
+bindsym $mod+5   workspace $ws5
+bindsym $mod+6   workspace $ws6
+bindsym $mod+7   workspace $ws7
+bindsym $mod+8   workspace $ws8
+bindsym $mod+9   workspace $ws9
+bindsym $mod+0   workspace $ws0
+bindsym $mod+F1  workspace $wsF1
+bindsym $mod+F2  workspace $wsF2
+bindsym $mod+F3  workspace $wsF3
+bindsym $mod+F4  workspace $wsF4
+bindsym $mod+F5  workspace $wsF5
+bindsym $mod+F6  workspace $wsF6
+bindsym $mod+F7  workspace $wsF7
+bindsym $mod+F8  workspace $wsF8
+bindsym $mod+F9  workspace $wsF9
+bindsym $mod+F10 workspace $wsF10
+bindsym $mod+F11 workspace $wsF11
+bindsym $mod+F12 workspace $wsF12
+
+# move focused container to workspace
+bindsym $mod+Shift+1    move container to workspace $ws1
+bindsym $mod+Shift+2    move container to workspace $ws2
+bindsym $mod+Shift+3    move container to workspace $ws3
+bindsym $mod+Shift+4    move container to workspace $ws4
+bindsym $mod+Shift+5    move container to workspace $ws5
+bindsym $mod+Shift+6    move container to workspace $ws6
+bindsym $mod+Shift+7    move container to workspace $ws7
+bindsym $mod+Shift+8    move container to workspace $ws8
+bindsym $mod+Shift+9    move container to workspace $ws9
+bindsym $mod+Shift+0    move container to workspace $ws0
+bindsym $mod+Shift+F1   move container to workspace $wsF1
+bindsym $mod+Shift+F2   move container to workspace $wsF2
+bindsym $mod+Shift+F3   move container to workspace $wsF3
+bindsym $mod+Shift+F4   move container to workspace $wsF4
+bindsym $mod+Shift+F5   move container to workspace $wsF5
+bindsym $mod+Shift+F6   move container to workspace $wsF6
+bindsym $mod+Shift+F7   move container to workspace $wsF7
+bindsym $mod+Shift+F8   move container to workspace $wsF8
+bindsym $mod+Shift+F9   move container to workspace $wsF9
+bindsym $mod+Shift+F10  move container to workspace $wsF10
+bindsym $mod+Shift+F11  move container to workspace $wsF11
+bindsym $mod+Shift+F12  move container to workspace $wsF12
+
+# Layout stuff:
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+t layout tabbed
+bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+bindsym $mod+m fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# move focus to the parent container
+bindsym $mod+a focus parent
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+Shift+minus move scratchpad
+# Show the next scratchpad window or hide the focused scratchpad window.
+# If there are multiple scratchpad windows, this command cycles through them.
+bindsym $mod+minus scratchpad show
+
+# Resize mode (for tiling and floating)
+bindsym $mod+r mode "resize"
+floating_modifier $mod
+
+# Modes  (apparently the curly brace below shouldn't be closed?)
+mode "resize" {
+    bindsym h resize shrink width  15 px
+    bindsym j resize grow   height 15 px
+    bindsym k resize shrink height 15 px
+    bindsym l resize grow   width  15 px
+
+    # same bindings, but for the arrow keys
+    bindsym Left  resize shrink width  15 px
+    bindsym Up    resize grow   height 15 px
+    bindsym Down  resize shrink height 15 px
+    bindsym Right resize grow   width  15 px
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+
+    # brightness control even when locked?
+    bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
+
