@@ -13,6 +13,10 @@ chosen=$(cut -d ';' -f1 ~/.local/share/larbs/emoji | rofi -dmenu -i -p "Pick an 
 if [ -n "$1" ]; then
 	xdotool type "$chosen"
 else
-	echo "$chosen" | tr -d '\n' | xclip -selection clipboard
+    if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
+        echo "$chosen" | tr -d '\n' | wl-copy
+    else
+        echo "$chosen" | tr -d '\n' | xclip -selection clipboard
+    fi
 	notify-send "'$chosen' copied to clipboard." &
 fi

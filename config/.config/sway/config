@@ -121,8 +121,8 @@ bindsym $mod+$alt+t output LVDS-1 disable
 bindsym $mod+$alt+b output LVDS-1 enable
 
 # Brightness controls ( laptop only )
-bindsym Control+F4 exec light -T 1.5
-bindsym Control+F3 exec light -T 0.66
+# bindsym Control+F4 exec light -T 1.5
+# bindsym Control+F3 exec light -T 0.66
 
 # Screenshots
 bindsym Print               exec /home/bibek/.local/bin/screenshot_wayland  partial-copy
@@ -156,8 +156,8 @@ bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
 # Multimedia with Control key
-bindsym --locked Control+F2 exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
-bindsym --locked Control+F3 exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
+bindsym --locked Control+F3 exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') +5%
+bindsym --locked Control+F2 exec --no-startup-id pactl set-sink-volume $(pacmd list-sinks |awk '/* index:/{print $3}') -5%
 bindsym --locked Control+F4 exec --no-startup-id pactl set-sink-mute $(pacmd list-sinks |awk '/* index:/{print $3}') toggle
 bindsym --locked Control+F7 exec playerctl play-pause
 bindsym --locked Control+F8 exec playerctl next

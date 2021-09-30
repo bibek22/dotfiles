@@ -3,6 +3,7 @@ config/.config/*
 bins/.local/lib
 bins/.local/bin/git
 bins/.local/share/*
+bins/.local/Wolfram/*
 build/build/*
 dots/git
 
