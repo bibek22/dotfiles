@@ -1,7 +1,9 @@
+@import "/home/bibek/.cache/wal/colors-waybar.css";
+
 * {
     border:        none;
     border-radius: 0;
-    font-family:   ShureTechMono Nerd Font;
+    font-family:   Share Tech Mono;
     font-size:     18px;
     box-shadow:    none;
     text-shadow:   none;
@@ -9,14 +11,14 @@
 }
 
 window {
-    color:      rgba(217, 216, 216, 1);
-    background: rgba(35, 31, 32, 0.9);
+    color:      @foreground;
+    background: @background;
 }
 
  /* This is for when there is a single window and no gaps */
 window#waybar.solo {
-    color:      rgba(217, 216, 216, 1);
-    background: rgba(35, 31, 32, 0.95);
+    color:      @foreground;
+    background: @background;
 }
 
 #workspaces {
@@ -25,19 +27,23 @@ window#waybar.solo {
 
 #workspaces button {
     padding:    0 5px;
-    color:      rgba(217, 216, 216, 0.8);
+    color:      @color8;
 }
 
 #workspaces button.visible {
-    color:      rgba(217, 216, 216, 0.9);
+    /* color:      rgba(217, 216, 216, 0.9); */
+    color:      @color1;
 }
 
 #workspaces button:hover {
-    color:      rgba(17, 16, 16, 1);
+    /* color:      rgba(17, 16, 16, 1); */
+    background: @color8;
+    color: @color15;
+    border-radius: 5px;
 }
 
 #workspaces button.focused {
-    border-top: 3px solid rgba(217, 216, 216, 1);
+    border-top: 3px solid @color1;
     border-bottom: 3px solid rgba(217, 216, 216, 0);
 }
 
@@ -45,9 +51,21 @@ window#waybar.solo {
     color:      rgba(238, 46, 36, 1);
 }
 
+.modules-center {
+    color: @color1;
+    padding: 0px 30px;
+    /* font doesn't seem to work */
+    /* font-family:  Liberation Mono; */
+    /* text-align: center; */
+}
+
+#tray image {
+	padding: 0px 5px;
+}
+
 #mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail {
-    margin:     0px 6px 0px 10px;
-    min-width:  25px;
+    margin:     0px 8px 0px 10px;
+    min-width:  22px;
 }
 
 #clock {

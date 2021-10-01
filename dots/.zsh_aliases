@@ -1,3 +1,4 @@
+alias viber="export QT_QPA_PLATFORM=xcb; viber 2> /dev/null & disown"
 alias feh="imv"
 alias dwl="/home/bibek/git/dwl/dwl"
 alias wm="cd /home/bibek/.local/Wolfram/Mathematica/11.3/Executables/ ; ./Mathematica"

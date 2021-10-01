@@ -126,13 +126,26 @@ ex=🎯:\
 *.java=♨:\
 "
 
+# Workspace labels for Sway-wm
+export ws1="1:"
+export ws2="2:2"
+export ws3="3:3"
+export ws4="4:4"
+export ws5="5:5"
+export ws6="6:6"
+export ws7="7:7"
+export ws8="8:8"
+export ws9="9:9"
+export ws0="10:10"
+export wsF1="11:"
+export wsF2="19:"
+export wsF10="20:20"
+export wsF11="21:"
+export wsF12="22:"
+
 # ~/.zsh_profile
-# [[ -f ~/.zshrc ]] && . ~/.zshrc  #cause acc. to wiki, it is not sourced only on login shell.
+# [[ -f ~/.zshrc ]] && . ~/.zshrc  #cause acc. to wiki, it is not sourced. only on login shell.
 
-if [ "$(tty)" = "/dev/tty1" ]; then
-	exec sway
-fi
-
-# if [[ $XDG_SESSION_ID == 1 ]]; then
+# if [ "$(tty)" = "/dev/tty1" ]; then
 #     exec sway
 # fi

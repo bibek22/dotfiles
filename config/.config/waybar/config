@@ -20,20 +20,20 @@
     },
 
     "memory": {
-        "interval": 30,
-        "format": "{avail:0.1f}G",
-        "max-length": 6
+        "interval": 5,
+        "format": " {avail:0.1f}G",
     },
 
     "clock": {
-        "format": "{:%a %d %b %H:%M}",
+        "format": "{:%a %d %b %I:%M}",
         "tooltip": false
     },
+
     "battery": {
-        "format": "{capacity}% {icon}",
+        "format": "{icon} {capacity}%",
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
-        "format-charging": "{capacity}% ",
+        "format-charging": " {capacity}%",
         "interval": 30,
         "states": {
             "warning": 25,
@@ -47,23 +47,25 @@
         "format-alt-click": "click-right",
         "format-icons": {
             "wifi": [""],
-            "ethernet": [""],
-            "disconnected": [""]
+            "ethernet": [""],
+            "disconnected": ["睊"]
         },
-        "on-click": "alacritty -e nmtui",
+        "on-click": "alacritty --class nmtui -e nmtui",
         "tooltip": false
     },
     "pulseaudio": {
         "format": "{icon}",
         "format-alt": "{volume} {icon}",
         "format-alt-click": "click-right",
-        "format-muted": "",
+        "format-muted": "",
         "format-icons": {
-            "phone": [" ", " ", " ", " "],
-            "default": ["", "", "", ""]
+            "phone": [" ", " ", "墳", " "],
+            "default": ["", "", "墳", ""]
         },
         "scroll-step": 10,
-        "on-click": "swaymsg workspace number 14",
+        "on-scroll-down": "/home/bibek/.local/bin/volumecontrol altdown",
+        "on-scroll-up": "/home/bibek/.local/bin/volumecontrol altup",
+        "on-click": "swaymsg workspace number 20; pgrep pulsemixer || alacritty --class pulsemixer -e pulsemixer",
         "tooltip": false
     },
     "custom/spotify": {
@@ -72,19 +74,19 @@
         "exec": "~/.config/waybar/modules/spotify.sh",
         "exec-if": "pgrep spotify",
         "escape": true,
-        "on-click": "swaymsg workspace number 14"
+        "on-click": "swaymsg workspace 22:"
     },
     "custom/storage": {
-        "format": "{} ",
-        "format-alt": "{percentage}% ",
+        "format": " {}",
+        "format-alt": " {percentage}%",
         "format-alt-click": "click-right",
         "return-type": "json",
-        "interval": 60,
+        "interval": 30,
         "exec": "~/.config/waybar/modules/storage.sh"
     },
     "backlight": {
         "format": "{icon}",
-        "format-alt": "{percent}% {icon}",
+        "format-alt": "{icon} {percent}%",
         "format-alt-click": "click-right",
         "format-icons": ["", ""],
         "on-scroll-down": "light -A 1",
@@ -102,19 +104,21 @@
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
+            "activated": "",
             "deactivated": ""
         },
         "tooltip": false
     },
     "custom/mail": {
-        "format": "{alt} ",
-        "format-alt": "{alt} ",
-        "format-alt-click": "click-left",
-        "interval": 20,
+        "format": "{alt}",
+        "interval": 3,
         "return-type": "json",
-        "exec": "~/mail_waybar.sh",
-        "tooltip": false
+        "exec": "/home/bibek/.local/bin/mail_waybar.sh",
+        "tooltip": false,
+        "on-click": "pgrep neomutt || alacritty --class neomutt -e neomutt & swaymsg workspace number 19:",
+        /* it's a shame that sleep workaround has to be added here. sway creates a new workspace numbered */
+        /* 12 if one is not already open. */
+        /* green color set from the script */
     },
 
     "tray": {

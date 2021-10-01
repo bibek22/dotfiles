@@ -4,5 +4,7 @@ profile Dual{
 }
 
 profile SingleMain{
-	output LVDS-1 enable scale 2
+	output LVDS-1
+    /* Use the line below if you have 1080p on a smaller display */
+	/* output LVDS-1 enable scale 2 */
 }

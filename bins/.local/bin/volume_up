@@ -40,6 +40,6 @@ case $1 in
   altup)         up 2 && notify;;
   down)       down 1 && notify;;
   altdown)       down 2 && notify;;
-  # mute)       down && notify;;
+  mute)       mute $2;;
 esac
 

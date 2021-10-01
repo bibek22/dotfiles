@@ -234,6 +234,10 @@ autocmd BufEnter /tmp/neomutt* set filetype=markdown
 :au BufWritePost */contents/contents.md :silent !pandoc contents.md -t beamer --slide-level 2 --pdf-engine=xelatex -o contents.tex
 
 
+" Allow saving of files as sudo when I forgot to start vim using sudo.
+cmap w!! w !sudo tee > /dev/null %
+
+
 """"""""""""""""""""""""""""""""""""""""
 ""        FZF SHORTCUTS              """
 """"""""""""""""""""""""""""""""""""""""
