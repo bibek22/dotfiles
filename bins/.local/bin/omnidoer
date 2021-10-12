@@ -179,7 +179,7 @@ else
     Both)           xrandr --output LVDS-1 --auto --left-of HDMI-1; xrandr --output HDMI-1 --primary --auto --left-of LVDS-1;;
     Delete)         Delete ;;
     CapsLock)       setxkbmap -option ctrl:nocaps ;; # Map CapsLock to CTRL
-    Gmail)          mbsync bibek.gautam@sxc.edu.np:INBOX;;
+    Gmail)          /home/bibek/.local/bin/mailsync;;
     States)         feh ~/pictures/us-states.png;;
     Play)           play ;;
     Stopwatch)      stopwatch ;;

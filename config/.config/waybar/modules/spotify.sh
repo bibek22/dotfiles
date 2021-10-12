@@ -1,17 +1,32 @@
 #!/bin/sh
 
-class=$(playerctl metadata --player=spotify --format '{{lc(status)}}')
-icon=""
+player=$(playerctl metadata --format '{{lc(playerName)}}')
+class=$(playerctl metadata --player=$player --format '{{lc(status)}}')
+if [[ $player == "spotify" ]]; then
+    icon=""
+elif [[ $player == "mpd" ]]; then
+    icon=""
+elif [[ $player == "mpv" ]]; then
+    icon=""
+elif [[ $player == "chromium" ]]; then
+    icon=""
+else
+    icon=""
+fi
 
 if [[ $class == "playing" ]]; then
-  info=$(playerctl metadata --player=spotify --format '{{artist}} - {{title}}')
-  if [[ ${#info} > 40 ]]; then
-    info=$(echo $info | cut -c1-40)"..."
-  fi
-  text=$info" "$icon
+    if [[ $player == "firefox" ]]; then
+      info=$(playerctl metadata --player=$player --format '{{title}}')
+  else
+      info=$(playerctl metadata --player=$player --format '{{artist}} - {{title}}')
+    fi
+  
+  info=$(echo $info | cut -c1-39  | sed -E "s/[[:alnum:]_'-]+/\u&/g");
+ 
+  text=$icon" "$info
 elif [[ $class == "paused" ]]; then
   text=$icon
-elif [[ $class == "stopped" ]]; then
+else # stopped
   text=""
 fi
 

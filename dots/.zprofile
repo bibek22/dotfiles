@@ -3,10 +3,9 @@ TZ='Asia/Kathmandu'; export TZ
 
 # Default programs:
 export EDITOR="nvim"
-export TERMINAL="st"
+export TERMINAL="alacritty"
 export BROWSER="firefox"
 export READER="zathura"
-export SUDO_ASKPASS="dmenupass"
 
 # Add paths
 export PATH=/home/bibek/.local/bin:$PATH
@@ -35,7 +34,6 @@ export STARDICT_DATA_DIR=$XDG_DATA_HOME
 
 # Other program settings:
 export LESS="$LESS --no-init --quit-if-one-screen"
-
  
 
 export FZF_DEFAULT_OPTS="--layout=reverse --height 40%"
@@ -126,26 +124,8 @@ ex=🎯:\
 *.java=♨:\
 "
 
-# Workspace labels for Sway-wm
-export ws1="1:"
-export ws2="2:2"
-export ws3="3:3"
-export ws4="4:4"
-export ws5="5:5"
-export ws6="6:6"
-export ws7="7:7"
-export ws8="8:8"
-export ws9="9:9"
-export ws0="10:10"
-export wsF1="11:"
-export wsF2="19:"
-export wsF10="20:20"
-export wsF11="21:"
-export wsF12="22:"
-
-# ~/.zsh_profile
-# [[ -f ~/.zshrc ]] && . ~/.zshrc  #cause acc. to wiki, it is not sourced. only on login shell.
-
-# if [ "$(tty)" = "/dev/tty1" ]; then
-#     exec sway
-# fi
+if [[ -z $DISPLAY && $TTY = /dev/tty1 ]]; then
+  export MOZ_ENABLE_WAYLAND=1
+  export QT_QPA_PLATFORM=xcb
+  sway
+fi

@@ -3,8 +3,8 @@
     "position": "top",
     "height": 30,
 
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
+    /* "modules-center": ["sway/window"], */
     "modules-right": ["tray", "custom/spotify", "pulseaudio", "custom/mail", "custom/storage", "memory", "network", "idle_inhibitor", "battery", "clock"],
     "sway/mode": {
         "format": " {}"
@@ -16,7 +16,24 @@
     },
     "sway/window": {
         "max-length": 80,
+        "align": 0,
         "tooltip": false
+    },
+
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {title} ",
+        "format-disconnected": "",
+        "format-stopped": "",
+        "interval": 2,
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "on-scroll-down": "mpc volume -5",
+        "on-scroll-up": "mpc volume +5",
+        "tooltip-format-disconnected": "MPD (disconnected)",
+        "max-length": 40
     },
 
     "memory": {
@@ -43,7 +60,7 @@
     },
     "network": {
         "format": "{icon}",
-        "format-alt": "[{bandwidthUpBits} {bandwidthDownBits}]{icon}",
+        "format-alt": "[{bandwidthDownBits} {bandwidthUpBits}]{icon}",
         "format-alt-click": "click-right",
         "format-icons": {
             "wifi": [""],
@@ -72,9 +89,12 @@
         "interval": 1,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/spotify.sh",
-        "exec-if": "pgrep spotify",
+        /* "exec-if": "pgrep spotify", */
         "escape": true,
-        "on-click": "swaymsg workspace 22:"
+        /* "on-click": "swaymsg workspace number 22", */
+        "on-click": "playerctl play-pause",
+        "on-click-right": "/home/bibek/findplayer.sh",
+        "max-length": 40,
     },
     "custom/storage": {
         "format": " {}",
@@ -115,9 +135,7 @@
         "return-type": "json",
         "exec": "/home/bibek/.local/bin/mail_waybar.sh",
         "tooltip": false,
-        "on-click": "pgrep neomutt || alacritty --class neomutt -e neomutt & swaymsg workspace number 19:",
-        /* it's a shame that sleep workaround has to be added here. sway creates a new workspace numbered */
-        /* 12 if one is not already open. */
+        "on-click": "pgrep neomutt || alacritty --class neomutt -e neomutt & swaymsg workspace number 19",
         /* green color set from the script */
     },
 

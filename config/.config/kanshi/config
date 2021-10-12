@@ -1,10 +1,10 @@
-profile Dual{
+profile Headless {
 	output LVDS-1 disable
 	output HDMI-A-1 mode 1920x1080 position 0,0
 }
 
 profile SingleMain{
 	output LVDS-1
-    /* Use the line below if you have 1080p on a smaller display */
-	/* output LVDS-1 enable scale 2 */
+    # Use the line below if you have 1080p on a smaller display 
+	# output LVDS-1 enable scale 2
 }

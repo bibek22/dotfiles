@@ -1,0 +1,18 @@
+[matching]
+'neomutt' = ''
+'mpv' = ''
+'/^reddit.*/'="樓"
+'/.*YouTube.*/'="<span foreground='red'></span>"
+'/^Netflix$/'="<span foreground='red'>ﱄ</span>"
+'telegramdesktop'=''
+"libreoffice-writer"=''
+'pulsemixer'='ﰝ'
+"Notion"="ﴬ"
+"/lf/"=""
+"ncmpcpp"="ﱘ"
+'nmtui'=""
+"zathura"=""
+"feh"=""
+"Gimp"=""
+"chromium"=""
+"weechat"=""
