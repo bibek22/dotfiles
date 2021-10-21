@@ -4,4 +4,4 @@ icon="﫭"
 # printf "%s%s\n" "$icon" "$(df -h /home /mnt/hdd/home/ | awk ' /[0-9]/ {print $4}'| tr '\n' '+' ) "
 
 printf "%s%s\n" "$icon" "$(df -h /mnt/hdd/home | awk ' /[0-9]/ {print $4}') "
-printf "%s%s\n" "$icon" "$(df -h /home | awk ' /[0-9]/ {print $4}') "
+printf "%s%s" "$icon" "$(df -h /home | awk ' /[0-9]/ {print $4}') " | tr -d [:space:]

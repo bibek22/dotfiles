@@ -1,0 +1,3 @@
+# just calls the status scripts used in dwm but gets rid of the newlines
+# as swaybar can't handles it differently
+/home/bibek/.local/bin/status/main | tr -d "\n"

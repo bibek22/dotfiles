@@ -39,7 +39,7 @@ else
     echo 
 fi
 
-pacmd list-sinks | awk '/volume: front/ { print $5 }' | tail -n 1 | tr '%' ''
+pacmd list-sinks | awk '/volume: front/ { print $5 }' | tail -n 1 | tr -d '%'
 
 # just indicate whether playing or not
 if [ 1 -lt `mpc | wc -l` ]; then

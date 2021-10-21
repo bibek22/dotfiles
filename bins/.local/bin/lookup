@@ -3,5 +3,5 @@
 # in terminal
 word=`cat /usr/share/dict/usa | rofi -dmenu -sorting-method fzf -sort` || exit
 res="$(sdcv -e -n $word | stripends | parse-sdcv.py)"
-dunstify -a "WordNet" -r 191919 --urgency=normal "$word" "$res"
+dunstify -a "WordNet" -t 5000 -r 191919 --urgency=normal "$word" "$res"
 {  echo "$word" } >> $HOME/dox/lookup_history

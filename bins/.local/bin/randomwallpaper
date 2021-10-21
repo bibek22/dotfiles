@@ -5,7 +5,7 @@ if [[ $XDG_SESSION_TYPE == "wayland" ]]; then
     # skip setting the wallpaper (gives a flicker) (-n) on wayland
     # skip sway reload (-e)
     # leave it to swaywm to load it automatically
-    wal  -e --backend wal -i "$wallpaper" --saturate 0.65 -a 0.9 \
+    wal  --backend wal -i "$wallpaper" --saturate 0.65 -a 0.9 \
         -o /home/bibek/.local/bin/dwmcolorsparser.py
 else
     wal --backend wal -i "$wallpaper" --saturate 0.65 -a 0.9 \

@@ -1,2 +1,2 @@
-echo "ﳄ"
-free -mh | grep -Po "\d+.\d?.i$"
+echo ""
+free -mh | grep -Po "\d+.\d?.i$" | head -n1

@@ -9,6 +9,6 @@ $HOME/.local/bin/status/disk      && echo "$delim"
 $HOME/.local/bin/status/mail      && echo "$delim"
 $HOME/.local/bin/status/internet  && echo "$delim"
 $HOME/.local/bin/status/nettraf   && echo "$delim"
-$HOME/.local/bin/status/battery   && echo "$delim"
-$HOME/.local/bin/status/moonphase && echo "$delim"
+# $HOME/.local/bin/status/battery   && echo "$delim"
+# $HOME/.local/bin/status/moonphase && echo "$delim"
 $HOME/.local/bin/status/date

@@ -3,9 +3,15 @@
     "position": "top",
     "height": 30,
 
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/window"],
-    /* "modules-center": ["sway/window"], */
-    "modules-right": ["tray", "custom/spotify", "pulseaudio", "custom/mail", "custom/storage", "memory", "network", "idle_inhibitor", "battery", "clock"],
+    /* "modules-left": ["sway/workspaces", "sway/mode"], */
+    /* [> "modules-left": ["sway/workspaces", "sway/mode", "sway/window"], <] */
+    /* [> "modules-center": ["sway/window"], <] */
+    /* "modules-right": ["tray", "custom/spotify", "pulseaudio", "custom/mail", "custom/storage", "memory", "network", "idle_inhibitor", "battery", "clock"], */
+
+    "modules-left": [ "custom/mail", "custom/storage", "memory", "custom/spotify", "sway/mode"],
+    "modules-center": ["sway/workspaces"],
+    "modules-right": ["tray",  "pulseaudio", "network", "idle_inhibitor", "battery", "clock"],
+
     "sway/mode": {
         "format": " {}"
     },

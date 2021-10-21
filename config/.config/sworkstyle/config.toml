@@ -2,16 +2,20 @@
 'neomutt' = ''
 'mpv' = ''
 '/^reddit.*/'="樓"
-'/.*YouTube.*/'="<span foreground='red'></span>"
-'/^Netflix$/'="<span foreground='red'>ﱄ</span>"
+'/.*YouTube.*/'="<span foreground='#CC0000'></span>"
+'/.* – Netflix$/'="<span foreground='#EE0000'>ﱄ</span>"
+'/^Netflix$/'="<span foreground='#EE0000'>ﱄ</span>"
 'telegramdesktop'=''
+'TelegramDesktop'=''
 "libreoffice-writer"=''
 'pulsemixer'='ﰝ'
 "Notion"="ﴬ"
 "/lf/"=""
 "ncmpcpp"="ﱘ"
 'nmtui'=""
+"Typora" = ""
 "zathura"=""
+"org.pwmt.zathura" = ""
 "feh"=""
 "Gimp"=""
 "chromium"=""

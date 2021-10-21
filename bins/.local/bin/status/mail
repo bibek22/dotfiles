@@ -2,5 +2,15 @@
 # Show unread mail if mutt-wizard is installed.
 # command -v mw >/dev/null 2>&1 &&
 # Icons:   
-echo "" &&
-du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | wc -l
+NEW=`du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | wc -l`
+
+[ "$NEW" -eq 0 ] && exit -1
+
+if [ "$XDG_SESSION_TYPE" == "wayland" ]
+then
+    echo -n "<span foreground='#20A020'>"
+    echo -n " $NEW"
+    echo -n '</span>'
+else
+    echo " $NEW" 
+fi

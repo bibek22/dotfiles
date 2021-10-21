@@ -6,7 +6,8 @@ import glob
 
 count = len(glob.glob("/home/bibek/.local/share/mail/*/INBOX/new/*"))
 if count:
-    count = '"<span foreground=\'green\'>' + " " + str(count) + '</span>"'
+    # count = '"<span foreground=\'green\'>' + " " + str(count) + '</span>"'
+    count = '"<span foreground=\'green\'>' + " " + '</span>"'
 else:
     count = '""'
 

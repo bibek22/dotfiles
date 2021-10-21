@@ -1,3 +1,13 @@
+function dark () {
+    # function to toggle light/dark mode on alacrity
+    if [[ $(alacritty-colorscheme status) =~ "light" ]]; then
+        alacritty-colorscheme apply gruvbox_dark.yaml
+    else
+        alacritty-colorscheme apply gruvbox_light.yaml
+    fi
+}
+
+alias format="sudo mkfs.ntfs -f -L 'Toshiba'"
 alias chromium="chromium --enable-features=UseOzonePlatform --ozone-platform=wayland"
 alias viber="export QT_QPA_PLATFORM=xcb; viber 2> /dev/null & disown"
 alias feh="imv"

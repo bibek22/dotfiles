@@ -13,10 +13,12 @@
     font-size:     20px;
 }
 
+
 #window, #custom-spotify{
     font-family:   Share Tech Mono;
     font-size:     15px;
 }
+
 #window {
     margin-left: 10px;
 }
@@ -30,7 +32,8 @@
 window {
     /* This selects the entire bar essentially */
     color:      @foreground;
-    background: @background;
+    background: rgba(0,0,0,0.1);
+    /* background: @background; */
 }
 
 /*  [> This is for when there is a single window and no gaps <] */
@@ -44,7 +47,8 @@ window {
 }
 
 #workspaces button {
-    padding:    0 5px;
+    margin:    0 10px;
+    padding:    0 0px;
     color:      @color8;
 }
 
