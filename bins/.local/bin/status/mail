@@ -8,7 +8,9 @@ NEW=`du -a ~/.local/share/mail/*/INBOX/new/* 2>/dev/null | wc -l`
 
 if [ "$XDG_SESSION_TYPE" == "wayland" ]
 then
-    echo -n "<span foreground='#20A020'>"
+    color3='#00AA00'
+    source "$HOME/.cache/wal/colors.sh"
+    echo -n "<span foreground='$color3'>"
     echo -n " $NEW"
     echo -n '</span>'
 else

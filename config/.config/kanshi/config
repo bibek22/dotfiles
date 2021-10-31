@@ -1,5 +1,5 @@
 profile Headless {
-	output LVDS-1 disable
+	output LVDS-1 disable position 1920,0
 	output HDMI-A-1 mode 1920x1080 position 0,0 
 }
 

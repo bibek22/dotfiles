@@ -1,9 +1,13 @@
 function dark () {
     # function to toggle light/dark mode on alacrity
-    if [[ $(alacritty-colorscheme status) =~ "light" ]]; then
-        alacritty-colorscheme apply gruvbox_dark.yaml
+    if [[ -n $1 ]]; then
+        #light mode
+        wal --theme solarized -nle
+        sed -i "s/-dark/-light/g" "$XDG_CONFIG_HOME/foot/foot.ini"
     else
-        alacritty-colorscheme apply gruvbox_light.yaml
+        #dark mode
+        wal --theme solarized -ne
+        sed -i "s/-light/-dark/g" "$XDG_CONFIG_HOME/foot/foot.ini"
     fi
 }
 

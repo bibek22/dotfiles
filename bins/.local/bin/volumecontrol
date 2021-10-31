@@ -31,9 +31,10 @@ function down(){
 }
 
 function notify(){
-  DEVICE=`echo $DEVICES | tr " " "\n" | tail -n$1| head -n1`
+  # DEVICE=`echo $DEVICES | tr " " "\n" | tail -n$1| head -n1`
   # msg=`getProgressString 20 "" ""  $CUR_VOL`
-  dunstify -h "string:synchronous:volume" -h "int:value:$CUR_VOL" -u low -a "Volume $DEVICE" -t 100 -r "$msgId" "Volume " "$CUR_VOL%"
+  # dunstify -h "string:synchronous:volume" -h "int:value:$CUR_VOL" -u low -a "Volume $DEVICE" -t 100 -r "$msgId" "Volume " "$CUR_VOL%"
+  return;
 }
 
 case $1 in

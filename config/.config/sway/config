@@ -3,7 +3,7 @@
 set $mod Mod4
 set $alt Mod1
 
-set $term alacritty
+set $term foot
 set $menu rofi -show run
 # colors set by pywal; file sourced below
 include "$HOME/.cache/wal/colors-sway"
@@ -39,7 +39,7 @@ client.urgent           $background $background $color1 $cl_urge $cl_urge
 # set $wsF12 22:
 
 # Font
-font Liberation Mono 12
+font Liberation Mono:style=Bold 12
 
 # Window borders
 default_border pixel 2
@@ -57,20 +57,25 @@ gaps inner 10
 # default bar on sway: sway-bar
 # Uses less memory, but tray popup menu isn't implemented yet
 bar {
-    font Share Tech Mono 16
+    font pango:Share Tech Mono,DejaVuSansMono Nerd Font 15
     pango_markup enabled
     position top
     separator_symbol ""
     # status_command while /home/bibek/.local/bin/status/main_swaybar; do sleep 1; done
-    status_command exec "/home/bibek/.local/bin/status/swaybar-protocol"
+    # status_command exec "/home/bibek/.local/bin/status/swaybar-protocol"
+    status_command "/usr/bin/i3status-rs /home/bibek/.config/i3status-rust/config.toml"
     strip_workspace_numbers yes
     # shows bar (in hide mode) when pressed mod4. to prevent this:
     modifier none
     colors {
-        background $background
+        # background $background
+        background "#00161c"
         statusline $color1
         # focused_background $color8
-        focused_workspace $color1 $background $color1
+        # focused_workspace $color1 $background $color1
+        focused_workspace $color1  "#00161c" $color1
+        active_workspace  "#00161c" "#00161c" $color1
+        inactive_workspace  "#00161c" "#00161c" $color1
     }
 }
 bindsym $mod+b bar mode toggle
@@ -89,7 +94,10 @@ exec --no-startup-id "sleep 2; mpd-mpris"
 # exec --no-startup-id pgrep gammastep || gammastep -l 85:27
 
 # Output configuration (done by kanshi), only set wallpaper here.
-output * bg $wallpaper fill
+# output * bg $wallpaper fill
+
+# Put monitor on left
+output HDMI-A-1 position 0,0
 
 # Input configuration
 input * {
@@ -103,26 +111,26 @@ input 2:7:SynPS/2_Synaptics_TouchPad {
 }
 
 # Default workspaces for common programs
-assign [class="^Notion$"] workspace number 3
-assign [app_id="^neomutt$"] workspace number 19
-assign [class="^firefox$"] workspace number 9
-assign [app_id="^firefox$"] workspace number 9
-assign [app_id="^chromium$"] workspace number 8
-assign [app_id="^pulsemixer$"] workspace number 20
-assign [class="^Signal$"] workspace number 8
+assign [class="^Notion$"]           workspace number 3
+assign [app_id="^neomutt$"]         workspace number 19
+assign [class="^firefox$"]          workspace number 9
+assign [app_id="^firefox$"]         workspace number 9
+assign [app_id="^chromium$"]        workspace number 8
+assign [app_id="^pulsemixer$"]      workspace number 20
+assign [class="^Signal$"]           workspace number 8
 assign [app_id="^telegramdesktop$"] workspace number 8
-assign [class="^TelegramDesktop$"] workspace number 8
-assign [class="^ViberPC$"] workspace number 8
-assign [class="^discord$"] workspace number 8
-assign [class="^Spotify$"] workspace number 22
+assign [class="^TelegramDesktop$"]  workspace number 8
+assign [class="^ViberPC$"]          workspace number 8
+assign [class="^discord$"]          workspace number 8
+assign [class="^Spotify$"]          workspace number 22
 
 # Floating mode by default
 for_window [class="pavucontrol"] floating enable
 for_window [app_id="pulsemixer"] floating enable
-for_window [app_id="nmtui"] floating enable
-for_window [class="ncmpcpp"] floating enable
-for_window [title = "Firefox - Sharing Indicator"] kill
-for_window [title = "Firefox — Sharing Indicator"] kill
+for_window [app_id="nmtui"]      floating enable
+for_window [class="ncmpcpp"]     floating enable
+for_window [title="Firefox - Sharing Indicator"] kill
+for_window [title="Firefox — Sharing Indicator"] kill
 for_window [title="Picture-in-Picture"]  floating enable
 
 # alacrity has too short names
@@ -133,15 +141,14 @@ for_window [title="Picture-in-Picture"]  floating enable
 bindsym Control+$alt+g exec "firefox"
 bindsym Control+$alt+f exec "pcmanfm"
 bindsym Control+$alt+s workspace number 22; exec "pgrep spotify || spotify"
-bindsym Control+$alt+m  workspace number 19; exec "pgrep neomutt || alacritty --class neomutt -e neomutt"
+bindsym Control+$alt+m  workspace number 19; exec "pgrep neomutt || foot -a neomutt -e neomutt"
 bindsym Control+$alt+k workspace number 22; exec /home/bibek/.local/bin/runonce ncmpcpp ncmpcpp
-bindsym Control+$alt+p  workspace number 20; exec "pgrep pulsemixer || alacritty --class pulsemixer -e pulsemixer"
+bindsym Control+$alt+p  workspace number 20; exec "pgrep pulsemixer || foot -a pulsemixer -e pulsemixer"
 bindsym $mod+Semicolon exec $term
 
 bindsym $mod+apostrophe exec /home/bibek/.local/bin/pick-emoji
 bindsym $alt+slash exec /home/bibek/.local/bin/lookup
 bindsym $mod+slash exec /home/bibek/.local/bin/windows_select_wayland
-bindsym $mod+period exec makoctl dismiss -a
 
 
 # Monitor switch (both or one)
@@ -149,10 +156,12 @@ bindsym $mod+$alt+t output LVDS-1 disable
 bindsym $mod+$alt+b output LVDS-1 enable
 
 # Brightness controls ( laptop only )
-bindsym Control+F11 exec gdbus call -e -d de.mherzberg \
-    -o /de/mherzberg/wlrbrightness -m de.mherzberg.wlrbrightness.decrease 0.1
-bindsym Control+F12 exec gdbus call -e -d de.mherzberg \
-    -o /de/mherzberg/wlrbrightness -m de.mherzberg.wlrbrightness.increase 0.1
+# bindsym Control+F11 exec gdbus call -e -d de.mherzberg \
+#     -o /de/mherzberg/wlrbrightness -m de.mherzberg.wlrbrightness.decrease 0.1
+# bindsym Control+F12 exec gdbus call -e -d de.mherzberg \
+#     -o /de/mherzberg/wlrbrightness -m de.mherzberg.wlrbrightness.increase 0.1
+bindsym Control+F11 exec /home/bibek/.local/bin/way-brightness
+bindsym Control+F12 exec /home/bibek/.local/bin/way-brightness up
 
 # Screenshots
 bindsym Print               exec /home/bibek/.local/bin/screenshot_wayland  partial-copy
@@ -175,6 +184,7 @@ bindsym $mod+n splith
 bindsym $mod+v splitv
 # screenlock
 bindsym Control+$alt+l exec swaylock
+
 # bindsym Control+Space exec makoctl dismiss
 # bindsym Control+Shift+Space exec makoctl dismiss --all
 
@@ -186,6 +196,7 @@ bindsym --locked XF86AudioMute exec --no-startup-id $volumecontrol mute
 bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
+
 # Multimedia with Control key
 bindsym --locked Control+F3 exec --no-startup-id $volumecontrol up
 bindsym --locked Control+F2 exec --no-startup-id $volumecontrol down
@@ -193,6 +204,7 @@ bindsym --locked Control+F4 exec --no-startup-id $volumecontrol mute
 bindsym --locked Control+F7 exec playerctl play-pause
 bindsym --locked Control+F8 exec playerctl next
 bindsym --locked Control+F6 exec playerctl previous
+
 # Same but with mod too
 bindsym --locked $mod+F3 exec --no-startup-id $volumecontrol up
 bindsym --locked $mod+F2 exec --no-startup-id $volumecontrol down
@@ -224,12 +236,6 @@ exec swayidle timeout 300 'exec swaylock' \
     resume 'swaymsg "output * dpms on"' \
     after-resume 'swaymsg "output * dpms on"' \
     before-sleep 'exec swaylock'
-# exec swayidle \
-#     timeout 300 'exec swaylock' \
-#     timeout 600 'swaymsg "output * dpms off"' \
-#     after-resume 'swaymsg "output * dpms on"' \
-#     resume 'swaymsg "output * dpms on"' \
-#     before-sleep 'exec swaylock'
 
 # Move your focus around
 bindsym $mod+Left focus left
@@ -251,6 +257,8 @@ bindsym $mod+Shift+Right move right
 # switch to workspace
 bindsym Shift+$mod+h workspace prev
 bindsym Shift+$mod+l workspace next
+bindsym Shift+$alt+$mod+h move workspace to output left
+bindsym Shift+$alt+$mod+l move workspace to output right
 bindsym $mod+Tab workspace  back_and_forth
 bindsym $mod+1   workspace  number 1
 bindsym $mod+2   workspace  number 2
@@ -356,5 +364,4 @@ mode "resize" {
 
     # brightness control even when locked?
     bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
-
-
+    bindsym --locked XF86MonBrightnessUp exec --no-startup-id light -A 10

@@ -32,7 +32,7 @@
 window {
     /* This selects the entire bar essentially */
     color:      @foreground;
-    background: rgba(0,0,0,0.1);
+    background: rgba(0,0,0,0);
     /* background: @background; */
 }
 

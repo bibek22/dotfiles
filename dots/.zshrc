@@ -114,4 +114,4 @@ bindkey '^ ' autosuggest-accept
 source ~/.zsh_aliases
 source ~/.zshrcc
 # for pywal colors in alacrity
-# cat ~/.cache/wal/sequences
+cat ~/.cache/wal/sequences

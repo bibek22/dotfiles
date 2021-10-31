@@ -1,2 +1,11 @@
-[[ $1 == "up" ]] && gdbus call -e -d de.mherzberg -o /de/mherzberg/wlrbrightness -m de.mherzberg.wlrbrightness.increase 0.1 && exit
-gdbus call -e -d de.mherzberg -o /de/mherzberg/wlrbrightness -m de.mherzberg.wlrbrightness.decrease 0.1
+#!/usr/bin/zsh
+
+Output=$(swaymsg -t get_outputs -p | grep focused | awk '{print $2}')
+
+if [[ "$Output" =~ "LVDS-1" ]]; then
+    [[ $1 == "up" ]] && light -A 10 && exit
+    light -U 10
+else
+    [[ $1 == "up" ]] && gdbus call -e -d de.mherzberg -o /de/mherzberg/wlrbrightness -m de.mherzberg.wlrbrightness.increase 0.1 && exit
+    gdbus call -e -d de.mherzberg -o /de/mherzberg/wlrbrightness -m de.mherzberg.wlrbrightness.decrease 0.1
+fi

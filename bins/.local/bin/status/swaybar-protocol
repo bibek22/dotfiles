@@ -1,3 +1,5 @@
+#!/usr/bin/zsh
+
 cat << EndOfMessage
 {"version": 1,  "click_events": true, "cont_signal": 18, "stop_signal": 19}
 EndOfMessage
@@ -12,11 +14,6 @@ do
     # Music Player Status
     echo -n '            {'
     echo -n '                "full_text":"'$(/home/bibek/.local/bin/status/music)'",'
-    # echo -n '                "border": "#222222ff",'
-    # echo -n '                "border_top": 2,'
-    # echo -n '                "border_bottom": 2,'
-    # echo -n '                "border_left": 2,'
-    # echo -n '                "border_right": 2,'
     echo -n '                "min_width": 100,'
     echo -n '                "align": "center",'
     echo -n '                "name": "music",'
@@ -26,11 +23,6 @@ do
     # Memory
     echo -n '            {'
     echo -n '                "full_text":"'$(/home/bibek/.local/bin/status/memory)'",'
-    # echo -n '                "border": "#222222ff",'
-    # echo -n '                "border_top": 2,'
-    # echo -n '                "border_bottom": 2,'
-    # echo -n '                "border_left": 2,'
-    # echo -n '                "border_right": 2,'
     echo -n '                "min_width": 100,'
     echo -n '                "align": "center",'
     echo -n '                "name": "memory",'
@@ -40,11 +32,6 @@ do
     # Disk
     echo -n '            {'
     echo -n '                "full_text":"'$(/home/bibek/.local/bin/status/disk)'",'
-    # echo -n '                "border": "#222222ff",'
-    # echo -n '                "border_top": 2,'
-    # echo -n '                "border_bottom": 2,'
-    # echo -n '                "border_left": 2,'
-    # echo -n '                "border_right": 2,'
     echo -n '                "min_width": 100,'
     echo -n '                "align": "center",'
     echo -n '                "name": "disk",'
@@ -55,26 +42,16 @@ do
     # mail
     echo -n '            {'
     echo -n '                "full_text":"'$(/home/bibek/.local/bin/status/mail)'",'
-    # echo -n '                "border": "#222222ff",'
-    # echo -n '                "border_top": 2,'
-    # echo -n '                "border_bottom": 2,'
-    # echo -n '                "border_left": 2,'
-    # echo -n '                "border_right": 2,'
     echo -n '                "min_width": 100,'
     echo -n '                "align": "center",'
     echo -n '                "name": "mail",'
-    echo -n '                "urgent": true,'
+    echo -n '                "urgent": false,'
     echo -n '                "markup": "pango"'
     echo -n '            },'
 
     # Internet
     echo -n '            {'
     echo -n '                "full_text":"'$(/home/bibek/.local/bin/status/internet)'",'
-    # echo -n '                "border": "#222222ff",'
-    # echo -n '                "border_top": 2,'
-    # echo -n '                "border_bottom": 2,'
-    # echo -n '                "border_left": 2,'
-    # echo -n '                "border_right": 2,'
     echo -n '                "min_width": "abc",'
     echo -n '                "align": "center",'
     echo -n '                "name": "internet",'
@@ -82,61 +59,72 @@ do
     echo -n '                "urgent": false,'
     echo -n '            },'
 
-    # Network Traffic
-    echo -n '            {'
-    echo -n '                "full_text":"'; echo -n "$(/home/bibek/.local/bin/status/nettraf)"; echo -n ' ",'
-    # echo -n '                "border": "#222222ff",'
-    # echo -n '                "border_top": 2,'
-    # echo -n '                "border_bottom": 2,'
-    # echo -n '                "border_left": 2,'
-    # echo -n '                "border_right": 2,'
-    echo -n '                "min_width": "[1.6KB3.4KB] ",'
-    echo -n '                "align": "center",'
-    echo -n '                "name": "traffic",'
-    echo -n '                "instance": "edt",'
-    echo -n '                "urgent": false,'
-    echo -n '            },'
+    # # Network Traffic
+    # echo -n '            {'
+    # echo -n '                "full_text":"'; echo -n "$(/home/bibek/.local/bin/status/nettraf)"; echo -n ' ",'
+    # echo -n '                "min_width": "[1.6KB3.4KB] ",'
+    # echo -n '                "align": "center",'
+    # echo -n '                "name": "traffic",'
+    # echo -n '                "instance": "edt",'
+    # echo -n '                "urgent": false,'
+    # echo -n '            },'
 
     # Date
     echo -n '            {'
     echo -n '                "full_text":"'$(/home/bibek/.local/bin/status/date)'",'
     echo -n '                "short_text":"",'
-    # echo -n '                "border": "#222222ff",'
-    # echo -n '                "border_top": 2,'
-    # echo -n '                "border_bottom": 2,'
-    # echo -n '                "border_left": 2,'
-    # echo -n '                "border_right": 2,'
     echo -n '                "min_width": 100,'
     echo -n '                "align": "center",'
-    echo -n '                "name": "clock",'
+    echo -n '                "name": "date",'
     echo -n '                "instance": "npt",'
     echo -n '                "urgent": false,'
     echo -n '            }'
 
 
     echo  '      ],'
-    sleep 1
-done) &
+    sleep 5
+done)  &
 
-# listening for mouse lick events in STDIN
+# Handles mouse click
+# listening for mouse click events in STDIN
 while read line;
 do
-  echo $line > /tmp/swaybartmp.txt
-  # on click, we get from STDIN :
-  # {"name":"id_time","button":1,"modifiers":["Mod2"],"x":2982,"y":9,"relative_x":67,"relative_y":9,"width":95,"height":22}
+    line=$(echo "$line" | sed "s/^,//")
+    echo "$line" > /tmp/swaybartmp.txt
+    # on click, we get from STDIN :
+    # {"name":"id_time","button":1,"modifiers":["Mod2"],"x":2982,"y":9,
+    # "relative_x":67,"relative_y":9,"width":95,"height":22}
 
-  # music click
-  if [[ $line == *"name"*"music"* ]]; then
-    playerctl play-pause
+    # widget -> which button/portion of the bar is clicked 
+    # ie. music, mail, date, etc.
+    widget=$(echo "$line" | jq '.name' )
+    button=$(echo "$line" | jq '.button' )
 
-  # CPU click
-  elif [[ $line == *"name"*"mail"* ]]; then
-    swaymsg workspace number 19; /home/bibek/.local/bin/runonce neomutt neomutt;
+    # music click
+    if [[ $widget =~ music ]]; then
+        if [[ $button -eq 4 ]]; then
+            $HOME/.local/bin/volumecontrol up;
+            $HOME/.local/bin/volumecontrol altup;
+            continue
+        elif [[ $button -eq 5 ]]; then
+            $HOME/.local/bin/volumecontrol down;
+            $HOME/.local/bin/volumecontrol altdown;
+            continue
+        else
+            playerctl play-pause;
+            continue
+        fi
 
-  # internet icon click
-  elif [[ $line == *"name"*"internet"* ]]; then
-    ip="$(python  -c 'import socket as s; print(s.gethostbyname(s.gethostname()))')"
-    notify-send "ip address:" "$ip"
+    # mail
+    elif [[ $widget =~ mail ]]; then
+        swaymsg workspace number 19;
+        /home/bibek/.local/bin/runonce neomutt neomutt;
+        continue
 
-  fi
+    # internet icon click
+    elif [[  $widget =~ internet ]]; then
+        ip="$(python  -c 'import socket as s;\
+        print(s.gethostbyname(s.gethostname()))')"
+        notify-send "ip address:" "$ip"
+    fi
 done
