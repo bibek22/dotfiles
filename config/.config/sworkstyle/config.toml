@@ -10,7 +10,7 @@
 "libreoffice-writer"=''
 'pulsemixer'='ﰝ'
 "Notion"="ﴬ"
-"/lf/"=""
+"/^lf$/"=""
 "ncmpcpp"="ﱘ"
 'nmtui'=""
 "Typora" = ""

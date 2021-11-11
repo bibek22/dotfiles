@@ -46,39 +46,42 @@ default_border pixel 2
 default_floating_border normal
 hide_edge_borders smart
 
-smart_gaps on
+# smart_gaps on
 gaps inner 10
 
-# # Waybar as the top bar (see config in waybar/config)
-# bar swaybar_command waybar
-# # waybar toggle (author suggested method)
-# bindsym $mod+b exec pkill -SIGUSR1 '^waybar$'
+# Waybar for status (separate config)
+bar swaybar_command waybar
+# waybar toggle (author suggested method)
+bindsym $mod+b exec pkill -SIGUSR1 '^waybar$'
 
-# default bar on sway: sway-bar
-# Uses less memory, but tray popup menu isn't implemented yet
-bar {
-    font pango:Share Tech Mono,DejaVuSansMono Nerd Font 15
-    pango_markup enabled
-    position top
-    separator_symbol ""
-    # status_command while /home/bibek/.local/bin/status/main_swaybar; do sleep 1; done
-    # status_command exec "/home/bibek/.local/bin/status/swaybar-protocol"
-    status_command "/usr/bin/i3status-rs /home/bibek/.config/i3status-rust/config.toml"
-    strip_workspace_numbers yes
-    # shows bar (in hide mode) when pressed mod4. to prevent this:
-    modifier none
-    colors {
-        # background $background
-        background "#00161c"
-        statusline $color1
-        # focused_background $color8
-        # focused_workspace $color1 $background $color1
-        focused_workspace $color1  "#00161c" $color1
-        active_workspace  "#00161c" "#00161c" $color1
-        inactive_workspace  "#00161c" "#00161c" $color1
-    }
-}
-bindsym $mod+b bar mode toggle
+# # default bar on sway: sway-bar
+# # Uses less memory, but tray popup menu isn't implemented yet
+# bar {
+#     font pango:Share Tech Mono,DejaVuSansMono Nerd Font 14
+#     pango_markup enabled
+#     position top
+#     separator_symbol ""
+#     # # To use the one from dwm
+#     # status_command while /home/bibek/.local/bin/status/main_swaybar; do sleep 1; done
+#     # # dwm status inspired but with i3 protocol
+#     # status_command exec "/home/bibek/.local/bin/status/swaybar-protocol"
+#     # # i3status-rust from github
+#     # status_command "/usr/bin/i3status-rs /home/bibek/.config/i3status-rust/config.toml"
+#     strip_workspace_numbers yes
+#     # shows bar (in hide mode) when pressed mod4. to prevent this:
+#     modifier none
+#     colors {
+#         # background $background
+#         background "#00161c"
+#         statusline $color1
+#         # focused_background $color8
+#         # focused_workspace $color1 $background $color1
+#         focused_workspace $color1  "#00161c" $color1
+#         active_workspace  "#00161c" "#00161c" $color1
+#         inactive_workspace  "#00161c" "#00161c" $color1
+#     }
+# }
+# bindsym $mod+b bar mode toggle
 
 
 # Autostart
@@ -98,6 +101,9 @@ exec --no-startup-id "sleep 2; mpd-mpris"
 
 # Put monitor on left
 output HDMI-A-1 position 0,0
+workspace 1 output HDMI-A-1
+# workspace 29 output HDMI-A-1
+workspace 8 output LVDS-1
 
 # Input configuration
 input * {
@@ -116,6 +122,7 @@ assign [app_id="^neomutt$"]         workspace number 19
 assign [class="^firefox$"]          workspace number 9
 assign [app_id="^firefox$"]         workspace number 9
 assign [app_id="^chromium$"]        workspace number 8
+assign [title="^Netflix$"]        workspace number 8
 assign [app_id="^pulsemixer$"]      workspace number 20
 assign [class="^Signal$"]           workspace number 8
 assign [app_id="^telegramdesktop$"] workspace number 8
@@ -124,6 +131,8 @@ assign [class="^ViberPC$"]          workspace number 8
 assign [class="^discord$"]          workspace number 8
 assign [class="^Spotify$"]          workspace number 22
 
+# Opens in fullscreen by default; dont allow it
+for_window [class="Typora"] fullscreen disable
 # Floating mode by default
 for_window [class="pavucontrol"] floating enable
 for_window [app_id="pulsemixer"] floating enable
@@ -131,7 +140,10 @@ for_window [app_id="nmtui"]      floating enable
 for_window [class="ncmpcpp"]     floating enable
 for_window [title="Firefox - Sharing Indicator"] kill
 for_window [title="Firefox — Sharing Indicator"] kill
-for_window [title="Picture-in-Picture"]  floating enable
+for_window [title="Picture-in-Picture"] floating enable; fullscreen enable; move container to output HDMI-A-1; inhibit_idle fullscreen
+# Idle inhibit (prevent swaylock because of idle)
+for_window [title="Netflix"] inhibit_idle fullscreen
+for_window [title="Netflix"] inhibit_idle fullscreen
 
 # alacrity has too short names
 # for_window [app_id="Alacritty"] title_format "<b>%title</b> (%app_id)"
@@ -141,6 +153,7 @@ for_window [title="Picture-in-Picture"]  floating enable
 bindsym Control+$alt+g exec "firefox"
 bindsym Control+$alt+f exec "pcmanfm"
 bindsym Control+$alt+s workspace number 22; exec "pgrep spotify || spotify"
+bindsym Control+$alt+n workspace number 23; exec "pgrep netflix || chromium --app=https://www.netflix.com"
 bindsym Control+$alt+m  workspace number 19; exec "pgrep neomutt || foot -a neomutt -e neomutt"
 bindsym Control+$alt+k workspace number 22; exec /home/bibek/.local/bin/runonce ncmpcpp ncmpcpp
 bindsym Control+$alt+p  workspace number 20; exec "pgrep pulsemixer || foot -a pulsemixer -e pulsemixer"

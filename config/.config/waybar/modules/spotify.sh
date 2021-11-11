@@ -14,7 +14,7 @@ else
     icon=""
 fi
 
-if [[ $class == "playing" ]]; then
+if [[ $class == "playing" ||  $class == "paused"  ]]; then
     if [[ $player == "firefox" ]]; then
       info=$(playerctl metadata --player=$player --format '{{title}}')
   else
@@ -24,8 +24,8 @@ if [[ $class == "playing" ]]; then
   info=$(echo $info | cut -c1-39  | sed -E "s/[[:alnum:]_'-]+/\u&/g");
  
   text=$icon" "$info
-elif [[ $class == "paused" ]]; then
-  text=$icon
+# elif [[ $class == "paused" ]]; then
+  # text=$icon
 else # stopped
   text=""
 fi

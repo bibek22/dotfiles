@@ -32,13 +32,17 @@ set completion-fg               "#75B5AA"
 set notification-bg             "#90A959" 
 set notification-fg             "#263238" 
 
-# # Normal Dark Mode
-# set recolor-lightcolor          "#263238"
-# set recolor-darkcolor           "#E0E0E0"
+# Normal Dark Mode (solarized)
+set recolor-lightcolor          "#263238"
+set recolor-darkcolor           "#E0E0E0"
 
-#  Old Book Mode (yellowish paper)
-set recolor-lightcolor          "#b7a786" 
-set recolor-darkcolor           "#000000" 
+# solarized
+set recolor-lightcolor          "#002b36"
+set recolor-darkcolor           "#D0D4DA"
+
+# #  Old Book Mode (yellowish paper)
+# set recolor-lightcolor          "#b7a786"
+# set recolor-darkcolor           "#000000"
 
 # Starts in dark mode
 # set recolor                     "true"

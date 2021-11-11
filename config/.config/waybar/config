@@ -1,6 +1,6 @@
 {
     "layer": "bottom",
-    "position": "top",
+    "position": "bottom",
     "height": 30,
 
     /* "modules-left": ["sway/workspaces", "sway/mode"], */
@@ -8,13 +8,20 @@
     /* [> "modules-center": ["sway/window"], <] */
     /* "modules-right": ["tray", "custom/spotify", "pulseaudio", "custom/mail", "custom/storage", "memory", "network", "idle_inhibitor", "battery", "clock"], */
 
-    "modules-left": [ "custom/mail", "custom/storage", "memory", "custom/spotify", "sway/mode"],
+    "modules-left": [ "custom/storage", "memory", "cpu", "pulseaudio", "custom/spotify", "sway/mode"],
     "modules-center": ["sway/workspaces"],
-    "modules-right": ["tray",  "pulseaudio", "network", "idle_inhibitor", "battery", "clock"],
+    "modules-right": ["tray", "backlight", "custom/mail",  "network", "idle_inhibitor", "battery", "clock"],
 
     "sway/mode": {
         "format": " {}"
     },
+
+    "cpu": {
+                "interval": 1,
+                "format": " {usage}%",
+                "max-length": 10,
+                "min-length": 6
+           },
 
     "sway/workspaces": {
         "format": "{name}",
@@ -65,42 +72,49 @@
         "tooltip": false
     },
     "network": {
+        "interval": 2,
         "format": "{icon}",
-        "format-alt": "[{bandwidthDownBits} {bandwidthUpBits}]{icon}",
+        "format-alt": "{icon} [{bandwidthDownOctets} {bandwidthUpOctets}]",
         "format-alt-click": "click-right",
         "format-icons": {
             "wifi": [""],
             "ethernet": [""],
             "disconnected": ["睊"]
         },
-        "on-click": "alacritty --class nmtui -e nmtui",
-        "tooltip": false
+        "on-click": "foot --app-id nmtui -e nmtui",
+        "tooltip-format": "{ifname}",
+        "tooltip-format-wifi": " {essid} ({signalStrength}%)\nIP: {ipaddr}\nDown: {bandwidthDownOctets}\nUp:   {bandwidthUpOctets}",
+        "tooltip-format-ethernet": "{ifname} ",
+        "tooltip-format-disconnected": "Disconnected",
+        "tooltip": true
     },
     "pulseaudio": {
-        "format": "{icon}",
-        "format-alt": "{volume} {icon}",
-        "format-alt-click": "click-right",
+        "format": "{icon} {volume}%",
+        /* "format-alt": "{icon} {volume}%", */
+        /* "format-alt-click": "click-right", */
         "format-muted": "",
         "format-icons": {
             "phone": [" ", " ", "墳", " "],
             "default": ["", "", "墳", ""]
         },
         "scroll-step": 10,
-        "on-scroll-down": "/home/bibek/.local/bin/volumecontrol altdown",
-        "on-scroll-up": "/home/bibek/.local/bin/volumecontrol altup",
-        "on-click": "swaymsg workspace number 20; pgrep pulsemixer || alacritty --class pulsemixer -e pulsemixer",
+        "on-scroll-down": "pactl set-sink-volume @DEFAULT_SINK@ -5%",
+        "on-scroll-up":  "pactl set-sink-volume @DEFAULT_SINK@ +5%",
+        "on-click-right": "swaymsg workspace number 20; pgrep pulsemixer || foot --app-id pulsemixer -e pulsemixer",
+        /* This below switches default sink from internal to external speaker */
+        "on-click": "state=$(pamixer --get-default-sink | grep usb) &&  pacmd set-default-sink $(pamixer --list-sinks | grep 'pci'| grep -Eo '^.') && exit || pacmd set-default-sink $(pamixer --list-sinks | grep 'usb'| grep -Eo '^.')",
         "tooltip": false
     },
     "custom/spotify": {
         "interval": 1,
         "return-type": "json",
         "exec": "~/.config/waybar/modules/spotify.sh",
-        /* "exec-if": "pgrep spotify", */
         "escape": true,
-        /* "on-click": "swaymsg workspace number 22", */
         "on-click": "playerctl play-pause",
-        "on-click-right": "/home/bibek/findplayer.sh",
+        "on-click-right": "/home/bibek/.local/bin/findplayer.sh",
         "max-length": 40,
+        "on-scroll-up": "player=$(playerctl metadata --format '{{lc(playerName)}}'| grep mpd ) && mpc seek +5",
+        "on-scroll-down": "player=$(playerctl metadata --format '{{lc(playerName)}}'| grep mpd ) && mpc seek -5",
     },
     "custom/storage": {
         "format": " {}",
@@ -114,9 +128,10 @@
         "format": "{icon}",
         "format-alt": "{icon} {percent}%",
         "format-alt-click": "click-right",
-        "format-icons": ["", ""],
-        "on-scroll-down": "light -A 1",
-        "on-scroll-up": "light -U 1"
+        /* "format-icons": [""], */
+        "format-icons": ["", "", "", "", "", "", ""],
+        "on-scroll-down": "/home/bibek/.local/bin/way-brightness down",
+        "on-scroll-up":  "/home/bibek/.local/bin/way-brightness up"
     },
     "custom/weather": {
         "format": "{}",
@@ -141,7 +156,7 @@
         "return-type": "json",
         "exec": "/home/bibek/.local/bin/mail_waybar.sh",
         "tooltip": false,
-        "on-click": "pgrep neomutt || alacritty --class neomutt -e neomutt & swaymsg workspace number 19",
+        "on-click": "pgrep neomutt || foot --app-id neomutt -e neomutt & swaymsg workspace number 19",
         /* green color set from the script */
     },
 

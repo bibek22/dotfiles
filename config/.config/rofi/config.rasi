@@ -1,2 +1,4 @@
-@theme "/home/bibek/.cache/wal/colors-rofi-light.rasi"
+//@theme "/home/bibek/.cache/wal/colors-rofi-dark.rasi"
+/* @theme "/home/bibek/.cache/wal/colors-rofi-light.rasi" */
 /* @theme "/usr/share/rofi/themes/purple.rasi" */
+@theme "/usr/share/rofi/themes/solarized.rasi"

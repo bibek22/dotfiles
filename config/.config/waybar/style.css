@@ -1,4 +1,25 @@
-@import "/home/bibek/.cache/wal/colors-waybar.css";
+/* @import "/home/bibek/.cache/wal/colors-waybar.css"; */
+
+@define-color foreground #DdD6D3;
+@define-color background #00161c;
+@define-color cursor #dc322f;
+
+@define-color color0 #073642;
+@define-color color1 #dc322f;
+@define-color color2 #859900;
+@define-color color3 #b58900;
+@define-color color4 #268bd2;
+@define-color color5 #d33682;
+@define-color color6 #2aa198;
+@define-color color7 #eee8d5;
+@define-color color8 #6c7c80;
+@define-color color9 #dc322f;
+@define-color color10 #859900;
+@define-color color11 #b58900;
+@define-color color12 #268bd2;
+@define-color color13 #d33682;
+@define-color color14 #2aa198;
+@define-color color15 #eee8d5;
 
 * {
     border:        none;
@@ -13,7 +34,7 @@
     font-size:     20px;
 }
 
-
+    
 #window, #custom-spotify{
     font-family:   Share Tech Mono;
     font-size:     15px;
@@ -25,15 +46,20 @@
 
 .LVDS-1 {
     font-family:   Share Tech Mono;
-    font-size:     16px;
+    font-size:     18px;
 }
 
 
 window {
     /* This selects the entire bar essentially */
     color:      @foreground;
-    background: rgba(0,0,0,0);
-    /* background: @background; */
+    /* background: rgba(0,0,0,0); */
+    background: @background;
+}
+
+tooltip {
+    font-family:   Share Tech Mono;
+    font-size:     16px;
 }
 
 /*  [> This is for when there is a single window and no gaps <] */
@@ -50,6 +76,8 @@ window {
     margin:    0 10px;
     padding:    0 0px;
     color:      @color8;
+    background: #083745;
+    border-radius: 5px;
 }
 
 #workspaces button.visible {
@@ -61,7 +89,6 @@ window {
     /* color:      rgba(17, 16, 16, 1); */
     background: @color8;
     color: @color15;
-    border-radius: 5px;
 }
 
 #workspaces button.focused {
@@ -79,7 +106,7 @@ window {
 }
 
 #tray image {
-	padding: 0px 5px;
+    padding: 0px 5px;
 }
 
 #mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail {
