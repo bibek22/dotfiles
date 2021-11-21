@@ -15,7 +15,7 @@ set $cl_fore #d9d8d8
 set $cl_urge #ee2e24
 
 # Colors                border      bg          text    indi     childborder
-client.focused          $color2     $background $color2 $cl_indi $color5
+client.focused          $color2     $background $color2 $cl_indi #18cca9
 client.focused_inactive $color8     $background $color4 $cl_back $cl_back
 client.unfocused        $color8     $background $color8 $cl_back $cl_back
 client.urgent           $background $background $color1 $cl_urge $cl_urge
