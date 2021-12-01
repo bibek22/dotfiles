@@ -7,7 +7,8 @@ class=$(playerctl metadata --player=$player --format '{{lc(status)}}')
 if [[ $player == "spotify" ]]; then
     swaymsg workspace number 22;
 elif [[ $player == "mpd" ]]; then
-    /home/bibek/.local/bin/windows_select_wayland "Ncmpcpp"
+    pgrep ncmpcpp && /home/bibek/.local/bin/windows_select_wayland "Ncmpcpp"  && exit 
+    swaymsg workspace number 22; exec /home/bibek/.local/bin/runonce ncmpcpp ncmpcpp
     icon=""
 elif [[ $player == "mpv" ]]; then
     /home/bibek/.local/bin/windows_select_wayland "mpv"
