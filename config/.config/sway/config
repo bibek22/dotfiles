@@ -139,6 +139,7 @@ input 2:7:SynPS/2_Synaptics_TouchPad {
 
 # Default workspaces for common programs
 assign [class="^Notion$"]           workspace number 3
+assign [class="^notion-app-enhanced$"] workspace number 3
 assign [app_id="^neomutt$"]         workspace number 19
 assign [class="^firefox$"]          workspace number 9
 assign [app_id="^firefox$"]         workspace number 9
