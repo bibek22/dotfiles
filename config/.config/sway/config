@@ -5,69 +5,27 @@ set $alt Mod1
 
 set $term foot
 set $menu rofi -show run
+
 # colors set by pywal; file sourced below
-include "$HOME/.cache/wal/colors-sway"
+# include "$HOME/.cache/wal/colors-sway"
 
-# Copied from wal; temporary
-set $background #eee8d5
-set $foreground #002b36
+# Solarized dark
+# # Colors              border  bg      text    indi    childborder
+client.focused          #021d24 #031b21 #C0C0C0 #268bd2 #6c71c4
+client.focused_inactive #021d24 #052c36 #839496 #073642 #073642
+client.unfocused        #021d24 #052c36 #839496 #073642 #073642
+client.urgent           #002b36 #dc322f #fdf6e3 #002b36 #002b36
 
-set $color0 #eee8d5
-set $color1 #dc322f
-set $color2 #859900
-set $color3 #b58900
-set $color4 #268bd2
-set $color5 #d33682
-set $color6 #2aa198
-set $color7 #073642
-set $color8 #6c7c80
-set $color9 #dc322f
-set $color10 #859900
-set $color11 #b58900
-set $color12 #268bd2
-set $color13 #d33682
-set $color14 #2aa198
-set $color15 #073642
-
-set $cl_high #2d3138
-set $cl_indi #d9d8d8
-set $cl_back #231f20
-set $cl_fore #d9d8d8
-set $cl_urge #ee2e24
-
-# Colors                border      bg          text    indi     childborder
-client.focused          $color2     $background $color2 $cl_indi #18cca9
-client.focused_inactive $color8     $background $color4 $cl_back $cl_back
-client.unfocused        $color8     $background $color8 $cl_back $cl_back
-client.urgent           $background $background $color1 $cl_urge $cl_urge
-
-# titlebar_padding 20 0
-
-# set $ws1   1:
-# set $ws2   2:2
-# set $ws3   3:3
-# set $ws4   4:4
-# set $ws5   5:5
-# set $ws6   6:6
-# set $ws7   7:7
-# set $ws8   8:8
-# set $ws9   9:9
-# set $ws0   10:10
-# set $wsF1  11:
-# set $wsF9  19:
-# set $wsF10 20:20
-# set $wsF11 21:
-# set $wsF12 22:
 
 # Font
-font Liberation Mono:style=Bold 12
+font Fira Mono:style=Regular 12
 
 # Window borders
 default_border pixel 2
 default_floating_border normal
 hide_edge_borders smart
 
-# smart_gaps on
+smart_gaps on
 gaps inner 10
 
 # Waybar for status (separate config)
@@ -144,7 +102,7 @@ assign [app_id="^neomutt$"]         workspace number 19
 assign [class="^firefox$"]          workspace number 9
 assign [app_id="^firefox$"]         workspace number 9
 assign [app_id="^chromium$"]        workspace number 8
-assign [title="^Netflix$"]        workspace number 8
+assign [title="^Netflix$"]          workspace number 8
 assign [app_id="^pulsemixer$"]      workspace number 20
 assign [class="^Signal$"]           workspace number 8
 assign [app_id="^telegramdesktop$"] workspace number 8
@@ -154,12 +112,12 @@ assign [class="^discord$"]          workspace number 8
 assign [class="^Spotify$"]          workspace number 22
 
 # Opens in fullscreen by default; dont allow it
-for_window [class="Typora"] fullscreen disable
+for_window [class="Typora"]         fullscreen disable
 # Floating mode by default
-for_window [class="pavucontrol"] floating enable
-for_window [app_id="pulsemixer"] floating enable
-for_window [app_id="nmtui"]      floating enable
-for_window [class="ncmpcpp"]     floating enable
+for_window [class="pavucontrol"]    floating enable
+for_window [app_id="pulsemixer"]    floating enable
+for_window [app_id="nmtui"]         floating enable
+for_window [class="ncmpcpp"]        floating enable
 for_window [title="Firefox - Sharing Indicator"] kill
 for_window [title="Firefox — Sharing Indicator"] kill
 for_window [title="Picture-in-Picture"] floating enable; fullscreen enable; move container to output HDMI-A-1; inhibit_idle fullscreen

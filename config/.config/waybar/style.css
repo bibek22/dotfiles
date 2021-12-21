@@ -69,6 +69,8 @@ tooltip {
 /* } */
 
 #workspaces {
+    /* Use this font below if unicode tofu appears */
+    font-family:   ShureTechMono Nerd Font;
     margin: 0 5px;
 }
 
