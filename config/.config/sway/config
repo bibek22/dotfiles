@@ -219,6 +219,7 @@ bindsym --locked XF86MonBrightnessDown exec --no-startup-id light -U 10
 # Suspend
 # bindsym --locked XF86Sleep exec --no-startup-id "swaylock; systemctl suspend"
 bindsym XF86Mail workspace number 12; exec /home/bibek/.local/bin/runonce neomutt neomutt
+bindsym Control+F9 exec /home/bibek/.local/bin/omnidoer Gmail
 
 # Toggle Redshift
 bindsym $mod+Home exec --no-startup-id pkill -USR1 redshift
