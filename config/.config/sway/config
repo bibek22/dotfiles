@@ -195,6 +195,7 @@ bindsym --locked Control+F3 exec --no-startup-id $volumecontrol up
 bindsym --locked Control+F2 exec --no-startup-id $volumecontrol down
 bindsym --locked Control+F4 exec --no-startup-id $volumecontrol mute
 bindsym --locked Control+F7 exec playerctl play-pause
+bindsym --locked Shift+Control+F7 exec playerctl -a pause
 bindsym --locked Control+F8 exec playerctl next
 bindsym --locked Control+F6 exec playerctl previous
 
