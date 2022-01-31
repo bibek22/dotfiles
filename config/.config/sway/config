@@ -145,8 +145,9 @@ bindsym $mod+slash exec /home/bibek/.local/bin/windows_select_wayland
 
 
 # Monitor switch (both or one)
-bindsym $mod+$alt+t output LVDS-1 disable
-bindsym $mod+$alt+b output LVDS-1 enable
+bindsym $mod+$alt+t output LVDS-1 disable; output HDMI-A-1 enable; output HDMI-A-1 dpms on
+bindsym $mod+$alt+b output LVDS-1 enable;  output HDMI-A-1  enable; output HDMI-A-1 dpms on; output LVDS-1 dpms on
+bindsym $mod+$alt+Shift+b output * dpms off
 
 # Brightness controls ( laptop only )
 # bindsym Control+F11 exec gdbus call -e -d de.mherzberg \

@@ -83,7 +83,7 @@
         },
         "on-click": "foot --app-id nmtui -e nmtui",
         "tooltip-format": "{ifname}",
-        "tooltip-format-wifi": " {essid} ({signalStrength}%)\nIP: {ipaddr}\nDown: {bandwidthDownOctets}\nUp:   {bandwidthUpOctets}",
+        "tooltip-format-wifi": " {essid} ({signalStrength}%)\nIP: {ipaddr}\nDown: {bandwidthDownBits}\nUp:   {bandwidthUpBits}",
         "tooltip-format-ethernet": "{ifname} ",
         "tooltip-format-disconnected": "Disconnected",
         "tooltip": true
