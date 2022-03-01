@@ -11,6 +11,7 @@ function dark () {
     fi
 }
 
+alias update_time="sudo systemctl status systemd-timesyncd.service"
 alias format="sudo mkfs.ntfs -f -L 'Toshiba'"
 alias chromium="chromium --enable-features=UseOzonePlatform --ozone-platform=wayland"
 alias viber="export QT_QPA_PLATFORM=xcb; viber 2> /dev/null & disown"

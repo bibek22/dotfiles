@@ -110,6 +110,7 @@ assign [class="^TelegramDesktop$"]  workspace number 8
 assign [class="^ViberPC$"]          workspace number 8
 assign [class="^discord$"]          workspace number 8
 assign [class="^Spotify$"]          workspace number 22
+assign [app_id="^Spotify$"]          workspace number 22
 
 # Opens in fullscreen by default; dont allow it
 for_window [class="Typora"]         fullscreen disable
