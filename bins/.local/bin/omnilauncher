@@ -10,6 +10,7 @@ function open() {
     pdf)    zathura "$1" ;;
     djvu)   zathura "$1" ;;
     epub)   zathura "$1" ;;
+    mobi)   zathura "$1" ;;
     mid)    aplaymidi -p `aplaymidi -l | tail -n 1 | grep -Eo "[0-9]*:."` "$1" ;;
     jpg)    feh -F "$1" ;;
     png)    feh -F "$1" ;;
