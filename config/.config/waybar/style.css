@@ -46,10 +46,8 @@
 
 .LVDS-1 {
     font-family:   Share Tech Mono;
-    font-size:     18px;
+    font-size:     13px;
 }
-
-
 window {
     /* This selects the entire bar essentially */
     color:      @foreground;
