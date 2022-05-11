@@ -1,5 +1,6 @@
 profile Headless {
 	output LVDS-1 enable transform 90 position 1920,0 scale 1
+	# output LVDS-1 enable position 1920,0 scale 1
 	output HDMI-A-1 mode 1920x1080 position 0,0  scale 1
 }
 

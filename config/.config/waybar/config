@@ -129,7 +129,7 @@
         "format-alt": "{icon} {percent}%",
         "format-alt-click": "click-right",
         /* "format-icons": [""], */
-        "format-icons": ["", "", "", "", "", "", ""],
+        "format-icons": ["", "", "",  "", "", "",""],
         "on-scroll-down": "/home/bibek/.local/bin/way-brightness down",
         "on-scroll-up":  "/home/bibek/.local/bin/way-brightness up"
     },
