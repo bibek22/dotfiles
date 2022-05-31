@@ -18,7 +18,9 @@ ctrl + alt + l
 ctrl + alt + t
     /home/bibek/.local/bin/timer 0 108
 ctrl + alt + 1
-    /home/bibek/.local/bin/button
+    /home/bibek/schedule1.sh
+ctrl + alt + 2
+    /home/bibek/schedule2.sh
      
 
 super + o
