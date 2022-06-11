@@ -12,8 +12,8 @@ set $menu rofi -show run
 # Solarized dark
 # # Colors              border  bg      text    indi    childborder
 client.focused          #021d24 #031b21 #C0C0C0 #268bd2 #6c71c4
-client.focused_inactive #021d24 #052c36 #839496 #073642 #073642
-client.unfocused        #021d24 #052c36 #839496 #073642 #073642
+client.focused_inactive #021d24 #052c36 #A3B4B6 #073642 #073642
+client.unfocused        #021d24 #052c36 #A3B4B6 #073642 #073642
 client.urgent           #002b36 #dc322f #fdf6e3 #002b36 #002b36
 
 
@@ -254,8 +254,8 @@ bindsym $mod+Shift+Right move right
 # switch to workspace
 bindsym Shift+$mod+h workspace prev
 bindsym Shift+$mod+l workspace next
-bindsym Shift+$alt+$mod+h move workspace to output left
-bindsym Shift+$alt+$mod+l move workspace to output right
+bindsym Shift+$alt+$mod+h move workspace to output left; focus left 
+bindsym Shift+$alt+$mod+l move workspace to output right; focus right
 bindsym $mod+Tab workspace  back_and_forth
 bindsym $mod+1   workspace  number 1
 bindsym $mod+2   workspace  number 2
