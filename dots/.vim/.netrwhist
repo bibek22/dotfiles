@@ -1,0 +1,9 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =7
+let g:netrw_dirhist_1='/ocean/projects/phy200067p/bgautam/.vscode'
+let g:netrw_dirhist_2='/ocean/projects/phy200067p/bgautam'
+let g:netrw_dirhist_3='/ocean/projects/phy200067p/bgautam/gw-strain/regionwise/mask-corrected/s20control'
+let g:netrw_dirhist_4='/ocean/projects/phy200067p/bgautam/gw-strain/regionwise/mask-corrected'
+let g:netrw_dirhist_5='/ocean/projects/phy200067p/bgautam/gw-strain/regionwise/mask-corrected/s20control'
+let g:netrw_dirhist_6='/ocean/projects/phy200067p/bgautam/gw-strain/regionwise/mask-corrected/s20t1e12'
+let g:netrw_dirhist_7='/ocean/projects/phy200067p/bgautam/gw-strain/regionwise/mask-corrected/s20t1e12/plots'
